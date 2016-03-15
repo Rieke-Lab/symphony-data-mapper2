@@ -1,0 +1,748 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FC0F4E2F169671C700B9EA5C /* AUIModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC0F4E271696719600B9EA5C /* AUIModel.framework */; };
+		FC0F4E30169671C700B9EA5C /* AUIProtocols.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC0F4E281696719600B9EA5C /* AUIProtocols.framework */; };
+		FC0F4E31169671C700B9EA5C /* BWKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC0F4E291696719600B9EA5C /* BWKit.framework */; };
+		FC0F4E32169671C700B9EA5C /* DAQFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC0F4E2A1696719600B9EA5C /* DAQFramework.framework */; };
+		FC0F4E361696774900B9EA5C /* SMKBaseTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0F4E341696774900B9EA5C /* SMKBaseTestCase.m */; };
+		FC0F4E371696774900B9EA5C /* SMKExperimentMapperTest.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0F4E351696774900B9EA5C /* SMKExperimentMapperTest.m */; };
+		FC0F4F1C1697924000B9EA5C /* 010413AcMyCellID1_metadata.xml in Resources */ = {isa = PBXBuildFile; fileRef = FC0F4F181697924000B9EA5C /* 010413AcMyCellID1_metadata.xml */; };
+		FC0F4F1D1697924000B9EA5C /* 010413AcMyCellID1.h5 in Resources */ = {isa = PBXBuildFile; fileRef = FC0F4F191697924000B9EA5C /* 010413AcMyCellID1.h5 */; };
+		FC0F4F1E1697924000B9EA5C /* 010413AcMyCellID2_metadata.xml in Resources */ = {isa = PBXBuildFile; fileRef = FC0F4F1A1697924000B9EA5C /* 010413AcMyCellID2_metadata.xml */; };
+		FC0F4F1F1697924000B9EA5C /* 010413AcMyCellID2.h5 in Resources */ = {isa = PBXBuildFile; fileRef = FC0F4F1B1697924000B9EA5C /* 010413AcMyCellID2.h5 */; };
+		FC0F4F22169794D300B9EA5C /* SMKMetadataParser.h in Headers */ = {isa = PBXBuildFile; fileRef = FC0F4F20169794D300B9EA5C /* SMKMetadataParser.h */; };
+		FC0F4F23169794D300B9EA5C /* SMKMetadataParser.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0F4F21169794D300B9EA5C /* SMKMetadataParser.m */; };
+		FC0F4F271697991E00B9EA5C /* SMKSource.h in Headers */ = {isa = PBXBuildFile; fileRef = FC0F4F251697991E00B9EA5C /* SMKSource.h */; };
+		FC0F4F281697991E00B9EA5C /* SMKSource.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0F4F261697991E00B9EA5C /* SMKSource.m */; };
+		FC0F4F2B1697993700B9EA5C /* SMKNote.h in Headers */ = {isa = PBXBuildFile; fileRef = FC0F4F291697993700B9EA5C /* SMKNote.h */; };
+		FC0F4F2C1697993700B9EA5C /* SMKNote.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0F4F2A1697993700B9EA5C /* SMKNote.m */; };
+		FC50C13D16B84FED00656CC0 /* SMKEpochGroupEnumerator.h in Headers */ = {isa = PBXBuildFile; fileRef = FC50C13B16B84FED00656CC0 /* SMKEpochGroupEnumerator.h */; };
+		FC50C13E16B84FED00656CC0 /* SMKEpochGroupEnumerator.m in Sources */ = {isa = PBXBuildFile; fileRef = FC50C13C16B84FED00656CC0 /* SMKEpochGroupEnumerator.m */; };
+		FC50C14116B8C06700656CC0 /* MACHdf5Reader.h in Headers */ = {isa = PBXBuildFile; fileRef = FC50C13F16B8C06600656CC0 /* MACHdf5Reader.h */; };
+		FC50C14216B8C06700656CC0 /* MACHdf5Reader.m in Sources */ = {isa = PBXBuildFile; fileRef = FC50C14016B8C06600656CC0 /* MACHdf5Reader.m */; };
+		FC6B6E21169612C0006B4688 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC6B6E20169612C0006B4688 /* Cocoa.framework */; };
+		FC6B6E2B169612C0006B4688 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FC6B6E29169612C0006B4688 /* InfoPlist.strings */; };
+		FC6B6E37169612C0006B4688 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC6B6E36169612C0006B4688 /* SenTestingKit.framework */; };
+		FC6B6E38169612C0006B4688 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC6B6E20169612C0006B4688 /* Cocoa.framework */; };
+		FC6B6E3B169612C0006B4688 /* SymphonyMappingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC6B6E1D169612C0006B4688 /* SymphonyMappingKit.framework */; };
+		FC6B6E41169612C0006B4688 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FC6B6E3F169612C0006B4688 /* InfoPlist.strings */; };
+		FC6B6E4F16961335006B4688 /* SMKExperimentMapper.h in Headers */ = {isa = PBXBuildFile; fileRef = FC6B6E4D16961335006B4688 /* SMKExperimentMapper.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FC6B6E5016961335006B4688 /* SMKExperimentMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = FC6B6E4E16961335006B4688 /* SMKExperimentMapper.m */; };
+		FC75B7941697A16300F33AED /* SMKMetadataParserTest.m in Sources */ = {isa = PBXBuildFile; fileRef = FC75B7931697A16300F33AED /* SMKMetadataParserTest.m */; };
+		FC79481716B9B68F00DABE9C /* MACHdf5LinkInformation.h in Headers */ = {isa = PBXBuildFile; fileRef = FC79481516B9B68F00DABE9C /* MACHdf5LinkInformation.h */; };
+		FC79481816B9B68F00DABE9C /* MACHdf5LinkInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = FC79481616B9B68F00DABE9C /* MACHdf5LinkInformation.m */; };
+		FC79481F16B9D3A000DABE9C /* MACHdf5ReaderTest.m in Sources */ = {isa = PBXBuildFile; fileRef = FC79481E16B9D3A000DABE9C /* MACHdf5ReaderTest.m */; };
+		FC7C8DE616B3279800F9E8A6 /* SMKDataFileReader.h in Headers */ = {isa = PBXBuildFile; fileRef = FC7C8DE416B3279800F9E8A6 /* SMKDataFileReader.h */; };
+		FC7C8DE716B3279800F9E8A6 /* SMKDataFileReader.m in Sources */ = {isa = PBXBuildFile; fileRef = FC7C8DE516B3279800F9E8A6 /* SMKDataFileReader.m */; };
+		FC7C8DEB16B3442500F9E8A6 /* SMKEpochGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = FC7C8DE916B3442500F9E8A6 /* SMKEpochGroup.h */; };
+		FC7C8DEC16B3442500F9E8A6 /* SMKEpochGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = FC7C8DEA16B3442500F9E8A6 /* SMKEpochGroup.m */; };
+		FC7C8DF716B719F300F9E8A6 /* SMKDataFileReaderTest.m in Sources */ = {isa = PBXBuildFile; fileRef = FC7C8DF616B719F300F9E8A6 /* SMKDataFileReaderTest.m */; };
+		FC98DD1816C4A4D50039E8B4 /* BWFileSystemResource+UrlFix.h in Headers */ = {isa = PBXBuildFile; fileRef = FC98DD1616C4A4D50039E8B4 /* BWFileSystemResource+UrlFix.h */; };
+		FC98DD1916C4A4D50039E8B4 /* BWFileSystemResource+UrlFix.m in Sources */ = {isa = PBXBuildFile; fileRef = FC98DD1716C4A4D50039E8B4 /* BWFileSystemResource+UrlFix.m */; };
+		FC98DD3216CB19070039E8B4 /* ExternalDevicesPlugin.plugin in CopyFiles */ = {isa = PBXBuildFile; fileRef = FC98DD3116CB19070039E8B4 /* ExternalDevicesPlugin.plugin */; };
+		FC98DD3516CC24260039E8B4 /* SMKIOBase.h in Headers */ = {isa = PBXBuildFile; fileRef = FC98DD3316CC24250039E8B4 /* SMKIOBase.h */; };
+		FC98DD3616CC24260039E8B4 /* SMKIOBase.m in Sources */ = {isa = PBXBuildFile; fileRef = FC98DD3416CC24260039E8B4 /* SMKIOBase.m */; };
+		FC98DD3916CD97150039E8B4 /* 021313AcMyCellID1_metadata.xml in Resources */ = {isa = PBXBuildFile; fileRef = FC98DD3716CD97150039E8B4 /* 021313AcMyCellID1_metadata.xml */; };
+		FC98DD3A16CD97150039E8B4 /* 021313AcMyCellID1.h5 in Resources */ = {isa = PBXBuildFile; fileRef = FC98DD3816CD97150039E8B4 /* 021313AcMyCellID1.h5 */; };
+		FCAADD5816C32F49003341CD /* AUIModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC0F4E271696719600B9EA5C /* AUIModel.framework */; };
+		FCC63F6016BB1FD200BDDD57 /* MACHdf5CommonInformation.h in Headers */ = {isa = PBXBuildFile; fileRef = FCC63F5E16BB1FD200BDDD57 /* MACHdf5CommonInformation.h */; };
+		FCC63F6116BB1FD200BDDD57 /* MACHdf5CommonInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC63F5F16BB1FD200BDDD57 /* MACHdf5CommonInformation.m */; };
+		FCC63F6416BB1FEA00BDDD57 /* MACHdf5ObjectInformation.h in Headers */ = {isa = PBXBuildFile; fileRef = FCC63F6216BB1FEA00BDDD57 /* MACHdf5ObjectInformation.h */; };
+		FCC63F6516BB1FEA00BDDD57 /* MACHdf5ObjectInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC63F6316BB1FEA00BDDD57 /* MACHdf5ObjectInformation.m */; };
+		FCC63F6816BB3B5400BDDD57 /* SMKEpoch.h in Headers */ = {isa = PBXBuildFile; fileRef = FCC63F6616BB3B5400BDDD57 /* SMKEpoch.h */; };
+		FCC63F6916BB3B5400BDDD57 /* SMKEpoch.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC63F6716BB3B5400BDDD57 /* SMKEpoch.m */; };
+		FCC63F6C16BB3B7A00BDDD57 /* SMKEpochEnumerator.h in Headers */ = {isa = PBXBuildFile; fileRef = FCC63F6A16BB3B7A00BDDD57 /* SMKEpochEnumerator.h */; };
+		FCC63F6D16BB3B7A00BDDD57 /* SMKEpochEnumerator.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC63F6B16BB3B7A00BDDD57 /* SMKEpochEnumerator.m */; };
+		FCC63F7616C077A700BDDD57 /* SMKEpochEnumeratorTest.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC63F7516C077A700BDDD57 /* SMKEpochEnumeratorTest.m */; };
+		FCC63F7916C0785F00BDDD57 /* SMKEpochGroupEnumeratorTest.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC63F7816C0785F00BDDD57 /* SMKEpochGroupEnumeratorTest.m */; };
+		FCC63F7C16C0932600BDDD57 /* SMKResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = FCC63F7A16C0932500BDDD57 /* SMKResponse.h */; };
+		FCC63F7D16C0932600BDDD57 /* SMKResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC63F7B16C0932500BDDD57 /* SMKResponse.m */; };
+		FCC63F8016C0933B00BDDD57 /* SMKStimulus.h in Headers */ = {isa = PBXBuildFile; fileRef = FCC63F7E16C0933A00BDDD57 /* SMKStimulus.h */; };
+		FCC63F8116C0933B00BDDD57 /* SMKStimulus.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC63F7F16C0933B00BDDD57 /* SMKStimulus.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		FC6B6E39169612C0006B4688 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FC6B6E13169612C0006B4688 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FC6B6E1C169612C0006B4688;
+			remoteInfo = SymphonyMappingKit;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		FC98DD2F16CB17A50039E8B4 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 7;
+			files = (
+				FC98DD3216CB19070039E8B4 /* ExternalDevicesPlugin.plugin in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		FC0F4E271696719600B9EA5C /* AUIModel.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AUIModel.framework; path = ../Libraries/AUIModel.framework; sourceTree = "<group>"; };
+		FC0F4E281696719600B9EA5C /* AUIProtocols.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AUIProtocols.framework; path = ../Libraries/AUIProtocols.framework; sourceTree = "<group>"; };
+		FC0F4E291696719600B9EA5C /* BWKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BWKit.framework; path = ../Libraries/BWKit.framework; sourceTree = "<group>"; };
+		FC0F4E2A1696719600B9EA5C /* DAQFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DAQFramework.framework; path = ../Libraries/DAQFramework.framework; sourceTree = "<group>"; };
+		FC0F4E341696774900B9EA5C /* SMKBaseTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMKBaseTestCase.m; sourceTree = "<group>"; };
+		FC0F4E351696774900B9EA5C /* SMKExperimentMapperTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMKExperimentMapperTest.m; sourceTree = "<group>"; };
+		FC0F4E3816967BB000B9EA5C /* SMKBaseTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMKBaseTestCase.h; sourceTree = "<group>"; };
+		FC0F4F181697924000B9EA5C /* 010413AcMyCellID1_metadata.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = 010413AcMyCellID1_metadata.xml; path = Fixtures/010413AcMyCellID1_metadata.xml; sourceTree = "<group>"; };
+		FC0F4F191697924000B9EA5C /* 010413AcMyCellID1.h5 */ = {isa = PBXFileReference; lastKnownFileType = file; name = 010413AcMyCellID1.h5; path = Fixtures/010413AcMyCellID1.h5; sourceTree = "<group>"; };
+		FC0F4F1A1697924000B9EA5C /* 010413AcMyCellID2_metadata.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = 010413AcMyCellID2_metadata.xml; path = Fixtures/010413AcMyCellID2_metadata.xml; sourceTree = "<group>"; };
+		FC0F4F1B1697924000B9EA5C /* 010413AcMyCellID2.h5 */ = {isa = PBXFileReference; lastKnownFileType = file; name = 010413AcMyCellID2.h5; path = Fixtures/010413AcMyCellID2.h5; sourceTree = "<group>"; };
+		FC0F4F20169794D300B9EA5C /* SMKMetadataParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SMKMetadataParser.h; path = Behavioral/SMKMetadataParser.h; sourceTree = "<group>"; };
+		FC0F4F21169794D300B9EA5C /* SMKMetadataParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SMKMetadataParser.m; path = Behavioral/SMKMetadataParser.m; sourceTree = "<group>"; };
+		FC0F4F251697991E00B9EA5C /* SMKSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SMKSource.h; path = Model/SMKSource.h; sourceTree = "<group>"; };
+		FC0F4F261697991E00B9EA5C /* SMKSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SMKSource.m; path = Model/SMKSource.m; sourceTree = "<group>"; };
+		FC0F4F291697993700B9EA5C /* SMKNote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SMKNote.h; path = Model/SMKNote.h; sourceTree = "<group>"; };
+		FC0F4F2A1697993700B9EA5C /* SMKNote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SMKNote.m; path = Model/SMKNote.m; sourceTree = "<group>"; };
+		FC50C13B16B84FED00656CC0 /* SMKEpochGroupEnumerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SMKEpochGroupEnumerator.h; path = Behavioral/SMKEpochGroupEnumerator.h; sourceTree = "<group>"; };
+		FC50C13C16B84FED00656CC0 /* SMKEpochGroupEnumerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SMKEpochGroupEnumerator.m; path = Behavioral/SMKEpochGroupEnumerator.m; sourceTree = "<group>"; };
+		FC50C13F16B8C06600656CC0 /* MACHdf5Reader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MACHdf5Reader.h; path = Hdf5/MACHdf5Reader.h; sourceTree = "<group>"; };
+		FC50C14016B8C06600656CC0 /* MACHdf5Reader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MACHdf5Reader.m; path = Hdf5/MACHdf5Reader.m; sourceTree = "<group>"; };
+		FC6B6E1D169612C0006B4688 /* SymphonyMappingKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SymphonyMappingKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC6B6E20169612C0006B4688 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		FC6B6E23169612C0006B4688 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		FC6B6E24169612C0006B4688 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		FC6B6E25169612C0006B4688 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		FC6B6E28169612C0006B4688 /* SymphonyMappingKit-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SymphonyMappingKit-Info.plist"; sourceTree = "<group>"; };
+		FC6B6E2A169612C0006B4688 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		FC6B6E2C169612C0006B4688 /* SymphonyMappingKit-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SymphonyMappingKit-Prefix.pch"; sourceTree = "<group>"; };
+		FC6B6E35169612C0006B4688 /* SymphonyMappingKitTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SymphonyMappingKitTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC6B6E36169612C0006B4688 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		FC6B6E3E169612C0006B4688 /* SymphonyMappingKitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SymphonyMappingKitTests-Info.plist"; sourceTree = "<group>"; };
+		FC6B6E40169612C0006B4688 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		FC6B6E4D16961335006B4688 /* SMKExperimentMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SMKExperimentMapper.h; path = Behavioral/SMKExperimentMapper.h; sourceTree = "<group>"; };
+		FC6B6E4E16961335006B4688 /* SMKExperimentMapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SMKExperimentMapper.m; path = Behavioral/SMKExperimentMapper.m; sourceTree = "<group>"; };
+		FC75B7931697A16300F33AED /* SMKMetadataParserTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMKMetadataParserTest.m; sourceTree = "<group>"; };
+		FC79481516B9B68F00DABE9C /* MACHdf5LinkInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MACHdf5LinkInformation.h; path = Hdf5/MACHdf5LinkInformation.h; sourceTree = "<group>"; };
+		FC79481616B9B68F00DABE9C /* MACHdf5LinkInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MACHdf5LinkInformation.m; path = Hdf5/MACHdf5LinkInformation.m; sourceTree = "<group>"; };
+		FC79481E16B9D3A000DABE9C /* MACHdf5ReaderTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MACHdf5ReaderTest.m; sourceTree = "<group>"; };
+		FC7C8DE416B3279800F9E8A6 /* SMKDataFileReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SMKDataFileReader.h; path = Behavioral/SMKDataFileReader.h; sourceTree = "<group>"; };
+		FC7C8DE516B3279800F9E8A6 /* SMKDataFileReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SMKDataFileReader.m; path = Behavioral/SMKDataFileReader.m; sourceTree = "<group>"; };
+		FC7C8DE916B3442500F9E8A6 /* SMKEpochGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SMKEpochGroup.h; path = Model/SMKEpochGroup.h; sourceTree = "<group>"; };
+		FC7C8DEA16B3442500F9E8A6 /* SMKEpochGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SMKEpochGroup.m; path = Model/SMKEpochGroup.m; sourceTree = "<group>"; };
+		FC7C8DF616B719F300F9E8A6 /* SMKDataFileReaderTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMKDataFileReaderTest.m; sourceTree = "<group>"; };
+		FC98DD1616C4A4D50039E8B4 /* BWFileSystemResource+UrlFix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "BWFileSystemResource+UrlFix.h"; path = "CoreData/BWFileSystemResource+UrlFix.h"; sourceTree = "<group>"; };
+		FC98DD1716C4A4D50039E8B4 /* BWFileSystemResource+UrlFix.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "BWFileSystemResource+UrlFix.m"; path = "CoreData/BWFileSystemResource+UrlFix.m"; sourceTree = "<group>"; };
+		FC98DD3116CB19070039E8B4 /* ExternalDevicesPlugin.plugin */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = ExternalDevicesPlugin.plugin; path = SymphonyMappingKit/Resources/ExternalDevicesPlugin.plugin; sourceTree = "<group>"; };
+		FC98DD3316CC24250039E8B4 /* SMKIOBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SMKIOBase.h; path = Model/SMKIOBase.h; sourceTree = "<group>"; };
+		FC98DD3416CC24260039E8B4 /* SMKIOBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SMKIOBase.m; path = Model/SMKIOBase.m; sourceTree = "<group>"; };
+		FC98DD3716CD97150039E8B4 /* 021313AcMyCellID1_metadata.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = 021313AcMyCellID1_metadata.xml; path = Fixtures/021313AcMyCellID1_metadata.xml; sourceTree = "<group>"; };
+		FC98DD3816CD97150039E8B4 /* 021313AcMyCellID1.h5 */ = {isa = PBXFileReference; lastKnownFileType = file; name = 021313AcMyCellID1.h5; path = Fixtures/021313AcMyCellID1.h5; sourceTree = "<group>"; };
+		FCC63F5E16BB1FD200BDDD57 /* MACHdf5CommonInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MACHdf5CommonInformation.h; path = Hdf5/MACHdf5CommonInformation.h; sourceTree = "<group>"; };
+		FCC63F5F16BB1FD200BDDD57 /* MACHdf5CommonInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MACHdf5CommonInformation.m; path = Hdf5/MACHdf5CommonInformation.m; sourceTree = "<group>"; };
+		FCC63F6216BB1FEA00BDDD57 /* MACHdf5ObjectInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MACHdf5ObjectInformation.h; path = Hdf5/MACHdf5ObjectInformation.h; sourceTree = "<group>"; };
+		FCC63F6316BB1FEA00BDDD57 /* MACHdf5ObjectInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MACHdf5ObjectInformation.m; path = Hdf5/MACHdf5ObjectInformation.m; sourceTree = "<group>"; };
+		FCC63F6616BB3B5400BDDD57 /* SMKEpoch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SMKEpoch.h; path = Model/SMKEpoch.h; sourceTree = "<group>"; };
+		FCC63F6716BB3B5400BDDD57 /* SMKEpoch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SMKEpoch.m; path = Model/SMKEpoch.m; sourceTree = "<group>"; };
+		FCC63F6A16BB3B7A00BDDD57 /* SMKEpochEnumerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SMKEpochEnumerator.h; path = Behavioral/SMKEpochEnumerator.h; sourceTree = "<group>"; };
+		FCC63F6B16BB3B7A00BDDD57 /* SMKEpochEnumerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SMKEpochEnumerator.m; path = Behavioral/SMKEpochEnumerator.m; sourceTree = "<group>"; };
+		FCC63F7516C077A700BDDD57 /* SMKEpochEnumeratorTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMKEpochEnumeratorTest.m; sourceTree = "<group>"; };
+		FCC63F7816C0785F00BDDD57 /* SMKEpochGroupEnumeratorTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMKEpochGroupEnumeratorTest.m; sourceTree = "<group>"; };
+		FCC63F7A16C0932500BDDD57 /* SMKResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SMKResponse.h; path = Model/SMKResponse.h; sourceTree = "<group>"; };
+		FCC63F7B16C0932500BDDD57 /* SMKResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SMKResponse.m; path = Model/SMKResponse.m; sourceTree = "<group>"; };
+		FCC63F7E16C0933A00BDDD57 /* SMKStimulus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SMKStimulus.h; path = Model/SMKStimulus.h; sourceTree = "<group>"; };
+		FCC63F7F16C0933B00BDDD57 /* SMKStimulus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SMKStimulus.m; path = Model/SMKStimulus.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FC6B6E19169612C0006B4688 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FC0F4E2F169671C700B9EA5C /* AUIModel.framework in Frameworks */,
+				FC0F4E30169671C700B9EA5C /* AUIProtocols.framework in Frameworks */,
+				FC0F4E31169671C700B9EA5C /* BWKit.framework in Frameworks */,
+				FC0F4E32169671C700B9EA5C /* DAQFramework.framework in Frameworks */,
+				FC6B6E21169612C0006B4688 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FC6B6E31169612C0006B4688 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FCAADD5816C32F49003341CD /* AUIModel.framework in Frameworks */,
+				FC6B6E37169612C0006B4688 /* SenTestingKit.framework in Frameworks */,
+				FC6B6E38169612C0006B4688 /* Cocoa.framework in Frameworks */,
+				FC6B6E3B169612C0006B4688 /* SymphonyMappingKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FC0F4F161697922E00B9EA5C /* Fixtures */ = {
+			isa = PBXGroup;
+			children = (
+				FC98DD3716CD97150039E8B4 /* 021313AcMyCellID1_metadata.xml */,
+				FC98DD3816CD97150039E8B4 /* 021313AcMyCellID1.h5 */,
+				FC0F4F181697924000B9EA5C /* 010413AcMyCellID1_metadata.xml */,
+				FC0F4F191697924000B9EA5C /* 010413AcMyCellID1.h5 */,
+				FC0F4F1A1697924000B9EA5C /* 010413AcMyCellID2_metadata.xml */,
+				FC0F4F1B1697924000B9EA5C /* 010413AcMyCellID2.h5 */,
+			);
+			name = Fixtures;
+			sourceTree = "<group>";
+		};
+		FC0F4F24169798E300B9EA5C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FC0F4F251697991E00B9EA5C /* SMKSource.h */,
+				FC0F4F261697991E00B9EA5C /* SMKSource.m */,
+				FC0F4F291697993700B9EA5C /* SMKNote.h */,
+				FC0F4F2A1697993700B9EA5C /* SMKNote.m */,
+				FC7C8DE916B3442500F9E8A6 /* SMKEpochGroup.h */,
+				FC7C8DEA16B3442500F9E8A6 /* SMKEpochGroup.m */,
+				FCC63F6616BB3B5400BDDD57 /* SMKEpoch.h */,
+				FCC63F6716BB3B5400BDDD57 /* SMKEpoch.m */,
+				FC98DD3316CC24250039E8B4 /* SMKIOBase.h */,
+				FC98DD3416CC24260039E8B4 /* SMKIOBase.m */,
+				FCC63F7A16C0932500BDDD57 /* SMKResponse.h */,
+				FCC63F7B16C0932500BDDD57 /* SMKResponse.m */,
+				FCC63F7E16C0933A00BDDD57 /* SMKStimulus.h */,
+				FCC63F7F16C0933B00BDDD57 /* SMKStimulus.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		FC6B6E11169612C0006B4688 = {
+			isa = PBXGroup;
+			children = (
+				FC6B6E26169612C0006B4688 /* SymphonyMappingKit */,
+				FC6B6E3C169612C0006B4688 /* SymphonyMappingKitTests */,
+				FC7C8DFC16B72AB900F9E8A6 /* Libraries */,
+				FC98DD3016CB18710039E8B4 /* Resources */,
+				FC6B6E1F169612C0006B4688 /* Frameworks */,
+				FC6B6E1E169612C0006B4688 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FC6B6E1E169612C0006B4688 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FC6B6E1D169612C0006B4688 /* SymphonyMappingKit.framework */,
+				FC6B6E35169612C0006B4688 /* SymphonyMappingKitTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FC6B6E1F169612C0006B4688 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FC0F4E271696719600B9EA5C /* AUIModel.framework */,
+				FC0F4E281696719600B9EA5C /* AUIProtocols.framework */,
+				FC0F4E291696719600B9EA5C /* BWKit.framework */,
+				FC0F4E2A1696719600B9EA5C /* DAQFramework.framework */,
+				FC6B6E20169612C0006B4688 /* Cocoa.framework */,
+				FC6B6E36169612C0006B4688 /* SenTestingKit.framework */,
+				FC6B6E22169612C0006B4688 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FC6B6E22169612C0006B4688 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FC6B6E23169612C0006B4688 /* AppKit.framework */,
+				FC6B6E24169612C0006B4688 /* CoreData.framework */,
+				FC6B6E25169612C0006B4688 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		FC6B6E26169612C0006B4688 /* SymphonyMappingKit */ = {
+			isa = PBXGroup;
+			children = (
+				FC0F4F24169798E300B9EA5C /* Model */,
+				FC6B6E511696133D006B4688 /* Behavioral */,
+				FC6B6E27169612C0006B4688 /* Supporting Files */,
+				FC79481416B9B50900DABE9C /* Hdf5 */,
+				FC98DD1516C4A44B0039E8B4 /* CoreData */,
+			);
+			path = SymphonyMappingKit;
+			sourceTree = "<group>";
+		};
+		FC6B6E27169612C0006B4688 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FC6B6E28169612C0006B4688 /* SymphonyMappingKit-Info.plist */,
+				FC6B6E29169612C0006B4688 /* InfoPlist.strings */,
+				FC6B6E2C169612C0006B4688 /* SymphonyMappingKit-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FC6B6E3C169612C0006B4688 /* SymphonyMappingKitTests */ = {
+			isa = PBXGroup;
+			children = (
+				FC6B6E3D169612C0006B4688 /* Supporting Files */,
+				FC0F4F161697922E00B9EA5C /* Fixtures */,
+				FC0F4E3816967BB000B9EA5C /* SMKBaseTestCase.h */,
+				FC0F4E341696774900B9EA5C /* SMKBaseTestCase.m */,
+				FC0F4E351696774900B9EA5C /* SMKExperimentMapperTest.m */,
+				FC75B7931697A16300F33AED /* SMKMetadataParserTest.m */,
+				FC7C8DF616B719F300F9E8A6 /* SMKDataFileReaderTest.m */,
+				FCC63F7816C0785F00BDDD57 /* SMKEpochGroupEnumeratorTest.m */,
+				FCC63F7516C077A700BDDD57 /* SMKEpochEnumeratorTest.m */,
+				FC79481E16B9D3A000DABE9C /* MACHdf5ReaderTest.m */,
+			);
+			path = SymphonyMappingKitTests;
+			sourceTree = "<group>";
+		};
+		FC6B6E3D169612C0006B4688 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FC6B6E3E169612C0006B4688 /* SymphonyMappingKitTests-Info.plist */,
+				FC6B6E3F169612C0006B4688 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FC6B6E511696133D006B4688 /* Behavioral */ = {
+			isa = PBXGroup;
+			children = (
+				FC6B6E4D16961335006B4688 /* SMKExperimentMapper.h */,
+				FC6B6E4E16961335006B4688 /* SMKExperimentMapper.m */,
+				FC0F4F20169794D300B9EA5C /* SMKMetadataParser.h */,
+				FC0F4F21169794D300B9EA5C /* SMKMetadataParser.m */,
+				FC7C8DE416B3279800F9E8A6 /* SMKDataFileReader.h */,
+				FC7C8DE516B3279800F9E8A6 /* SMKDataFileReader.m */,
+				FC50C13B16B84FED00656CC0 /* SMKEpochGroupEnumerator.h */,
+				FC50C13C16B84FED00656CC0 /* SMKEpochGroupEnumerator.m */,
+				FCC63F6A16BB3B7A00BDDD57 /* SMKEpochEnumerator.h */,
+				FCC63F6B16BB3B7A00BDDD57 /* SMKEpochEnumerator.m */,
+			);
+			name = Behavioral;
+			sourceTree = "<group>";
+		};
+		FC79481416B9B50900DABE9C /* Hdf5 */ = {
+			isa = PBXGroup;
+			children = (
+				FC50C13F16B8C06600656CC0 /* MACHdf5Reader.h */,
+				FC50C14016B8C06600656CC0 /* MACHdf5Reader.m */,
+				FC79481516B9B68F00DABE9C /* MACHdf5LinkInformation.h */,
+				FC79481616B9B68F00DABE9C /* MACHdf5LinkInformation.m */,
+				FCC63F5E16BB1FD200BDDD57 /* MACHdf5CommonInformation.h */,
+				FCC63F5F16BB1FD200BDDD57 /* MACHdf5CommonInformation.m */,
+				FCC63F6216BB1FEA00BDDD57 /* MACHdf5ObjectInformation.h */,
+				FCC63F6316BB1FEA00BDDD57 /* MACHdf5ObjectInformation.m */,
+			);
+			name = Hdf5;
+			sourceTree = "<group>";
+		};
+		FC7C8DFC16B72AB900F9E8A6 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
+		FC98DD1516C4A44B0039E8B4 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				FC98DD1616C4A4D50039E8B4 /* BWFileSystemResource+UrlFix.h */,
+				FC98DD1716C4A4D50039E8B4 /* BWFileSystemResource+UrlFix.m */,
+			);
+			name = CoreData;
+			sourceTree = "<group>";
+		};
+		FC98DD3016CB18710039E8B4 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				FC98DD3116CB19070039E8B4 /* ExternalDevicesPlugin.plugin */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		FC6B6E1A169612C0006B4688 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FC6B6E4F16961335006B4688 /* SMKExperimentMapper.h in Headers */,
+				FC0F4F22169794D300B9EA5C /* SMKMetadataParser.h in Headers */,
+				FC0F4F271697991E00B9EA5C /* SMKSource.h in Headers */,
+				FC0F4F2B1697993700B9EA5C /* SMKNote.h in Headers */,
+				FC7C8DE616B3279800F9E8A6 /* SMKDataFileReader.h in Headers */,
+				FC7C8DEB16B3442500F9E8A6 /* SMKEpochGroup.h in Headers */,
+				FC50C13D16B84FED00656CC0 /* SMKEpochGroupEnumerator.h in Headers */,
+				FC50C14116B8C06700656CC0 /* MACHdf5Reader.h in Headers */,
+				FC79481716B9B68F00DABE9C /* MACHdf5LinkInformation.h in Headers */,
+				FCC63F6016BB1FD200BDDD57 /* MACHdf5CommonInformation.h in Headers */,
+				FCC63F6416BB1FEA00BDDD57 /* MACHdf5ObjectInformation.h in Headers */,
+				FCC63F6816BB3B5400BDDD57 /* SMKEpoch.h in Headers */,
+				FCC63F6C16BB3B7A00BDDD57 /* SMKEpochEnumerator.h in Headers */,
+				FCC63F7C16C0932600BDDD57 /* SMKResponse.h in Headers */,
+				FCC63F8016C0933B00BDDD57 /* SMKStimulus.h in Headers */,
+				FC98DD1816C4A4D50039E8B4 /* BWFileSystemResource+UrlFix.h in Headers */,
+				FC98DD3516CC24260039E8B4 /* SMKIOBase.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		FC6B6E1C169612C0006B4688 /* SymphonyMappingKit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FC6B6E47169612C0006B4688 /* Build configuration list for PBXNativeTarget "SymphonyMappingKit" */;
+			buildPhases = (
+				FC6B6E18169612C0006B4688 /* Sources */,
+				FC6B6E19169612C0006B4688 /* Frameworks */,
+				FC6B6E1A169612C0006B4688 /* Headers */,
+				FC6B6E1B169612C0006B4688 /* Resources */,
+				FC98DD2F16CB17A50039E8B4 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SymphonyMappingKit;
+			productName = SymphonyMappingKit;
+			productReference = FC6B6E1D169612C0006B4688 /* SymphonyMappingKit.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		FC6B6E34169612C0006B4688 /* SymphonyMappingKitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FC6B6E4A169612C0006B4688 /* Build configuration list for PBXNativeTarget "SymphonyMappingKitTests" */;
+			buildPhases = (
+				FC6B6E30169612C0006B4688 /* Sources */,
+				FC6B6E31169612C0006B4688 /* Frameworks */,
+				FC6B6E32169612C0006B4688 /* Resources */,
+				FC6B6E33169612C0006B4688 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FC6B6E3A169612C0006B4688 /* PBXTargetDependency */,
+			);
+			name = SymphonyMappingKitTests;
+			productName = SymphonyMappingKitTests;
+			productReference = FC6B6E35169612C0006B4688 /* SymphonyMappingKitTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FC6B6E13169612C0006B4688 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0450;
+				ORGANIZATIONNAME = "Rieke Lab";
+			};
+			buildConfigurationList = FC6B6E16169612C0006B4688 /* Build configuration list for PBXProject "SymphonyMappingKit" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = FC6B6E11169612C0006B4688;
+			productRefGroup = FC6B6E1E169612C0006B4688 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FC6B6E1C169612C0006B4688 /* SymphonyMappingKit */,
+				FC6B6E34169612C0006B4688 /* SymphonyMappingKitTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FC6B6E1B169612C0006B4688 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FC6B6E2B169612C0006B4688 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FC6B6E32169612C0006B4688 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FC6B6E41169612C0006B4688 /* InfoPlist.strings in Resources */,
+				FC0F4F1C1697924000B9EA5C /* 010413AcMyCellID1_metadata.xml in Resources */,
+				FC0F4F1D1697924000B9EA5C /* 010413AcMyCellID1.h5 in Resources */,
+				FC0F4F1E1697924000B9EA5C /* 010413AcMyCellID2_metadata.xml in Resources */,
+				FC0F4F1F1697924000B9EA5C /* 010413AcMyCellID2.h5 in Resources */,
+				FC98DD3916CD97150039E8B4 /* 021313AcMyCellID1_metadata.xml in Resources */,
+				FC98DD3A16CD97150039E8B4 /* 021313AcMyCellID1.h5 in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		FC6B6E33169612C0006B4688 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FC6B6E18169612C0006B4688 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FC6B6E5016961335006B4688 /* SMKExperimentMapper.m in Sources */,
+				FC0F4F23169794D300B9EA5C /* SMKMetadataParser.m in Sources */,
+				FC0F4F281697991E00B9EA5C /* SMKSource.m in Sources */,
+				FC0F4F2C1697993700B9EA5C /* SMKNote.m in Sources */,
+				FC7C8DE716B3279800F9E8A6 /* SMKDataFileReader.m in Sources */,
+				FC7C8DEC16B3442500F9E8A6 /* SMKEpochGroup.m in Sources */,
+				FC50C13E16B84FED00656CC0 /* SMKEpochGroupEnumerator.m in Sources */,
+				FC50C14216B8C06700656CC0 /* MACHdf5Reader.m in Sources */,
+				FC79481816B9B68F00DABE9C /* MACHdf5LinkInformation.m in Sources */,
+				FCC63F6116BB1FD200BDDD57 /* MACHdf5CommonInformation.m in Sources */,
+				FCC63F6516BB1FEA00BDDD57 /* MACHdf5ObjectInformation.m in Sources */,
+				FCC63F6916BB3B5400BDDD57 /* SMKEpoch.m in Sources */,
+				FCC63F6D16BB3B7A00BDDD57 /* SMKEpochEnumerator.m in Sources */,
+				FCC63F7D16C0932600BDDD57 /* SMKResponse.m in Sources */,
+				FCC63F8116C0933B00BDDD57 /* SMKStimulus.m in Sources */,
+				FC98DD1916C4A4D50039E8B4 /* BWFileSystemResource+UrlFix.m in Sources */,
+				FC98DD3616CC24260039E8B4 /* SMKIOBase.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FC6B6E30169612C0006B4688 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FC0F4E361696774900B9EA5C /* SMKBaseTestCase.m in Sources */,
+				FC0F4E371696774900B9EA5C /* SMKExperimentMapperTest.m in Sources */,
+				FC75B7941697A16300F33AED /* SMKMetadataParserTest.m in Sources */,
+				FC7C8DF716B719F300F9E8A6 /* SMKDataFileReaderTest.m in Sources */,
+				FC79481F16B9D3A000DABE9C /* MACHdf5ReaderTest.m in Sources */,
+				FCC63F7616C077A700BDDD57 /* SMKEpochEnumeratorTest.m in Sources */,
+				FCC63F7916C0785F00BDDD57 /* SMKEpochGroupEnumeratorTest.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FC6B6E3A169612C0006B4688 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FC6B6E1C169612C0006B4688 /* SymphonyMappingKit */;
+			targetProxy = FC6B6E39169612C0006B4688 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		FC6B6E29169612C0006B4688 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC6B6E2A169612C0006B4688 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		FC6B6E3F169612C0006B4688 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC6B6E40169612C0006B4688 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		FC6B6E45169612C0006B4688 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_ENABLE_OBJC_GC = unsupported;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				SDKROOT = macosx10.6;
+				VALID_ARCHS = i386;
+			};
+			name = Debug;
+		};
+		FC6B6E46169612C0006B4688 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_ENABLE_OBJC_GC = unsupported;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				SDKROOT = macosx10.6;
+				VALID_ARCHS = i386;
+			};
+			name = Release;
+		};
+		FC6B6E48169612C0006B4688 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = ../Libraries;
+				FRAMEWORK_VERSION = A;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SymphonyMappingKit/SymphonyMappingKit-Prefix.pch";
+				HEADER_SEARCH_PATHS = /usr/local/hdf5/include;
+				INFOPLIST_FILE = "SymphonyMappingKit/SymphonyMappingKit-Info.plist";
+				INSTALL_PATH = "@rpath";
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path/Frameworks";
+				OTHER_LDFLAGS = (
+					/usr/local/hdf5/lib/libhdf5.a,
+					"-lz",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Debug;
+		};
+		FC6B6E49169612C0006B4688 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = ../Libraries;
+				FRAMEWORK_VERSION = A;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SymphonyMappingKit/SymphonyMappingKit-Prefix.pch";
+				HEADER_SEARCH_PATHS = /usr/local/hdf5/include;
+				INFOPLIST_FILE = "SymphonyMappingKit/SymphonyMappingKit-Info.plist";
+				INSTALL_PATH = "@rpath";
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path/Frameworks";
+				OTHER_LDFLAGS = (
+					/usr/local/hdf5/lib/libhdf5.a,
+					"-lz",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Release;
+		};
+		FC6B6E4B169612C0006B4688 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+					"\"$(SRCROOT)/../Libraries\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SymphonyMappingKit/SymphonyMappingKit-Prefix.pch";
+				HEADER_SEARCH_PATHS = /usr/local/hdf5/include;
+				INFOPLIST_FILE = "SymphonyMappingKitTests/SymphonyMappingKitTests-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(SRCROOT)/../Libraries";
+				OTHER_LDFLAGS = /usr/local/hdf5/lib/libhdf5.a;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		FC6B6E4C169612C0006B4688 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+					"\"$(SRCROOT)/../Libraries\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SymphonyMappingKit/SymphonyMappingKit-Prefix.pch";
+				HEADER_SEARCH_PATHS = /usr/local/hdf5/include;
+				INFOPLIST_FILE = "SymphonyMappingKitTests/SymphonyMappingKitTests-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(SRCROOT)/../Libraries";
+				OTHER_LDFLAGS = /usr/local/hdf5/lib/libhdf5.a;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FC6B6E16169612C0006B4688 /* Build configuration list for PBXProject "SymphonyMappingKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FC6B6E45169612C0006B4688 /* Debug */,
+				FC6B6E46169612C0006B4688 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FC6B6E47169612C0006B4688 /* Build configuration list for PBXNativeTarget "SymphonyMappingKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FC6B6E48169612C0006B4688 /* Debug */,
+				FC6B6E49169612C0006B4688 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FC6B6E4A169612C0006B4688 /* Build configuration list for PBXNativeTarget "SymphonyMappingKitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FC6B6E4B169612C0006B4688 /* Debug */,
+				FC6B6E4C169612C0006B4688 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FC6B6E13169612C0006B4688 /* Project object */;
+}

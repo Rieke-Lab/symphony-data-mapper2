@@ -1,0 +1,413 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FC0F4EC716967D5B00B9EA5C /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC0F4EC616967D5B00B9EA5C /* Cocoa.framework */; };
+		FC0F4ED116967D5B00B9EA5C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FC0F4ECF16967D5B00B9EA5C /* InfoPlist.strings */; };
+		FC0F4ED316967D5B00B9EA5C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0F4ED216967D5B00B9EA5C /* main.m */; };
+		FC0F4ED716967D5B00B9EA5C /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = FC0F4ED516967D5B00B9EA5C /* Credits.rtf */; };
+		FC0F4EDD16967D5B00B9EA5C /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC0F4EDB16967D5B00B9EA5C /* MainMenu.xib */; };
+		FC0F4EF616967E5C00B9EA5C /* AUIModel.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = FC0F4EF216967E5C00B9EA5C /* AUIModel.framework */; };
+		FC0F4EF716967E5C00B9EA5C /* AUIProtocols.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = FC0F4EF316967E5C00B9EA5C /* AUIProtocols.framework */; };
+		FC0F4EF816967E5C00B9EA5C /* BWKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = FC0F4EF416967E5C00B9EA5C /* BWKit.framework */; };
+		FC0F4EF916967E5C00B9EA5C /* DAQFramework.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = FC0F4EF516967E5C00B9EA5C /* DAQFramework.framework */; };
+		FC0F4EFC169683D800B9EA5C /* SymphonyMappingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC0F4EEC16967DB800B9EA5C /* SymphonyMappingKit.framework */; };
+		FC0F4EFD169683E000B9EA5C /* SymphonyMappingKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = FC0F4EEC16967DB800B9EA5C /* SymphonyMappingKit.framework */; };
+		FC98DD1C16C5B5650039E8B4 /* AUIModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC0F4EF216967E5C00B9EA5C /* AUIModel.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		FC0F4EEB16967DB800B9EA5C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FC0F4EE316967DB800B9EA5C /* SymphonyMappingKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = FC6B6E1D169612C0006B4688;
+			remoteInfo = SymphonyMappingKit;
+		};
+		FC0F4EED16967DB800B9EA5C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FC0F4EE316967DB800B9EA5C /* SymphonyMappingKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = FC6B6E35169612C0006B4688;
+			remoteInfo = SymphonyMappingKitTests;
+		};
+		FC0F4EEF16967DDC00B9EA5C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FC0F4EE316967DB800B9EA5C /* SymphonyMappingKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = FC6B6E1C169612C0006B4688;
+			remoteInfo = SymphonyMappingKit;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		FC0F4EF116967E1200B9EA5C /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				FC0F4EFD169683E000B9EA5C /* SymphonyMappingKit.framework in CopyFiles */,
+				FC0F4EF616967E5C00B9EA5C /* AUIModel.framework in CopyFiles */,
+				FC0F4EF716967E5C00B9EA5C /* AUIProtocols.framework in CopyFiles */,
+				FC0F4EF816967E5C00B9EA5C /* BWKit.framework in CopyFiles */,
+				FC0F4EF916967E5C00B9EA5C /* DAQFramework.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		FC0F4EC216967D5B00B9EA5C /* SymphonyDataMapper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SymphonyDataMapper.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC0F4EC616967D5B00B9EA5C /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		FC0F4EC916967D5B00B9EA5C /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		FC0F4ECA16967D5B00B9EA5C /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		FC0F4ECB16967D5B00B9EA5C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		FC0F4ECE16967D5B00B9EA5C /* SymphonyDataMapper-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SymphonyDataMapper-Info.plist"; sourceTree = "<group>"; };
+		FC0F4ED016967D5B00B9EA5C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		FC0F4ED216967D5B00B9EA5C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		FC0F4ED416967D5B00B9EA5C /* SymphonyDataMapper-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SymphonyDataMapper-Prefix.pch"; sourceTree = "<group>"; };
+		FC0F4ED616967D5B00B9EA5C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		FC0F4EDC16967D5B00B9EA5C /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		FC0F4EE316967DB800B9EA5C /* SymphonyMappingKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SymphonyMappingKit.xcodeproj; path = ../SymphonyMappingKit/SymphonyMappingKit.xcodeproj; sourceTree = "<group>"; };
+		FC0F4EF216967E5C00B9EA5C /* AUIModel.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AUIModel.framework; path = ../Libraries/AUIModel.framework; sourceTree = "<group>"; };
+		FC0F4EF316967E5C00B9EA5C /* AUIProtocols.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AUIProtocols.framework; path = ../Libraries/AUIProtocols.framework; sourceTree = "<group>"; };
+		FC0F4EF416967E5C00B9EA5C /* BWKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BWKit.framework; path = ../Libraries/BWKit.framework; sourceTree = "<group>"; };
+		FC0F4EF516967E5C00B9EA5C /* DAQFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DAQFramework.framework; path = ../Libraries/DAQFramework.framework; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FC0F4EBF16967D5A00B9EA5C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FC98DD1C16C5B5650039E8B4 /* AUIModel.framework in Frameworks */,
+				FC0F4EFC169683D800B9EA5C /* SymphonyMappingKit.framework in Frameworks */,
+				FC0F4EC716967D5B00B9EA5C /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FC0F4EB716967D5A00B9EA5C = {
+			isa = PBXGroup;
+			children = (
+				FC0F4EE316967DB800B9EA5C /* SymphonyMappingKit.xcodeproj */,
+				FC0F4ECC16967D5B00B9EA5C /* SymphonyDataMapper */,
+				FC0F4EC516967D5B00B9EA5C /* Frameworks */,
+				FC0F4EC316967D5B00B9EA5C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FC0F4EC316967D5B00B9EA5C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FC0F4EC216967D5B00B9EA5C /* SymphonyDataMapper.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FC0F4EC516967D5B00B9EA5C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FC0F4EF216967E5C00B9EA5C /* AUIModel.framework */,
+				FC0F4EF316967E5C00B9EA5C /* AUIProtocols.framework */,
+				FC0F4EF416967E5C00B9EA5C /* BWKit.framework */,
+				FC0F4EF516967E5C00B9EA5C /* DAQFramework.framework */,
+				FC0F4EC616967D5B00B9EA5C /* Cocoa.framework */,
+				FC0F4EC816967D5B00B9EA5C /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FC0F4EC816967D5B00B9EA5C /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FC0F4EC916967D5B00B9EA5C /* AppKit.framework */,
+				FC0F4ECA16967D5B00B9EA5C /* CoreData.framework */,
+				FC0F4ECB16967D5B00B9EA5C /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		FC0F4ECC16967D5B00B9EA5C /* SymphonyDataMapper */ = {
+			isa = PBXGroup;
+			children = (
+				FC0F4EDB16967D5B00B9EA5C /* MainMenu.xib */,
+				FC0F4ECD16967D5B00B9EA5C /* Supporting Files */,
+			);
+			path = SymphonyDataMapper;
+			sourceTree = "<group>";
+		};
+		FC0F4ECD16967D5B00B9EA5C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FC0F4ECE16967D5B00B9EA5C /* SymphonyDataMapper-Info.plist */,
+				FC0F4ECF16967D5B00B9EA5C /* InfoPlist.strings */,
+				FC0F4ED216967D5B00B9EA5C /* main.m */,
+				FC0F4ED416967D5B00B9EA5C /* SymphonyDataMapper-Prefix.pch */,
+				FC0F4ED516967D5B00B9EA5C /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FC0F4EE416967DB800B9EA5C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FC0F4EEC16967DB800B9EA5C /* SymphonyMappingKit.framework */,
+				FC0F4EEE16967DB800B9EA5C /* SymphonyMappingKitTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FC0F4EC116967D5A00B9EA5C /* SymphonyDataMapper */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FC0F4EE016967D5B00B9EA5C /* Build configuration list for PBXNativeTarget "SymphonyDataMapper" */;
+			buildPhases = (
+				FC0F4EBE16967D5A00B9EA5C /* Sources */,
+				FC0F4EBF16967D5A00B9EA5C /* Frameworks */,
+				FC0F4EC016967D5A00B9EA5C /* Resources */,
+				FC0F4EF116967E1200B9EA5C /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FC0F4EF016967DDC00B9EA5C /* PBXTargetDependency */,
+			);
+			name = SymphonyDataMapper;
+			productName = SymphonyDataMapper;
+			productReference = FC0F4EC216967D5B00B9EA5C /* SymphonyDataMapper.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FC0F4EB916967D5A00B9EA5C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = SDM;
+				LastUpgradeCheck = 0450;
+				ORGANIZATIONNAME = "Rieke Lab";
+			};
+			buildConfigurationList = FC0F4EBC16967D5A00B9EA5C /* Build configuration list for PBXProject "SymphonyDataMapper" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = FC0F4EB716967D5A00B9EA5C;
+			productRefGroup = FC0F4EC316967D5B00B9EA5C /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = FC0F4EE416967DB800B9EA5C /* Products */;
+					ProjectRef = FC0F4EE316967DB800B9EA5C /* SymphonyMappingKit.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				FC0F4EC116967D5A00B9EA5C /* SymphonyDataMapper */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		FC0F4EEC16967DB800B9EA5C /* SymphonyMappingKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SymphonyMappingKit.framework;
+			remoteRef = FC0F4EEB16967DB800B9EA5C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		FC0F4EEE16967DB800B9EA5C /* SymphonyMappingKitTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = SymphonyMappingKitTests.octest;
+			remoteRef = FC0F4EED16967DB800B9EA5C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FC0F4EC016967D5A00B9EA5C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FC0F4ED116967D5B00B9EA5C /* InfoPlist.strings in Resources */,
+				FC0F4ED716967D5B00B9EA5C /* Credits.rtf in Resources */,
+				FC0F4EDD16967D5B00B9EA5C /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FC0F4EBE16967D5A00B9EA5C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FC0F4ED316967D5B00B9EA5C /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FC0F4EF016967DDC00B9EA5C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SymphonyMappingKit;
+			targetProxy = FC0F4EEF16967DDC00B9EA5C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		FC0F4ECF16967D5B00B9EA5C /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC0F4ED016967D5B00B9EA5C /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		FC0F4ED516967D5B00B9EA5C /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC0F4ED616967D5B00B9EA5C /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		FC0F4EDB16967D5B00B9EA5C /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC0F4EDC16967D5B00B9EA5C /* en */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		FC0F4EDE16967D5B00B9EA5C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				SDKROOT = macosx10.6;
+				VALID_ARCHS = i386;
+			};
+			name = Debug;
+		};
+		FC0F4EDF16967D5B00B9EA5C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				SDKROOT = macosx10.6;
+				VALID_ARCHS = i386;
+			};
+			name = Release;
+		};
+		FC0F4EE116967D5B00B9EA5C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../Libraries\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SymphonyDataMapper/SymphonyDataMapper-Prefix.pch";
+				INFOPLIST_FILE = "SymphonyDataMapper/SymphonyDataMapper-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx10.6;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		FC0F4EE216967D5B00B9EA5C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../Libraries\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SymphonyDataMapper/SymphonyDataMapper-Prefix.pch";
+				INFOPLIST_FILE = "SymphonyDataMapper/SymphonyDataMapper-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx10.6;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FC0F4EBC16967D5A00B9EA5C /* Build configuration list for PBXProject "SymphonyDataMapper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FC0F4EDE16967D5B00B9EA5C /* Debug */,
+				FC0F4EDF16967D5B00B9EA5C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FC0F4EE016967D5B00B9EA5C /* Build configuration list for PBXNativeTarget "SymphonyDataMapper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FC0F4EE116967D5B00B9EA5C /* Debug */,
+				FC0F4EE216967D5B00B9EA5C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FC0F4EB916967D5A00B9EA5C /* Project object */;
+}
