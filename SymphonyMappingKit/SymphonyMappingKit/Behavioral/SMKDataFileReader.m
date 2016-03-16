@@ -7,19 +7,11 @@
 //
 
 #import "SMKDataFileReader.h"
-#import "SMKEpochGroup.h"
-#import "SMKEpochGroupEnumerator.h"
+#import "SMKExperimentEnumerator.h"
 #import "MACHdf5Reader.h"
 #import "MACHdf5LinkInformation.h"
 
 #define STRING_MAX 1024
-
-@interface SMKEpochGroupEnumerator ()
-
-- (void)readAllEpochGroups;
-- (SMKEpochGroup *)readEpochGroup:(hid_t)groupId parent:(SMKEpochGroup *)parent;
-
-@end
 
 @implementation SMKDataFileReader
 
@@ -34,22 +26,22 @@
     if (self) {
         _reader = [MACHdf5Reader readerWithFilePath:hdf5FilePath];
         
-        _epochGroupPaths = [NSMutableArray array];
+        _experimentPaths = [NSMutableArray array];
         
         NSArray *rootMembers = [_reader groupMemberLinkInfoInPath:@"/"];
         
         for (MACHdf5LinkInformation *member in rootMembers) {
             if (member.isGroup) {
-                [_epochGroupPaths addObject:member.path];
+                [_experimentPaths addObject:member.path];
             }
         }
     }
     return self;
 }
 
-- (SMKEpochGroupEnumerator *)epochGroupEnumerator
-{   
-    return [[[SMKEpochGroupEnumerator alloc] initWithReader:_reader epochGroupPaths:_epochGroupPaths] autorelease];
+- (SMKExperimentEnumerator *)experimentEnumerator
+{
+    return [[[SMKExperimentEnumerator alloc] initWithReader:_reader experimentPaths: _experimentPaths] autorelease];
 }
 
 @end

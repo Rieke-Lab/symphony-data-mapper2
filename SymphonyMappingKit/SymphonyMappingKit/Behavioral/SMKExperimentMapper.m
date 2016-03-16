@@ -7,6 +7,7 @@
 //
 
 #import "SMKExperimentMapper.h"
+#import "SMKExperiment.h"
 #import "SMKMetadataParser.h"
 #import "SMKNote.h"
 #import "SMKDataFileReader.h"
@@ -59,38 +60,34 @@
 
 - (void)map
 {
-    Experiment *auiExperiment = [NSEntityDescription insertNewObjectForEntityForName:@"Experiment"
-                                                           inManagedObjectContext:_context];
-    
-    auiExperiment.startDate = [NSDate dateWithTimeIntervalSinceReferenceDate:DBL_MAX]; // temp
-    auiExperiment.daqID = @"edu.washington.bwark.acqui.ITCController_ITC00_0";
-    auiExperiment.rigSettingsData = [NSData data];
-    auiExperiment.purpose = @"";
-    auiExperiment.otherNotes = @"";
-    
-    [self assertValid:auiExperiment];
-    
-    // Setup HDF5 output file for response
-    NSURL *dataFileUrl = [Experiment responseDataURLForPersistentStoreURL:_auisqlUrl];
-    
-    [Experiment createResponseDataFileAtURL:dataFileUrl];
-    [auiExperiment useResponseDataFileAtURL:dataFileUrl];
-    [BWFileSystemResource setURL:dataFileUrl relativeToRootURL:_auisqlUrl forFileSystemResource:auiExperiment.responseDataFile];
-    
-    _hdf5FileUrl = dataFileUrl;
-    
-    // Create a placeholder for the DAQ config so we can validate entities as they're created.
-    // We'll create the real DAQ config after mapping all the entities.
-    _daqConfigContainer = [NSEntityDescription insertNewObjectForEntityForName:@"DAQConfigContainer"
-                                                        inManagedObjectContext:_context];
-    _daqConfigContainer.daqConfigData = [NSData data];
-    [self assertValid:_daqConfigContainer];
-    
-    // Load external devices plugin
-    NSString *bundlePath = [[[NSBundle bundleForClass:[self class]] resourcePath] stringByAppendingPathComponent:@"ExternalDevicesPlugin.plugin"];
-    if (![[NSBundle bundleWithPath:bundlePath] principalClass]) {
-        [NSException raise:@"CannotLoadBundle" format:@"Unable to load external devices plugin"];
+    SMKDataFileReader *reader = [SMKDataFileReader readerForHdf5FilePath:_dataFilePath];
+    SMKExperimentEnumerator *experimentEnumerator = [reader experimentEnumerator];
+    SMKExperiment *experiment;
+    while (experiment = [experimentEnumerator nextObject]) {
+        [self mapExperiment:experiment];
     }
+    
+//    // Setup HDF5 output file for response
+//    NSURL *dataFileUrl = [Experiment responseDataURLForPersistentStoreURL:_auisqlUrl];
+//    
+//    [Experiment createResponseDataFileAtURL:dataFileUrl];
+//    [auiExperiment useResponseDataFileAtURL:dataFileUrl];
+//    [BWFileSystemResource setURL:dataFileUrl relativeToRootURL:_auisqlUrl forFileSystemResource:auiExperiment.responseDataFile];
+//    
+//    _hdf5FileUrl = dataFileUrl;
+//    
+//    // Create a placeholder for the DAQ config so we can validate entities as they're created.
+//    // We'll create the real DAQ config after mapping all the entities.
+//    _daqConfigContainer = [NSEntityDescription insertNewObjectForEntityForName:@"DAQConfigContainer"
+//                                                        inManagedObjectContext:_context];
+//    _daqConfigContainer.daqConfigData = [NSData data];
+//    [self assertValid:_daqConfigContainer];
+//    
+//    // Load external devices plugin
+//    NSString *bundlePath = [[[NSBundle bundleForClass:[self class]] resourcePath] stringByAppendingPathComponent:@"ExternalDevicesPlugin.plugin"];
+//    if (![[NSBundle bundleWithPath:bundlePath] principalClass]) {
+//        [NSException raise:@"CannotLoadBundle" format:@"Unable to load external devices plugin"];
+//    }
     
 //    // Import notes
 //    for (NSString *filePath in _metadataFilePaths) {
@@ -150,22 +147,36 @@
 //        }
 //    }
     
-    // Create DAQ config from streams created while mapping
-    NSSet *streamProperties = [_streams valueForKey:@"streamProperties"];
-    
-    // HACK: this is inside the AUIIOController but we don't want to create an entire controller just for the daq config
-    NSString *AUIIOControllerStreamPropertiesKey = @"AUIIOControllerStreamPropertiesKey";
-    NSDictionary *configDict = [NSDictionary dictionaryWithObject:streamProperties
-                                                           forKey:AUIIOControllerStreamPropertiesKey];
-    NSData *configData = [NSKeyedArchiver archivedDataWithRootObject:configDict];
-    
-    _daqConfigContainer.daqConfigData = configData;
-    [self assertValid:_daqConfigContainer];
+//    // Create DAQ config from streams created while mapping
+//    NSSet *streamProperties = [_streams valueForKey:@"streamProperties"];
+//    
+//    // HACK: this is inside the AUIIOController but we don't want to create an entire controller just for the daq config
+//    NSString *AUIIOControllerStreamPropertiesKey = @"AUIIOControllerStreamPropertiesKey";
+//    NSDictionary *configDict = [NSDictionary dictionaryWithObject:streamProperties
+//                                                           forKey:AUIIOControllerStreamPropertiesKey];
+//    NSData *configData = [NSKeyedArchiver archivedDataWithRootObject:configDict];
+//    
+//    _daqConfigContainer.daqConfigData = configData;
+//    [self assertValid:_daqConfigContainer];
     
     NSError *error;
     if ([_context save:&error] == NO) {
         [NSException raise:@"Failed to save context" format:@"Failed to save context: %@", [error localizedDescription]];
     }
+}
+
+- (void)mapExperiment:(SMKExperiment *)experiment
+{
+    Experiment *auiExperiment = [NSEntityDescription insertNewObjectForEntityForName:@"Experiment"
+                                                              inManagedObjectContext:_context];
+    
+    auiExperiment.startDate = experiment.startTime;
+    auiExperiment.daqID = @"edu.washington.bwark.acqui.ITCController_ITC00_0";
+    auiExperiment.rigSettingsData = [NSData data];
+    auiExperiment.purpose = experiment.purpose;
+    auiExperiment.otherNotes = @"";
+    
+    [self assertValid:auiExperiment];
 }
 
 - (void)mapEpochGroup:(SMKEpochGroup *)group toCell:(RecordedCell *)auiCell

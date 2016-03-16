@@ -10,16 +10,16 @@
 
 #include "hdf5.h"
 
-@class SMKEpochGroupEnumerator;
+@class SMKExperimentEnumerator;
 @class MACHdf5Reader;
 
 @interface SMKDataFileReader : NSObject {
     MACHdf5Reader *_reader;
-    NSMutableArray *_epochGroupPaths;
+    NSMutableArray *_experimentPaths;
 }
 
 + (id)readerForHdf5FilePath:(NSString *)hdf5FilePath;
 - (id)initWithHdf5FilePath:(NSString *)hdf5FilePath;
-- (SMKEpochGroupEnumerator *)epochGroupEnumerator;
+- (SMKExperimentEnumerator *)experimentEnumerator;
 
 @end
