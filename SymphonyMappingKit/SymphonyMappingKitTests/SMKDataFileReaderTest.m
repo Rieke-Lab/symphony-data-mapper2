@@ -1,41 +1,32 @@
 //
 //  SMKDataFileReaderTest.m
-//  SymphonyMappingKit
+//  
 //
-//  Created by Mark Cafaro on 1/28/13.
-//  Copyright (c) 2013 Rieke Lab. All rights reserved.
+//  Created by Mark Cafaro on 3/16/16.
+//
 //
 
 #import "SMKBaseTestCase.h"
-#import "SMKDataFileReader.h"
-#import "SMKEpochGroupEnumerator.h"
-#import "SMKEpochGroup.h"
 
-@interface SMKDataFileReaderTest : SMKBaseTestCase {
-    SMKDataFileReader *_reader;
-}
+@interface SMKDataFileReaderTest : SMKBaseTestCase
 
 @end
 
 @implementation SMKDataFileReaderTest
 
-- (void)setUp
-{
+- (void)setUp {
     [super setUp];
-    
-    _reader = [SMKDataFileReader readerForHdf5FilePath:[_resourcePath stringByAppendingString:@"010413AcMyCellID1.h5"]];
+    // Put setup code here. This method is called before the invocation of each test method in the class.
 }
 
-- (void)testEpochGroupEnumerator
-{
-    SMKEpochGroupEnumerator *enumerator = [_reader epochGroupEnumerator];
-    
-    int count = 0;
-    while ([enumerator nextObject]) {
-        count++;
-    }
-    
-    STAssertTrue(count == 2, nil);
+- (void)tearDown {
+    // Put teardown code here. This method is called after the invocation of each test method in the class.
+    [super tearDown];
+}
+
+- (void)testExample {
+    // This is an example of a functional test case.
+    STAssertTrue(YES, @"Pass");
 }
 
 @end
