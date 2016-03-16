@@ -34,26 +34,22 @@
 
 @implementation SMKExperimentMapper
 
-+ (id)mapperForDataFilePaths:(NSSet *)dataFilePaths
-           metadataFilePaths:(NSSet *)metadataFilePaths
-                     context:(NSManagedObjectContext *)context
-                   auisqlUrl:(NSURL *)auisqlUrl
-{
-    return [[[self alloc] initWithDataFilePaths:dataFilePaths
-                              metadataFilePaths:metadataFilePaths
-                                        context:context
-                                      auisqlUrl:auisqlUrl] autorelease];
-}
-
-- (id)initWithDataFilePaths:(NSSet *)dataFilePaths
-          metadataFilePaths:(NSSet *)metadataFilePaths
++ (id)mapperForDataFilePath:(NSString *)dataFilePath
                     context:(NSManagedObjectContext *)context
                   auisqlUrl:(NSURL *)auisqlUrl
 {
+    return [[[self alloc] initWithDataFilePath:dataFilePath
+                                       context:context
+                                     auisqlUrl:auisqlUrl] autorelease];
+}
+
+- (id)initWithDataFilePath:(NSString *)dataFilePath
+                   context:(NSManagedObjectContext *)context
+                 auisqlUrl:(NSURL *)auisqlUrl
+{
     self = [super init];
     if (self) {
-        _dataFilePaths = [dataFilePaths retain];
-        _metadataFilePaths = [metadataFilePaths retain];
+        _dataFilePath = [dataFilePath retain];
         _context = [context retain];
         _auisqlUrl = [auisqlUrl retain];
         _streams = [NSMutableSet set];
@@ -96,63 +92,63 @@
         [NSException raise:@"CannotLoadBundle" format:@"Unable to load external devices plugin"];
     }
     
-    // Import notes
-    for (NSString *filePath in _metadataFilePaths) {
-        
-        SMKMetadataParser *parser = [SMKMetadataParser parserForFilePath:filePath];
-        [parser parse];
-    
-        for (SMKNote *note in parser.notes) {
-            Note *auiNote = [NSEntityDescription insertNewObjectForEntityForName:@"Note"
-                                                          inManagedObjectContext:_context];
-            
-            auiNote.date = note.timestamp;
-            auiNote.text = note.comment;
-            auiNote.experiment = auiExperiment;
-            
-            [self assertValid:auiNote];
-        }
-        
-        // TODO: place the source data somewhere
-    }
-
-    // Import cells    
-    for (NSString *filePath in _dataFilePaths) {
-        @autoreleasepool {
-            RecordedCell *auiCell = [NSEntityDescription insertNewObjectForEntityForName:@"Cell"
-                                                                  inManagedObjectContext:_context];
-            
-            NSString *label = [[filePath lastPathComponent] stringByDeletingPathExtension];
-            auiCell.label = label;
-            auiCell.experiment = auiExperiment;
-            auiCell.comment = @"";
-            BOOL addedStartDate = NO;
-            
-            SMKDataFileReader *reader = [SMKDataFileReader readerForHdf5FilePath:filePath];
-            SMKEpochGroupEnumerator *groupEnumerator = [reader epochGroupEnumerator];
-            SMKEpochGroup *group;
-            while (group = [groupEnumerator nextObject]) {
-                if (!addedStartDate) {
-                    auiCell.startDate = group.startTime;
-                    addedStartDate = YES;
-                    
-                    if ([auiExperiment.startDate compare:auiCell.startDate] == NSOrderedDescending) {
-                        auiExperiment.startDate = auiCell.startDate;
-                    }
-                }
-                
-                [self mapEpochGroup:group toCell:auiCell];
-            }
-            
-            [self assertValid:auiCell];
-            
-            // Cut down on memory usage by flushing per cell
-            NSError *error;
-            if ([_context save:&error] == NO) {
-                [NSException raise:@"Failed to save context" format:@"Failed to save context: %@", [error localizedDescription]];
-            }
-        }
-    }
+//    // Import notes
+//    for (NSString *filePath in _metadataFilePaths) {
+//        
+//        SMKMetadataParser *parser = [SMKMetadataParser parserForFilePath:filePath];
+//        [parser parse];
+//    
+//        for (SMKNote *note in parser.notes) {
+//            Note *auiNote = [NSEntityDescription insertNewObjectForEntityForName:@"Note"
+//                                                          inManagedObjectContext:_context];
+//            
+//            auiNote.date = note.timestamp;
+//            auiNote.text = note.comment;
+//            auiNote.experiment = auiExperiment;
+//            
+//            [self assertValid:auiNote];
+//        }
+//        
+//        // TODO: place the source data somewhere
+//    }
+//
+//    // Import cells    
+//    for (NSString *filePath in _dataFilePaths) {
+//        @autoreleasepool {
+//            RecordedCell *auiCell = [NSEntityDescription insertNewObjectForEntityForName:@"Cell"
+//                                                                  inManagedObjectContext:_context];
+//            
+//            NSString *label = [[filePath lastPathComponent] stringByDeletingPathExtension];
+//            auiCell.label = label;
+//            auiCell.experiment = auiExperiment;
+//            auiCell.comment = @"";
+//            BOOL addedStartDate = NO;
+//            
+//            SMKDataFileReader *reader = [SMKDataFileReader readerForHdf5FilePath:filePath];
+//            SMKEpochGroupEnumerator *groupEnumerator = [reader epochGroupEnumerator];
+//            SMKEpochGroup *group;
+//            while (group = [groupEnumerator nextObject]) {
+//                if (!addedStartDate) {
+//                    auiCell.startDate = group.startTime;
+//                    addedStartDate = YES;
+//                    
+//                    if ([auiExperiment.startDate compare:auiCell.startDate] == NSOrderedDescending) {
+//                        auiExperiment.startDate = auiCell.startDate;
+//                    }
+//                }
+//                
+//                [self mapEpochGroup:group toCell:auiCell];
+//            }
+//            
+//            [self assertValid:auiCell];
+//            
+//            // Cut down on memory usage by flushing per cell
+//            NSError *error;
+//            if ([_context save:&error] == NO) {
+//                [NSException raise:@"Failed to save context" format:@"Failed to save context: %@", [error localizedDescription]];
+//            }
+//        }
+//    }
     
     // Create DAQ config from streams created while mapping
     NSSet *streamProperties = [_streams valueForKey:@"streamProperties"];

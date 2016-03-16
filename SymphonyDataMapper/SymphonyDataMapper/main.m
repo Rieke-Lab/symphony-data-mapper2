@@ -13,7 +13,7 @@
 
 int usage()
 {
-    printf("usage: sdm -a auisqlFile dataFile1 [metaDataFile1] .. [dataFileN [metaDataFileN]]\n");
+    printf("usage: sdm2 dataFile\n");
     return 1;
 }
 
@@ -22,59 +22,27 @@ int main(int argc, char *argv[])
     NSAutoreleasePool *pool = [NSAutoreleasePool new];
     NSError *error;
     
-    NSString *auisqlFilePath = nil;
-    BOOL overwriteExisting = NO;
-    
-    int ch;
-    while ((ch = getopt(argc, argv, "a:y")) != -1) {
-        switch (ch) {
-            case 'a':
-                auisqlFilePath = [NSString stringWithCString:optarg encoding:NSASCIIStringEncoding];
-                break;
-            case 'y':
-                overwriteExisting = YES;
-                break;
-            default:
-                return usage();
-                break;
-        }
-    }
-    
-    if (auisqlFilePath == nil || optind == argc) {
+    if (argc != 2) {
         return usage();
     }
     
-    NSMutableSet *dataFilePaths = [NSMutableSet setWithCapacity:argc - optind];
-    NSMutableSet *metaDataFilePaths = [NSMutableSet setWithCapacity:argc - optind];
+    NSFileManager* fileManager = [NSFileManager defaultManager];
     
-    NSFileManager* manager = [NSFileManager defaultManager];
+    NSString *dataFilePath = [NSString stringWithCString:argv[1] encoding:NSASCIIStringEncoding];
     
-    for (int i = optind; i < argc; i++) {
-        NSString *filePath = [NSString stringWithCString:argv[i] encoding:NSASCIIStringEncoding];
-        
-        if (![manager isReadableFileAtPath:filePath]) {
-            printf("File is not readable or does not exist: %s\n", [filePath cStringUsingEncoding:NSASCIIStringEncoding]);
-            return 1;
-        }
-        
-        if ([filePath hasSuffix:@".xml"]) {
-            [metaDataFilePaths addObject:filePath];
-        } else {
-            [dataFilePaths addObject:filePath];
-        }
+    if (![fileManager isReadableFileAtPath:dataFilePath]) {
+        printf("File is not readable or does not exist: %s\n", [dataFilePath cStringUsingEncoding:NSASCIIStringEncoding]);
+        return 1;
     }
     
-    NSArray *components = [auisqlFilePath componentsSeparatedByString:@".auisql"];
-    NSString *hdf5File = [[components objectAtIndex:0] stringByAppendingString:@".h5"];
+    NSArray *components = [dataFilePath componentsSeparatedByString:@".h5"];
+    NSString *auisqlFilePath = [[components objectAtIndex:0] stringByAppendingString:@".auisql"];
+    NSString *auisqlHdf5FilePath = [[components objectAtIndex:0] stringByAppendingString:@".auisql.h5"];
     
-    if ([manager fileExistsAtPath:auisqlFilePath]) {
+    if ([fileManager fileExistsAtPath:auisqlFilePath]) {
         char response;
         
-        if (overwriteExisting) {
-            response = 'Y';
-        } else {
-            printf("Database file %s already exists.\n", [auisqlFilePath cStringUsingEncoding:NSASCIIStringEncoding]);
-        }
+        printf("Database file %s already exists.\n", [auisqlFilePath cStringUsingEncoding:NSASCIIStringEncoding]);
         
         while (response != 'Y' && response != 'N') {
             printf("Overwriting will devalidate previous OvationExports! Overwrite? [Y/N] ");
@@ -84,17 +52,17 @@ int main(int argc, char *argv[])
         
         switch (response) {
             case 'Y':
-                if ([manager removeItemAtPath:auisqlFilePath error:&error] == NO) {
+                if ([fileManager removeItemAtPath:auisqlFilePath error:&error] == NO) {
                     NSLog(@"Couldn't remove existing AUISQL file: %@", error);
                     return 1;
                 }
                 
-                if ([manager fileExistsAtPath:hdf5File]) {
-                    if ([manager removeItemAtPath:hdf5File error:&error] == NO) {
-                        NSLog(@"Couldn't remove existing HDF5 file: %@", error);
+                if ([fileManager fileExistsAtPath:auisqlHdf5FilePath]) {
+                    if ([fileManager removeItemAtPath:auisqlHdf5FilePath error:&error] == NO) {
+                        NSLog(@"Couldn't remove existing AUISQL HDF5 file: %@", error);
                         return 1;
                     }
-                }                
+                }
                 break;
                 
             case 'N':
@@ -122,10 +90,9 @@ int main(int argc, char *argv[])
     [context setPersistentStoreCoordinator:coordinator];
     [context setUndoManager:nil];
     
-    SMKExperimentMapper *mapper = [SMKExperimentMapper mapperForDataFilePaths:dataFilePaths
-                                                            metadataFilePaths:metaDataFilePaths
-                                                                      context:context
-                                                                    auisqlUrl:auisqlUrl];
+    SMKExperimentMapper *mapper = [SMKExperimentMapper mapperForDataFilePath:dataFilePath
+                                                                     context:context
+                                                                   auisqlUrl:auisqlUrl];
     
     @try {
         [mapper map];
