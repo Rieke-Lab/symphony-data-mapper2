@@ -7,8 +7,12 @@
 //
 
 #import "SMKBaseTestCase.h"
+#import "SMKDataFileReader.h"
+#import "SMKExperimentEnumerator.h"
 
-@interface SMKDataFileReaderTest : SMKBaseTestCase
+@interface SMKDataFileReaderTest : SMKBaseTestCase {
+    SMKDataFileReader *_reader;
+}
 
 @end
 
@@ -16,17 +20,20 @@
 
 - (void)setUp {
     [super setUp];
-    // Put setup code here. This method is called before the invocation of each test method in the class.
+    
+    _reader = [SMKDataFileReader readerForHdf5FilePath:[_resourcePath stringByAppendingString:@"2016-03-16.h5"]];
 }
 
-- (void)tearDown {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
-    [super tearDown];
-}
-
-- (void)testExample {
-    // This is an example of a functional test case.
-    STAssertTrue(YES, @"Pass");
+- (void)testEpochGroupEnumerator
+{
+    SMKExperimentEnumerator *enumerator = [_reader experimentEnumerator];
+    
+    int count = 0;
+    while ([enumerator nextObject]) {
+        count++;
+    }
+    
+    STAssertTrue(count == 1, nil);
 }
 
 @end
