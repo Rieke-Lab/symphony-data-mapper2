@@ -10,26 +10,13 @@
 
 @implementation SMKSource
 
-@synthesize identifier = _identifier;
 @synthesize label = _label;
-@synthesize children = _children;
-
-- (BOOL)isEqual:(SMKSource *)object
-{
-    return [_identifier isEqualToString:object.identifier]
-            && [_label isEqualToString:object.label]
-            && [_children isEqualToArray:object.children];
-}
-
-- (NSString *)description
-{
-    return [[_identifier description] stringByAppendingString:_label];
-}
+@synthesize sourceEnumerator = _sourceEnumerator;
 
 - (void)dealloc
 {
-    [_identifier release];
     [_label release];
+    [_sourceEnumerator release];
     
     [super dealloc];
 }

@@ -9,14 +9,14 @@
 #import <Foundation/Foundation.h>
 #import "SMKEntity.h"
 
+@class SMKSourceEnumerator;
+
 @interface SMKSource : SMKEntity {
-    NSString *_identifier;
     NSString *_label;
-    NSArray *_children;
+    SMKSourceEnumerator *_sourceEnumerator;
 }
 
-@property (copy) NSString *identifier;
 @property (copy) NSString *label;
-@property (assign) NSArray *children;
+@property (retain) SMKSourceEnumerator *sourceEnumerator;
 
 @end

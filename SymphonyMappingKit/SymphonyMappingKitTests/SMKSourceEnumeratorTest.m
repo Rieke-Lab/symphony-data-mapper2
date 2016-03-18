@@ -36,4 +36,17 @@
     STAssertTrue([source.label isEqualToString:@"Mouse"], nil);
 }
 
+- (void)testSourceEnumerator
+{
+    SMKSource *source = [_enumerator nextObject];
+    
+    SMKSourceEnumerator *sourceEnumerator = source.sourceEnumerator;
+    
+    int i = 0;
+    while ([sourceEnumerator nextObject]) {
+        i++;
+    }
+    STAssertTrue(i == 1, nil);
+}
+
 @end
