@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SMKEntity.h"
 
-@interface SMKSource : NSObject {
+@interface SMKSource : SMKEntity {
     NSString *_identifier;
     NSString *_label;
     NSArray *_children;

@@ -14,10 +14,6 @@
 
 @synthesize sourceIdentifier = _sourceIdentifier;
 @synthesize label = _label;
-@synthesize startTime = _startTime;
-@synthesize endTime = _endTime;
-@synthesize properties = _properties;
-@synthesize keywords = _keywords;
 @synthesize epochEnumerator = _epochEnumerator;
 @synthesize epochGroupEnumerator = _epochGroupEnumerator;
 
@@ -45,10 +41,6 @@
 {
     [_sourceIdentifier release];
     [_label release];
-    [_startTime release];
-    [_endTime release];
-    [_properties release];
-    [_keywords release];
     [_epochEnumerator release];
     [_epochGroupEnumerator release];
     

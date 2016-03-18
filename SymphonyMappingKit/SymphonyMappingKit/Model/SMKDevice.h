@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SMKEntity.h"
 
-@interface SMKDevice : NSObject
+@interface SMKDevice : SMKEntity
 
 @end

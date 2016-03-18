@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SMKTimelineEntity.h"
 
 #include "hdf5.h"
 
@@ -14,13 +15,9 @@
 @class SMKEpochGroupEnumerator;
 @class MACHdf5Reader;
 
-@interface SMKEpochGroup : NSObject {
+@interface SMKEpochGroup : SMKTimelineEntity {
     NSString *_sourceIdentifier;
     NSString *_label;
-    NSDate *_startTime;
-    NSDate *_endTime;
-    NSDictionary *_properties;
-    NSSet *_keywords;
     NSMutableArray *_epochs;
     SMKEpochEnumerator *_epochEnumerator;
     SMKEpochGroupEnumerator *_epochGroupEnumerator;
@@ -28,10 +25,6 @@
 
 @property (copy) NSString *sourceIdentifier;
 @property (copy) NSString *label;
-@property (retain) NSDate *startTime;
-@property (retain) NSDate *endTime;
-@property (retain) NSDictionary *properties;
-@property (retain) NSSet *keywords;
 @property (retain) SMKEpochEnumerator *epochEnumerator;
 @property (retain) SMKEpochGroupEnumerator *epochGroupEnumerator;
 

@@ -7,22 +7,19 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SMKTimelineEntity.h"
 
-@interface SMKEpoch : NSObject {
+@interface SMKEpoch : SMKTimelineEntity {
     NSString *_protocolId;
-    NSDate *_startTime;
     NSNumber *_duration;
     NSDictionary *_protocolParameters;
-    NSSet *_keywords;
     NSArray *_stimuli;
     NSArray *_responses;
 }
 
 @property (copy) NSString *protocolId;
-@property (retain) NSDate *startTime;
 @property (retain) NSNumber *duration;
 @property (retain) NSDictionary *protocolParameters;
-@property (retain) NSSet *keywords;
 @property (retain) NSArray *stimuli;
 @property (retain) NSArray *responses;
 

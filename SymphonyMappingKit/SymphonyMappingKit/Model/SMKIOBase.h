@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <AUIModel/AUIModel.h>
+#import "SMKEntity.h"
 
 // CODE DEBT: copied from AUIAxoPatchDevice.h, which is part of a plugin and
 // therefore not readily imported from.
@@ -20,7 +21,7 @@ typedef enum {
     UNKNOWN_MODE
 } AxoPatchAmpMode;
 
-@interface SMKIOBase : NSObject {
+@interface SMKIOBase : SMKEntity {
     NSString *_deviceName;
     NSString *_deviceManufacturer;
     AxoPatchAmpMode _deviceMode;
