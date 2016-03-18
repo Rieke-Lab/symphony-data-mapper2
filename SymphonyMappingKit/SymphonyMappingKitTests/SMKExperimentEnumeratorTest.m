@@ -30,7 +30,7 @@
     
     NSString *experiment = @"/experiment-ed6102df-f6c0-4ce0-81d9-4dae15dbe468";
     
-    _enumerator = [[[SMKExperimentEnumerator alloc] initWithReader:reader experimentPaths:[NSArray arrayWithObjects:experiment, nil]] autorelease];
+    _enumerator = [[[SMKExperimentEnumerator alloc] initWithReader:reader entityPaths:[NSArray arrayWithObjects:experiment, nil]] autorelease];
 }
 
 - (void)testNextObject

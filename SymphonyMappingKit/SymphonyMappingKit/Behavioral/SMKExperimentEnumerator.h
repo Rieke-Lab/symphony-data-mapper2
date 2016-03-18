@@ -7,17 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SMKTimelineEntityEnumerator.h"
 
-@class MACHdf5Reader;
-@class SMKExperiment;
-
-@interface SMKExperimentEnumerator : NSEnumerator <NSCopying> {
-    MACHdf5Reader *_reader;
-    NSArray *_paths;
-    NSUInteger _index;
-    SMKExperiment *_lastExperiment;
-}
-
-- (id)initWithReader:(MACHdf5Reader *)reader experimentPaths:(NSArray *)paths;
+@interface SMKExperimentEnumerator : SMKTimelineEntityEnumerator
 
 @end

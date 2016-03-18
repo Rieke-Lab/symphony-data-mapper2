@@ -41,7 +41,7 @@
 
 - (SMKExperimentEnumerator *)experimentEnumerator
 {
-    return [[[SMKExperimentEnumerator alloc] initWithReader:_reader experimentPaths: _experimentPaths] autorelease];
+    return [[[SMKExperimentEnumerator alloc] initWithReader:_reader entityPaths: _experimentPaths] autorelease];
 }
 
 @end
