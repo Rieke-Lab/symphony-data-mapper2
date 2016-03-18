@@ -18,6 +18,7 @@
 @property (readonly) NSString *path;
 @property (readonly) H5O_type_t type;
 @property (readonly) BOOL isGroup;
+@property (readonly) BOOL isDataset;
 
 - (id)initWithPath:(NSString *)path objectType:(H5O_type_t)type;
 

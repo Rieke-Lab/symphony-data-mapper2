@@ -28,6 +28,13 @@
 		FC50C14216B8C06700656CC0 /* MACHdf5Reader.m in Sources */ = {isa = PBXBuildFile; fileRef = FC50C14016B8C06600656CC0 /* MACHdf5Reader.m */; };
 		FC5D2EFD1C9A1FF4005A8222 /* 2016-03-16.h5 in Resources */ = {isa = PBXBuildFile; fileRef = FC5D2EFC1C9A1FF4005A8222 /* 2016-03-16.h5 */; };
 		FC5D2F031C9A245D005A8222 /* SMKDataFileReaderTest.m in Sources */ = {isa = PBXBuildFile; fileRef = FC5D2F021C9A245D005A8222 /* SMKDataFileReaderTest.m */; };
+		FC5D2F051C9A2881005A8222 /* SMKExperimentEnumeratorTest.m in Sources */ = {isa = PBXBuildFile; fileRef = FC5D2F041C9A2881005A8222 /* SMKExperimentEnumeratorTest.m */; };
+		FC5D2F0A1C9B7FB6005A8222 /* SMKSourceEnumerator.h in Headers */ = {isa = PBXBuildFile; fileRef = FC5D2F061C9B7FB6005A8222 /* SMKSourceEnumerator.h */; };
+		FC5D2F0B1C9B7FB6005A8222 /* SMKSourceEnumerator.m in Sources */ = {isa = PBXBuildFile; fileRef = FC5D2F071C9B7FB6005A8222 /* SMKSourceEnumerator.m */; };
+		FC5D2F0C1C9B7FB6005A8222 /* SMKDeviceEnumerator.h in Headers */ = {isa = PBXBuildFile; fileRef = FC5D2F081C9B7FB6005A8222 /* SMKDeviceEnumerator.h */; };
+		FC5D2F0D1C9B7FB6005A8222 /* SMKDeviceEnumerator.m in Sources */ = {isa = PBXBuildFile; fileRef = FC5D2F091C9B7FB6005A8222 /* SMKDeviceEnumerator.m */; };
+		FC5D2F101C9B83F6005A8222 /* SMKDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = FC5D2F0E1C9B83F6005A8222 /* SMKDevice.h */; };
+		FC5D2F111C9B83F6005A8222 /* SMKDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = FC5D2F0F1C9B83F6005A8222 /* SMKDevice.m */; };
 		FC6B6E21169612C0006B4688 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC6B6E20169612C0006B4688 /* Cocoa.framework */; };
 		FC6B6E2B169612C0006B4688 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FC6B6E29169612C0006B4688 /* InfoPlist.strings */; };
 		FC6B6E37169612C0006B4688 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC6B6E36169612C0006B4688 /* SenTestingKit.framework */; };
@@ -108,6 +115,13 @@
 		FC50C14016B8C06600656CC0 /* MACHdf5Reader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MACHdf5Reader.m; path = Hdf5/MACHdf5Reader.m; sourceTree = "<group>"; };
 		FC5D2EFC1C9A1FF4005A8222 /* 2016-03-16.h5 */ = {isa = PBXFileReference; lastKnownFileType = file; name = "2016-03-16.h5"; path = "Fixtures/2016-03-16.h5"; sourceTree = "<group>"; };
 		FC5D2F021C9A245D005A8222 /* SMKDataFileReaderTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMKDataFileReaderTest.m; sourceTree = "<group>"; };
+		FC5D2F041C9A2881005A8222 /* SMKExperimentEnumeratorTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMKExperimentEnumeratorTest.m; sourceTree = "<group>"; };
+		FC5D2F061C9B7FB6005A8222 /* SMKSourceEnumerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SMKSourceEnumerator.h; path = Behavioral/SMKSourceEnumerator.h; sourceTree = "<group>"; };
+		FC5D2F071C9B7FB6005A8222 /* SMKSourceEnumerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SMKSourceEnumerator.m; path = Behavioral/SMKSourceEnumerator.m; sourceTree = "<group>"; };
+		FC5D2F081C9B7FB6005A8222 /* SMKDeviceEnumerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SMKDeviceEnumerator.h; path = Behavioral/SMKDeviceEnumerator.h; sourceTree = "<group>"; };
+		FC5D2F091C9B7FB6005A8222 /* SMKDeviceEnumerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SMKDeviceEnumerator.m; path = Behavioral/SMKDeviceEnumerator.m; sourceTree = "<group>"; };
+		FC5D2F0E1C9B83F6005A8222 /* SMKDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SMKDevice.h; path = Model/SMKDevice.h; sourceTree = "<group>"; };
+		FC5D2F0F1C9B83F6005A8222 /* SMKDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SMKDevice.m; path = Model/SMKDevice.m; sourceTree = "<group>"; };
 		FC6B6E1D169612C0006B4688 /* SymphonyMappingKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SymphonyMappingKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC6B6E20169612C0006B4688 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		FC6B6E23169612C0006B4688 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -185,6 +199,8 @@
 		FC0F4F24169798E300B9EA5C /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				FC5D2F0E1C9B83F6005A8222 /* SMKDevice.h */,
+				FC5D2F0F1C9B83F6005A8222 /* SMKDevice.m */,
 				FC16F8931C9A0A5B007CB4FF /* SMKExperiment.h */,
 				FC16F8941C9A0A5B007CB4FF /* SMKExperiment.m */,
 				FC0F4F251697991E00B9EA5C /* SMKSource.h */,
@@ -280,6 +296,7 @@
 				FC0F4E3816967BB000B9EA5C /* SMKBaseTestCase.h */,
 				FC0F4E341696774900B9EA5C /* SMKBaseTestCase.m */,
 				FC5D2F021C9A245D005A8222 /* SMKDataFileReaderTest.m */,
+				FC5D2F041C9A2881005A8222 /* SMKExperimentEnumeratorTest.m */,
 			);
 			path = SymphonyMappingKitTests;
 			sourceTree = "<group>";
@@ -296,6 +313,10 @@
 		FC6B6E511696133D006B4688 /* Behavioral */ = {
 			isa = PBXGroup;
 			children = (
+				FC5D2F061C9B7FB6005A8222 /* SMKSourceEnumerator.h */,
+				FC5D2F071C9B7FB6005A8222 /* SMKSourceEnumerator.m */,
+				FC5D2F081C9B7FB6005A8222 /* SMKDeviceEnumerator.h */,
+				FC5D2F091C9B7FB6005A8222 /* SMKDeviceEnumerator.m */,
 				FC16F8911C9A0A5B007CB4FF /* SMKExperimentEnumerator.h */,
 				FC16F8921C9A0A5B007CB4FF /* SMKExperimentEnumerator.m */,
 				FC6B6E4D16961335006B4688 /* SMKExperimentMapper.h */,
@@ -358,15 +379,18 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC5D2F101C9B83F6005A8222 /* SMKDevice.h in Headers */,
 				FC6B6E4F16961335006B4688 /* SMKExperimentMapper.h in Headers */,
 				FC0F4F22169794D300B9EA5C /* SMKMetadataParser.h in Headers */,
 				FC0F4F271697991E00B9EA5C /* SMKSource.h in Headers */,
 				FC0F4F2B1697993700B9EA5C /* SMKNote.h in Headers */,
 				FC7C8DE616B3279800F9E8A6 /* SMKDataFileReader.h in Headers */,
+				FC5D2F0A1C9B7FB6005A8222 /* SMKSourceEnumerator.h in Headers */,
 				FC16F8971C9A0A5B007CB4FF /* SMKExperiment.h in Headers */,
 				FC7C8DEB16B3442500F9E8A6 /* SMKEpochGroup.h in Headers */,
 				FC50C13D16B84FED00656CC0 /* SMKEpochGroupEnumerator.h in Headers */,
 				FC50C14116B8C06700656CC0 /* MACHdf5Reader.h in Headers */,
+				FC5D2F0C1C9B7FB6005A8222 /* SMKDeviceEnumerator.h in Headers */,
 				FC79481716B9B68F00DABE9C /* MACHdf5LinkInformation.h in Headers */,
 				FCC63F6016BB1FD200BDDD57 /* MACHdf5CommonInformation.h in Headers */,
 				FCC63F6416BB1FEA00BDDD57 /* MACHdf5ObjectInformation.h in Headers */,
@@ -499,9 +523,12 @@
 				FC50C14216B8C06700656CC0 /* MACHdf5Reader.m in Sources */,
 				FC16F8961C9A0A5B007CB4FF /* SMKExperimentEnumerator.m in Sources */,
 				FC79481816B9B68F00DABE9C /* MACHdf5LinkInformation.m in Sources */,
+				FC5D2F0B1C9B7FB6005A8222 /* SMKSourceEnumerator.m in Sources */,
 				FCC63F6116BB1FD200BDDD57 /* MACHdf5CommonInformation.m in Sources */,
 				FCC63F6516BB1FEA00BDDD57 /* MACHdf5ObjectInformation.m in Sources */,
+				FC5D2F0D1C9B7FB6005A8222 /* SMKDeviceEnumerator.m in Sources */,
 				FCC63F6916BB3B5400BDDD57 /* SMKEpoch.m in Sources */,
+				FC5D2F111C9B83F6005A8222 /* SMKDevice.m in Sources */,
 				FC16F8981C9A0A5B007CB4FF /* SMKExperiment.m in Sources */,
 				FCC63F6D16BB3B7A00BDDD57 /* SMKEpochEnumerator.m in Sources */,
 				FCC63F7D16C0932600BDDD57 /* SMKResponse.m in Sources */,
@@ -517,6 +544,7 @@
 			files = (
 				FC5D2F031C9A245D005A8222 /* SMKDataFileReaderTest.m in Sources */,
 				FC0F4E361696774900B9EA5C /* SMKBaseTestCase.m in Sources */,
+				FC5D2F051C9A2881005A8222 /* SMKExperimentEnumeratorTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

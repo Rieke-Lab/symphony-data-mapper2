@@ -28,6 +28,11 @@
     return _type == H5O_TYPE_GROUP;
 }
 
+- (BOOL)isDataset
+{
+    return _type == H5O_TYPE_DATASET;
+}
+
 - (BOOL)isEqual:(MACHdf5CommonInformation *)object
 {
     return [_path isEqualToString:object.path] && _type == object.type;
