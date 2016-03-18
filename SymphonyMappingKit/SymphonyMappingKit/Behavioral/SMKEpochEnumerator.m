@@ -30,6 +30,11 @@ typedef struct backgroundData {
 
 @implementation SMKEpochEnumerator
 
+- (id)createNextEntity
+{
+    return [SMKEpoch new];
+}
+
 //- (id)initWithReader:(MACHdf5Reader *)reader epochPaths:(NSArray *)paths
 //{
 //    self = [super init];
