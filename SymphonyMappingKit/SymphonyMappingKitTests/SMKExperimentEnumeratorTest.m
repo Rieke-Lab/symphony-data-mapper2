@@ -42,6 +42,13 @@
     STAssertTrue(i == 1, nil);
 }
 
+- (void)testUuid
+{
+    SMKExperiment *experiment = [_enumerator nextObject];
+    
+    STAssertTrue([experiment.uuid isEqualToString:@"ed6102df-f6c0-4ce0-81d9-4dae15dbe468"], nil);
+}
+
 - (void)testPurpose
 {
     SMKExperiment *experiment = [_enumerator nextObject];
@@ -78,7 +85,6 @@
                               @"Awesome project", @"project",
                               @"UW", @"institution",
                               @"Rieke lab", @"lab",
-                              @"ed6102df-f6c0-4ce0-81d9-4dae15dbe468", @"__symphony__uuid__",
                               nil];
     
     STAssertTrue([experiment.properties isEqualToDictionary:expected], nil);

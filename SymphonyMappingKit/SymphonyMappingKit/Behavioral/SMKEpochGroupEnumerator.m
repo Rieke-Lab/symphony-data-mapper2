@@ -8,8 +8,10 @@
 
 #import "SMKEpochGroupEnumerator.h"
 #import "SMKEpochGroup.h"
+#import "SMKEpochBlockEnumerator.h"
 #import "SMKEpoch.h"
 #import "SMKEpochEnumerator.h"
+#import "SMKSourceEnumerator.h"
 #import "MACHdf5Reader.h"
 #import "MACHdf5ObjectInformation.h"
 #import "MACHdf5LinkInformation.h"
@@ -18,55 +20,38 @@
 
 @implementation SMKEpochGroupEnumerator
 
-- (id)initWithReader:(MACHdf5Reader *)reader epochGroupPaths:(NSArray *)paths
+- (id)createNextEntity
 {
-    self = [super init];
-    if (self) {
-        _reader = [reader retain];
-        _paths = [paths retain];
-        _index = 0;
+    return [SMKEpochGroup new];
+}
+
+- (void)mapEntity:(SMKEntity *)entity withPath:(NSString *)path
+{
+    [super mapEntity:entity withPath:path];
+    
+    SMKEpochGroup *group = (SMKEpochGroup *)entity;
+    
+    group.label = [_reader readStringAttribute:@"label" onPath:path];
+    
+    NSString *sourcePath = [path stringByAppendingString:@"/source"];
+    SMKSourceEnumerator *sourceEnumerator = [[SMKSourceEnumerator alloc] initWithReader:_reader entityPaths:[NSArray arrayWithObjects:sourcePath, nil]];
+    group.source = sourceEnumerator.nextObject;
+    
+    // Epoch Groups
+    NSArray *groupMembers = [_reader groupMemberLinkInfoInPath:[path stringByAppendingString:@"/epochGroups"]];
+    NSMutableArray *groupPaths = [NSMutableArray arrayWithCapacity:[groupMembers count]];
+    for (MACHdf5LinkInformation *groupMember in groupMembers) {
+        [groupPaths addObject:groupMember.path];
     }
-    return self;
-}
-
-- (id)nextObject
-{
-    if (_index >= [_paths count]) {
-        return nil;
+    group.epochGroupEnumerator = [[[SMKEpochGroupEnumerator alloc] initWithReader:_reader entityPaths:groupPaths] autorelease];
+    
+    // Epoch Blocks
+    NSArray *blockMembers = [_reader groupMemberLinkInfoInPath:[path stringByAppendingString:@"/epochBlocks"]];
+    NSMutableArray *blockPaths = [NSMutableArray arrayWithCapacity:[blockMembers count]];
+    for (MACHdf5LinkInformation *blockMember in blockMembers) {
+        [blockPaths addObject:blockMember.path];
     }
-    
-    NSString *groupPath = [_paths objectAtIndex:_index];
-    
-    // Release the last returned group
-    if (_lastGroup != nil) {
-        [_lastGroup release];
-    }
-    
-    SMKEpochGroup *group = [SMKEpochGroup new];
-    
-    _index++;
-    _lastGroup = group;
-    return group;
-}
-
-- (NSArray *)allObjects
-{
-    return nil;
-}
-
-- (id)copyWithZone:(NSZone *)zone
-{
-    SMKEpochGroupEnumerator *another = [[SMKEpochGroupEnumerator alloc] initWithReader:_reader epochGroupPaths:_paths];
-    return another;
-}
-
-- (void)dealloc
-{
-    [_reader release];
-    [_paths release];
-    [_lastGroup release];
-    
-    [super dealloc];
+    group.epochBlockEnumerator = [[[SMKEpochBlockEnumerator alloc] initWithReader:_reader entityPaths:blockPaths] autorelease];
 }
 
 @end

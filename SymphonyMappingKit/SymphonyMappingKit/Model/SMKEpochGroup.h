@@ -9,23 +9,20 @@
 #import <Foundation/Foundation.h>
 #import "SMKTimelineEntity.h"
 
-#include "hdf5.h"
-
-@class SMKEpochEnumerator;
+@class SMKSource;
 @class SMKEpochGroupEnumerator;
-@class MACHdf5Reader;
+@class SMKEpochBlockEnumerator;
 
 @interface SMKEpochGroup : SMKTimelineEntity {
-    NSString *_sourceIdentifier;
     NSString *_label;
-    NSMutableArray *_epochs;
-    SMKEpochEnumerator *_epochEnumerator;
+    SMKSource *_source;
     SMKEpochGroupEnumerator *_epochGroupEnumerator;
+    SMKEpochBlockEnumerator *_epochBlockEnumerator;
 }
 
-@property (copy) NSString *sourceIdentifier;
 @property (copy) NSString *label;
-@property (retain) SMKEpochEnumerator *epochEnumerator;
+@property (retain) SMKSource *source;
 @property (retain) SMKEpochGroupEnumerator *epochGroupEnumerator;
+@property (retain) SMKEpochBlockEnumerator *epochBlockEnumerator;
 
 @end

@@ -12,37 +12,17 @@
 
 @implementation SMKEpochGroup
 
-@synthesize sourceIdentifier = _sourceIdentifier;
 @synthesize label = _label;
-@synthesize epochEnumerator = _epochEnumerator;
+@synthesize source = _source;
 @synthesize epochGroupEnumerator = _epochGroupEnumerator;
-
-- (void)setEpochEnumerator:(SMKEpochEnumerator *)epochEnumerator
-{
-    _epochEnumerator = [epochEnumerator retain];
-}
-
-- (SMKEpochEnumerator *)epochEnumerator
-{
-    return [[_epochEnumerator copy] autorelease];
-}
-
-- (void)setEpochGroupEnumerator:(SMKEpochGroupEnumerator *)epochGroupEnumerator
-{
-    _epochGroupEnumerator = [epochGroupEnumerator retain];
-}
-
-- (SMKEpochGroupEnumerator *)epochGroupEnumerator
-{
-    return [[_epochGroupEnumerator copy] autorelease];
-}
+@synthesize epochBlockEnumerator = _epochBlockEnumerator;
 
 - (void)dealloc
 {
-    [_sourceIdentifier release];
     [_label release];
-    [_epochEnumerator release];
+    [_source release];
     [_epochGroupEnumerator release];
+    [_epochBlockEnumerator release];
     
     [super dealloc];
 }

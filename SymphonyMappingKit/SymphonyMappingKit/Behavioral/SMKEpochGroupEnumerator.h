@@ -7,17 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SMKTimelineEntityEnumerator.h"
 
-@class MACHdf5Reader;
-@class SMKEpochGroup;
-
-@interface SMKEpochGroupEnumerator : NSEnumerator <NSCopying> {
-    MACHdf5Reader *_reader;
-    NSArray *_paths;
-    NSUInteger _index;
-    SMKEpochGroup *_lastGroup;
-}
-
-- (id)initWithReader:(MACHdf5Reader *)reader epochGroupPaths:(NSArray *)paths;
+@interface SMKEpochGroupEnumerator : SMKTimelineEntityEnumerator
 
 @end

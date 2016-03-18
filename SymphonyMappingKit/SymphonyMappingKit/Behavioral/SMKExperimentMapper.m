@@ -164,182 +164,182 @@
     }
 }
 
-- (void)mapExperiment:(SMKExperiment *)experiment
-{
-    Experiment *auiExperiment = [NSEntityDescription insertNewObjectForEntityForName:@"Experiment"
-                                                              inManagedObjectContext:_context];
-    
-    auiExperiment.startDate = experiment.startTime;
-    auiExperiment.daqID = @"edu.washington.bwark.acqui.ITCController_ITC00_0";
-    auiExperiment.rigSettingsData = [NSData data];
-    auiExperiment.purpose = experiment.purpose;
-    auiExperiment.otherNotes = @"";
-    
-    [self assertValid:auiExperiment];
-}
-
-- (void)mapEpochGroup:(SMKEpochGroup *)group toCell:(RecordedCell *)auiCell
-{
-    SMKEpochEnumerator *epochEnumerator = group.epochEnumerator;
-    SMKEpoch *epoch;
-    while (epoch = [epochEnumerator nextObject]) {
-        
-        Epoch *auiEpoch = [NSEntityDescription insertNewObjectForEntityForName:@"Epoch"
-                                                        inManagedObjectContext:_context];
-        
-        auiEpoch.startDate = epoch.startTime;
-        auiEpoch.saveResponse = [NSNumber numberWithBool:YES];
-        auiEpoch.includeInAnalysis = [NSNumber numberWithBool:YES];
-        auiEpoch.protocolID = epoch.protocolId;
-        auiEpoch.comment = @"";
-        auiEpoch.daqConfig = _daqConfigContainer;
-        auiEpoch.duration = epoch.duration;
-        
-        // Protocol settings
-        NSMutableDictionary *protocolSettings = [NSMutableDictionary dictionaryWithDictionary:epoch.protocolParameters];
-        [protocolSettings setValue:group.label forKeyPath:@"epochGroup:label"];
-        [protocolSettings setValue:[group.properties valueForKey:@"__symphony__uuid__"] forKeyPath:@"epochGroup:uuid"];
-        
-        // Add epoch keywords
-        for (NSString *keyword in epoch.keywords) {
-            KeywordTag *tag = [KeywordTag keywordTagWithTag:keyword inManagedObjectContext:_context error:nil];
-            [auiEpoch addKeywordsObject:tag];
-        }
-        
-        // Add epoch group keywords
-        for (NSString *keyword in group.keywords) {
-            KeywordTag *tag = [KeywordTag keywordTagWithTag:keyword inManagedObjectContext:_context error:nil];
-            [auiEpoch addKeywordsObject:tag];
-        }
-        
-        auiEpoch.cell = auiCell;
-        
-        // The sample rate is stored in the responses by Symphony and the stimuli by Acquirino
-        // It should be consistent throughout all responses of the epoch.
-        NSNumber *sampleRate = nil;
-        for (SMKResponse *response in epoch.responses) {
-            if (sampleRate != nil && ![sampleRate isEqualToNumber:response.sampleRate]) {
-                [NSException raise:@"HeterogeneousSampleRate" format:@"Unexpected heterogeneous sample rate in epoch"];
-            }
-            sampleRate = response.sampleRate;
-        }
-                
-        // Stimuli
-        for (SMKStimulus *stimulus in epoch.stimuli) {
-            
-            // Stream            
-            [self addStreamForIO:stimulus];
-            
-            // Stimulus
-            Stimulus *auiStimulus = [NSEntityDescription insertNewObjectForEntityForName:@"Stimulus"
-                                                                  inManagedObjectContext:_context];
-            auiStimulus.type = [NSNumber numberWithInt:stimulus.streamType];
-            auiStimulus.externalDeviceMode = [NSNumber numberWithInt:stimulus.deviceMode];
-            auiStimulus.externalDeviceGain = [NSNumber numberWithInt:1];
-            auiStimulus.channelID = stimulus.channelNumber;
-            auiStimulus.duration = auiEpoch.duration;
-            auiStimulus.stimulusID = stimulus.pluginId;
-            auiStimulus.sampleRate = sampleRate;
-            auiStimulus.version = [stimulus.parameters valueForKey:@"version"];
-            
-            // Consolidate stimulus parameters and device parameters into the parameters property
-            NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-            for (NSString *key in [stimulus.deviceParameters allKeys]) {
-                id value = [stimulus.deviceParameters valueForKey:key];
-                NSString *newKey = [NSString stringWithFormat:@"deviceParameters:%@", key];
-                [parameters setValue:value forKey:newKey];
-            }
-            [parameters addEntriesFromDictionary:stimulus.parameters];
-            
-            [KeyValuePair updateKVPSet:[auiStimulus mutableSetValueForKey:@"parametersKVPairs"]
-                        fromDictionary:parameters
-                  managedObjectContext:_context];
-            
-            auiStimulus.epoch = auiEpoch;
-            
-            // Add stimulus parameters to epoch protocol settings for convenience
-            NSString* streamName = [stimulus.deviceName stringByReplacingOccurrencesOfString: @" " withString: @"_"];
-            for (NSString *key in [stimulus.parameters allKeys]) {
-                id value = [stimulus.parameters valueForKey:key];
-                NSString *newKey = [NSString stringWithFormat:@"stimuli:%@:%@", streamName, key];
-                [protocolSettings setValue:value forKey:newKey];
-            }
-            
-            [self assertValid:auiStimulus];
-        }
-        
-        // Responses
-        for (SMKResponse *response in epoch.responses) {
-            
-            // Stream
-            [self addStreamForIO:response];
-            
-            // Response
-            Response *auiResponse = [NSEntityDescription insertNewObjectForEntityForName:@"Response"
-                                                                  inManagedObjectContext:_context];
-            
-            auiResponse.type = [NSNumber numberWithInt:response.streamType];
-            auiResponse.externalDeviceMode = [NSNumber numberWithInt:response.deviceMode];
-            auiResponse.externalDeviceGain = [NSNumber numberWithInt:1];
-            auiResponse.channelID = response.channelNumber;
-            auiResponse.sampleBytes = [NSNumber numberWithInt:sizeof(double)];
-            auiResponse.data = response.data;
-            
-            auiResponse.epoch = auiEpoch;
-            [self assertValid:auiResponse];
-        }
-        
-        [KeyValuePair updateKVPSet:[auiEpoch mutableSetValueForKey:@"protocolSettingsKVPairs"]
-                    fromDictionary:protocolSettings
-              managedObjectContext:_context];
-        
-        [self assertValid:auiEpoch];
-    }
-    
-    SMKEpochGroupEnumerator *groupEnumerator = group.epochGroupEnumerator;
-    SMKEpochGroup *subGroup;
-    while (subGroup = [groupEnumerator nextObject]) {
-        [self mapEpochGroup:subGroup toCell:auiCell];
-    }
-}
-
-- (void)addStreamForIO:(SMKIOBase *)io
-{
-    AUIDAQStream *stream = [[AUIDAQStream alloc] initWithIOController:nil
-                                                        channelNumber:[io.channelNumber intValue]
-                                                                 type:io.streamType];
-    stream.userDescription = io.deviceName;
-    if ([[io.deviceParameters valueForKey:@"HardwareType"] isEqualToString:@"MCTG_HW_TYPE_MC700B"]) {
-        stream.externalDevice = [[NSClassFromString(@"AUIMultiClampDevice") alloc] init];
-    } else {
-        stream.externalDevice = [[AUINullExternalDevice alloc] init];
-    }
-    // HACK: The stream objects won't compare properly without a controller.
-    BOOL exists = NO;
-    for (AUIDAQStream *s in _streams) {
-        if (s.type == stream.type
-            && [s.userDescription isEqualToString:stream.userDescription]
-            && s.channelNumber == stream.channelNumber) {
-            exists = YES;
-            break;
-        }
-    }
-    if (!exists) {
-        [_streams addObject:stream];
-    }
-    [stream release];
-}
-
-- (void)assertValid:(NSManagedObject *)objectForInsert
-{
-    NSError *error;
-    
-    BOOL isValid = [objectForInsert validateForInsert:&error];
-    
-    if (!isValid) {
-        [NSException raise:@"Failed to validate object" format:@"Failed to validate object: %@", [error localizedDescription]];
-    }
-}
+//- (void)mapExperiment:(SMKExperiment *)experiment
+//{
+//    Experiment *auiExperiment = [NSEntityDescription insertNewObjectForEntityForName:@"Experiment"
+//                                                              inManagedObjectContext:_context];
+//    
+//    auiExperiment.startDate = experiment.startTime;
+//    auiExperiment.daqID = @"edu.washington.bwark.acqui.ITCController_ITC00_0";
+//    auiExperiment.rigSettingsData = [NSData data];
+//    auiExperiment.purpose = experiment.purpose;
+//    auiExperiment.otherNotes = @"";
+//    
+//    [self assertValid:auiExperiment];
+//}
+//
+//- (void)mapEpochGroup:(SMKEpochGroup *)group toCell:(RecordedCell *)auiCell
+//{
+//    SMKEpochEnumerator *epochEnumerator = group.epochEnumerator;
+//    SMKEpoch *epoch;
+//    while (epoch = [epochEnumerator nextObject]) {
+//        
+//        Epoch *auiEpoch = [NSEntityDescription insertNewObjectForEntityForName:@"Epoch"
+//                                                        inManagedObjectContext:_context];
+//        
+//        auiEpoch.startDate = epoch.startTime;
+//        auiEpoch.saveResponse = [NSNumber numberWithBool:YES];
+//        auiEpoch.includeInAnalysis = [NSNumber numberWithBool:YES];
+//        auiEpoch.protocolID = epoch.protocolId;
+//        auiEpoch.comment = @"";
+//        auiEpoch.daqConfig = _daqConfigContainer;
+//        auiEpoch.duration = epoch.duration;
+//        
+//        // Protocol settings
+//        NSMutableDictionary *protocolSettings = [NSMutableDictionary dictionaryWithDictionary:epoch.protocolParameters];
+//        [protocolSettings setValue:group.label forKeyPath:@"epochGroup:label"];
+//        [protocolSettings setValue:[group.properties valueForKey:@"__symphony__uuid__"] forKeyPath:@"epochGroup:uuid"];
+//        
+//        // Add epoch keywords
+//        for (NSString *keyword in epoch.keywords) {
+//            KeywordTag *tag = [KeywordTag keywordTagWithTag:keyword inManagedObjectContext:_context error:nil];
+//            [auiEpoch addKeywordsObject:tag];
+//        }
+//        
+//        // Add epoch group keywords
+//        for (NSString *keyword in group.keywords) {
+//            KeywordTag *tag = [KeywordTag keywordTagWithTag:keyword inManagedObjectContext:_context error:nil];
+//            [auiEpoch addKeywordsObject:tag];
+//        }
+//        
+//        auiEpoch.cell = auiCell;
+//        
+//        // The sample rate is stored in the responses by Symphony and the stimuli by Acquirino
+//        // It should be consistent throughout all responses of the epoch.
+//        NSNumber *sampleRate = nil;
+//        for (SMKResponse *response in epoch.responses) {
+//            if (sampleRate != nil && ![sampleRate isEqualToNumber:response.sampleRate]) {
+//                [NSException raise:@"HeterogeneousSampleRate" format:@"Unexpected heterogeneous sample rate in epoch"];
+//            }
+//            sampleRate = response.sampleRate;
+//        }
+//                
+//        // Stimuli
+//        for (SMKStimulus *stimulus in epoch.stimuli) {
+//            
+//            // Stream            
+//            [self addStreamForIO:stimulus];
+//            
+//            // Stimulus
+//            Stimulus *auiStimulus = [NSEntityDescription insertNewObjectForEntityForName:@"Stimulus"
+//                                                                  inManagedObjectContext:_context];
+//            auiStimulus.type = [NSNumber numberWithInt:stimulus.streamType];
+//            auiStimulus.externalDeviceMode = [NSNumber numberWithInt:stimulus.deviceMode];
+//            auiStimulus.externalDeviceGain = [NSNumber numberWithInt:1];
+//            auiStimulus.channelID = stimulus.channelNumber;
+//            auiStimulus.duration = auiEpoch.duration;
+//            auiStimulus.stimulusID = stimulus.pluginId;
+//            auiStimulus.sampleRate = sampleRate;
+//            auiStimulus.version = [stimulus.parameters valueForKey:@"version"];
+//            
+//            // Consolidate stimulus parameters and device parameters into the parameters property
+//            NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+//            for (NSString *key in [stimulus.deviceParameters allKeys]) {
+//                id value = [stimulus.deviceParameters valueForKey:key];
+//                NSString *newKey = [NSString stringWithFormat:@"deviceParameters:%@", key];
+//                [parameters setValue:value forKey:newKey];
+//            }
+//            [parameters addEntriesFromDictionary:stimulus.parameters];
+//            
+//            [KeyValuePair updateKVPSet:[auiStimulus mutableSetValueForKey:@"parametersKVPairs"]
+//                        fromDictionary:parameters
+//                  managedObjectContext:_context];
+//            
+//            auiStimulus.epoch = auiEpoch;
+//            
+//            // Add stimulus parameters to epoch protocol settings for convenience
+//            NSString* streamName = [stimulus.deviceName stringByReplacingOccurrencesOfString: @" " withString: @"_"];
+//            for (NSString *key in [stimulus.parameters allKeys]) {
+//                id value = [stimulus.parameters valueForKey:key];
+//                NSString *newKey = [NSString stringWithFormat:@"stimuli:%@:%@", streamName, key];
+//                [protocolSettings setValue:value forKey:newKey];
+//            }
+//            
+//            [self assertValid:auiStimulus];
+//        }
+//        
+//        // Responses
+//        for (SMKResponse *response in epoch.responses) {
+//            
+//            // Stream
+//            [self addStreamForIO:response];
+//            
+//            // Response
+//            Response *auiResponse = [NSEntityDescription insertNewObjectForEntityForName:@"Response"
+//                                                                  inManagedObjectContext:_context];
+//            
+//            auiResponse.type = [NSNumber numberWithInt:response.streamType];
+//            auiResponse.externalDeviceMode = [NSNumber numberWithInt:response.deviceMode];
+//            auiResponse.externalDeviceGain = [NSNumber numberWithInt:1];
+//            auiResponse.channelID = response.channelNumber;
+//            auiResponse.sampleBytes = [NSNumber numberWithInt:sizeof(double)];
+//            auiResponse.data = response.data;
+//            
+//            auiResponse.epoch = auiEpoch;
+//            [self assertValid:auiResponse];
+//        }
+//        
+//        [KeyValuePair updateKVPSet:[auiEpoch mutableSetValueForKey:@"protocolSettingsKVPairs"]
+//                    fromDictionary:protocolSettings
+//              managedObjectContext:_context];
+//        
+//        [self assertValid:auiEpoch];
+//    }
+//    
+//    SMKEpochGroupEnumerator *groupEnumerator = group.epochGroupEnumerator;
+//    SMKEpochGroup *subGroup;
+//    while (subGroup = [groupEnumerator nextObject]) {
+//        [self mapEpochGroup:subGroup toCell:auiCell];
+//    }
+//}
+//
+//- (void)addStreamForIO:(SMKIOBase *)io
+//{
+//    AUIDAQStream *stream = [[AUIDAQStream alloc] initWithIOController:nil
+//                                                        channelNumber:[io.channelNumber intValue]
+//                                                                 type:io.streamType];
+//    stream.userDescription = io.deviceName;
+//    if ([[io.deviceParameters valueForKey:@"HardwareType"] isEqualToString:@"MCTG_HW_TYPE_MC700B"]) {
+//        stream.externalDevice = [[NSClassFromString(@"AUIMultiClampDevice") alloc] init];
+//    } else {
+//        stream.externalDevice = [[AUINullExternalDevice alloc] init];
+//    }
+//    // HACK: The stream objects won't compare properly without a controller.
+//    BOOL exists = NO;
+//    for (AUIDAQStream *s in _streams) {
+//        if (s.type == stream.type
+//            && [s.userDescription isEqualToString:stream.userDescription]
+//            && s.channelNumber == stream.channelNumber) {
+//            exists = YES;
+//            break;
+//        }
+//    }
+//    if (!exists) {
+//        [_streams addObject:stream];
+//    }
+//    [stream release];
+//}
+//
+//- (void)assertValid:(NSManagedObject *)objectForInsert
+//{
+//    NSError *error;
+//    
+//    BOOL isValid = [objectForInsert validateForInsert:&error];
+//    
+//    if (!isValid) {
+//        [NSException raise:@"Failed to validate object" format:@"Failed to validate object: %@", [error localizedDescription]];
+//    }
+//}
 
 //- (void)dealloc
 //{

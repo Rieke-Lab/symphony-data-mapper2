@@ -66,6 +66,8 @@ typedef struct noteData {
 
 - (void)mapEntity:(SMKEntity *)entity withPath:(NSString *)path
 {
+    entity.uuid = [_reader readStringAttribute:@"uuid" onPath:path];
+    
     NSArray *members = [_reader allGroupMembersInPath:path];
     
     NSDate *dotNetRefDate = [NSDate dateWithString:@"0001-01-01 00:00:00 +0000"];
@@ -81,9 +83,6 @@ typedef struct noteData {
         
         entity.properties = [_reader readAttributesOnPath:memberPath];
     }
-    
-    NSString *uuid = [_reader readStringAttribute:@"uuid" onPath:path];
-    [entity.properties setValue:uuid forKey:@"__symphony__uuid__"];
     
     // Keywords
     if ([_reader hasAttribute:@"keywords" onPath:path]) {

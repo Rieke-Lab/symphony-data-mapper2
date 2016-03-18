@@ -18,18 +18,6 @@
 
 #include "hdf5.h"
 
-// HACK: This should be defined based on the NOTE data type in the data file.
-// How do we create a struct data type from that datatype?
-typedef struct dtoData {
-    uint64_t ticks;
-    double offset;
-} dtoData;
-
-typedef struct noteData {
-    dtoData time;
-    char *text;
-} noteData;
-
 @implementation SMKExperimentEnumerator
 
 - (id)createNextEntity
@@ -67,7 +55,7 @@ typedef struct noteData {
     for (MACHdf5LinkInformation *groupMember in groupMembers) {
         [groupPaths addObject:groupMember.path];
     }
-    experiment.epochGroupEnumerator = [[[SMKEpochGroupEnumerator alloc] initWithReader:_reader epochGroupPaths:groupPaths] autorelease];
+    experiment.epochGroupEnumerator = [[[SMKEpochGroupEnumerator alloc] initWithReader:_reader entityPaths:groupPaths] autorelease];
 }
 
 @end
