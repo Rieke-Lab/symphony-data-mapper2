@@ -12,6 +12,7 @@
 #import "SMKDeviceEnumerator.h"
 #import "SMKSourceEnumerator.h"
 #import "SMKEpochGroupEnumerator.h"
+#import "SMKNote.h"
 #import "MACHdf5Reader.h"
 
 @interface SMKExperimentEnumeratorTest : SMKBaseTestCase {
@@ -81,6 +82,27 @@
                               nil];
     
     STAssertTrue([experiment.properties isEqualToDictionary:expected], nil);
+}
+
+- (void)testNotes
+{
+    SMKExperiment *experiment = [_enumerator nextObject];
+    
+    SMKNote *note1 = [SMKNote new];
+    note1.timestamp = [NSDate date];
+    note1.comment = @"one note here";
+    
+    SMKNote *note2 = [SMKNote new];
+    note2.timestamp = [NSDate date];
+    note2.comment = @"and then comes another note";
+    
+    SMKNote *note3 = [SMKNote new];
+    note3.timestamp = [NSDate date];
+    note3.comment = @"these are experiment notes";
+    
+    NSSet *expected = [NSSet setWithObjects:note1, note2, note3, nil];
+    
+    //STAssertTrue([experiment.notes isEqualToSet:expected], nil);
 }
 
 - (void)testKeywords

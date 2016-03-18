@@ -11,6 +11,7 @@
 #import "SMKDeviceEnumerator.h"
 #import "SMKSourceEnumerator.h"
 #import "SMKEpochGroupEnumerator.h"
+#import "SMKNote.h"
 #import "MACHdf5Reader.h"
 #import "MACHdf5ObjectInformation.h"
 #import "MACHdf5LinkInformation.h"
@@ -120,15 +121,21 @@ typedef struct noteData {
         
         hid_t datatypeId = H5Topen(_reader.fileId, "NOTE", H5P_DEFAULT);
         
-        noteData *notes = malloc(length * sizeof(noteData));
-        H5Dread(notesId, datatypeId, H5S_ALL, H5S_ALL, H5P_DEFAULT, notes);
+        noteData *data = malloc(length * sizeof(noteData));
+        H5Dread(notesId, datatypeId, H5S_ALL, H5S_ALL, H5P_DEFAULT, data);
         
+        NSMutableSet *notes = [NSMutableSet setWithCapacity:length];
         for (int i = 0; i < length; i++) {
-            NSLog(@"%llu", notes[i].time.ticks);
-            NSLog(@"%f", notes[i].time.offset);
+            SMKNote *note = [SMKNote new];
             
-            NSLog(@"%@", [NSString stringWithUTF8String:notes[i].text]);
+            NSTimeInterval interval = data[i].time.ticks / 1e7 - (data[i].time.offset * 60 * 60);
+            note.timestamp = [NSDate dateWithTimeInterval:interval sinceDate:dotNetRefDate];
+            
+            note.comment = [NSString stringWithUTF8String:data[i].text];
+            
+            [notes addObject:note];
         }
+        experiment.notes = notes;
     }
     
     // Devices
