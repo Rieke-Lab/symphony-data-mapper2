@@ -41,6 +41,8 @@
 		FC5D2F1D1C9C8F33005A8222 /* SMKEntityEnumerator.m in Sources */ = {isa = PBXBuildFile; fileRef = FC5D2F1B1C9C8F33005A8222 /* SMKEntityEnumerator.m */; };
 		FC5D2F201C9C8F63005A8222 /* SMKTimelineEntityEnumerator.h in Headers */ = {isa = PBXBuildFile; fileRef = FC5D2F1E1C9C8F63005A8222 /* SMKTimelineEntityEnumerator.h */; };
 		FC5D2F211C9C8F63005A8222 /* SMKTimelineEntityEnumerator.m in Sources */ = {isa = PBXBuildFile; fileRef = FC5D2F1F1C9C8F63005A8222 /* SMKTimelineEntityEnumerator.m */; };
+		FC5D2F241C9CA3E4005A8222 /* SMKDeviceEnumeratorTest.m in Sources */ = {isa = PBXBuildFile; fileRef = FC5D2F221C9CA3E4005A8222 /* SMKDeviceEnumeratorTest.m */; };
+		FC5D2F251C9CA3E4005A8222 /* SMKSourceEnumeratorTest.m in Sources */ = {isa = PBXBuildFile; fileRef = FC5D2F231C9CA3E4005A8222 /* SMKSourceEnumeratorTest.m */; };
 		FC6B6E21169612C0006B4688 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC6B6E20169612C0006B4688 /* Cocoa.framework */; };
 		FC6B6E2B169612C0006B4688 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FC6B6E29169612C0006B4688 /* InfoPlist.strings */; };
 		FC6B6E37169612C0006B4688 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC6B6E36169612C0006B4688 /* SenTestingKit.framework */; };
@@ -134,6 +136,8 @@
 		FC5D2F1B1C9C8F33005A8222 /* SMKEntityEnumerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SMKEntityEnumerator.m; path = Behavioral/SMKEntityEnumerator.m; sourceTree = "<group>"; };
 		FC5D2F1E1C9C8F63005A8222 /* SMKTimelineEntityEnumerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SMKTimelineEntityEnumerator.h; path = Behavioral/SMKTimelineEntityEnumerator.h; sourceTree = "<group>"; };
 		FC5D2F1F1C9C8F63005A8222 /* SMKTimelineEntityEnumerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SMKTimelineEntityEnumerator.m; path = Behavioral/SMKTimelineEntityEnumerator.m; sourceTree = "<group>"; };
+		FC5D2F221C9CA3E4005A8222 /* SMKDeviceEnumeratorTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMKDeviceEnumeratorTest.m; sourceTree = "<group>"; };
+		FC5D2F231C9CA3E4005A8222 /* SMKSourceEnumeratorTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMKSourceEnumeratorTest.m; sourceTree = "<group>"; };
 		FC6B6E1D169612C0006B4688 /* SymphonyMappingKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SymphonyMappingKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC6B6E20169612C0006B4688 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		FC6B6E23169612C0006B4688 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -313,6 +317,8 @@
 				FC0F4E341696774900B9EA5C /* SMKBaseTestCase.m */,
 				FC5D2F021C9A245D005A8222 /* SMKDataFileReaderTest.m */,
 				FC5D2F041C9A2881005A8222 /* SMKExperimentEnumeratorTest.m */,
+				FC5D2F221C9CA3E4005A8222 /* SMKDeviceEnumeratorTest.m */,
+				FC5D2F231C9CA3E4005A8222 /* SMKSourceEnumeratorTest.m */,
 			);
 			path = SymphonyMappingKitTests;
 			sourceTree = "<group>";
@@ -567,6 +573,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				FC5D2F031C9A245D005A8222 /* SMKDataFileReaderTest.m in Sources */,
+				FC5D2F241C9CA3E4005A8222 /* SMKDeviceEnumeratorTest.m in Sources */,
+				FC5D2F251C9CA3E4005A8222 /* SMKSourceEnumeratorTest.m in Sources */,
 				FC0F4E361696774900B9EA5C /* SMKBaseTestCase.m in Sources */,
 				FC5D2F051C9A2881005A8222 /* SMKExperimentEnumeratorTest.m in Sources */,
 			);

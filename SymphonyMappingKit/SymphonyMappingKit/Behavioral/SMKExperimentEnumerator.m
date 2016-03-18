@@ -51,7 +51,7 @@ typedef struct noteData {
     for (MACHdf5LinkInformation *deviceMember in deviceMembers) {
         [devicePaths addObject:deviceMember.path];
     }
-    experiment.deviceEnumerator = [[[SMKDeviceEnumerator alloc] initWithReader:_reader devicePaths:devicePaths] autorelease];
+    experiment.deviceEnumerator = [[[SMKDeviceEnumerator alloc] initWithReader:_reader entityPaths:devicePaths] autorelease];
     
     // Sources
     NSArray *sourceMembers = [_reader groupMemberLinkInfoInPath:[path stringByAppendingString:@"/sources"]];
@@ -59,7 +59,7 @@ typedef struct noteData {
     for (MACHdf5LinkInformation *sourceMember in sourceMembers) {
         [sourcePaths addObject:sourceMember.path];
     }
-    experiment.sourceEnumerator = [[[SMKSourceEnumerator alloc] initWithReader:_reader sourcePaths:sourcePaths] autorelease];
+    experiment.sourceEnumerator = [[[SMKSourceEnumerator alloc] initWithReader:_reader entityPaths:sourcePaths] autorelease];
     
     // Epoch Groups
     NSArray *groupMembers = [_reader groupMemberLinkInfoInPath:[path stringByAppendingString:@"/epochGroups"]];

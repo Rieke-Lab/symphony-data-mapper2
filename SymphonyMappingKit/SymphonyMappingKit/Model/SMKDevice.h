@@ -9,6 +9,12 @@
 #import <Foundation/Foundation.h>
 #import "SMKEntity.h"
 
-@interface SMKDevice : SMKEntity
+@interface SMKDevice : SMKEntity {
+    NSString *_name;
+    NSString *_manufacturer;
+}
+
+@property (copy) NSString *name;
+@property (copy) NSString *manufacturer;
 
 @end

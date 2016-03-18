@@ -8,58 +8,22 @@
 
 #import "SMKSourceEnumerator.h"
 #import "SMKSource.h"
+#import "MACHdf5Reader.h"
 
 @implementation SMKSourceEnumerator
 
-- (id)initWithReader:(MACHdf5Reader *)reader sourcePaths:(NSArray *)paths
+- (id)createNextEntity
 {
-    self = [super init];
-    if (self) {
-        _reader = [reader retain];
-        _paths = [paths retain];
-        _index = 0;
-    }
-    return self;
+    return [SMKSource new];
 }
 
-- (id)nextObject
+- (void)mapEntity:(SMKEntity *)entity withPath:(NSString *)path
 {
-    if (_index >= [_paths count]) {
-        return nil;
-    }
+    [super mapEntity:entity withPath:path];
     
-    NSString *sourcePath = [_paths objectAtIndex:_index];
+    SMKSource *source = (SMKSource *)entity;
     
-    // Release the last returned source
-    if (_lastSource != nil) {
-        [_lastSource release];
-    }
-    
-    SMKSource *source = [SMKSource new];
-    
-    _index++;
-    _lastSource = source;
-    return source;
-}
-
-- (NSArray *)allObjects
-{
-    return nil;
-}
-
-- (id)copyWithZone:(NSZone *)zone
-{
-    SMKSourceEnumerator *another = [[SMKSourceEnumerator alloc] initWithReader:_reader sourcePaths:_paths];
-    return another;
-}
-
-- (void)dealloc
-{
-    [_reader release];
-    [_paths release];
-    [_lastSource release];
-    
-    [super dealloc];
+    source.label = [_reader readStringAttribute:@"label" onPath:path];
 }
 
 @end

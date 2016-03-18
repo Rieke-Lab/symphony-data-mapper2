@@ -8,58 +8,23 @@
 
 #import "SMKDeviceEnumerator.h"
 #import "SMKDevice.h"
+#import "MACHdf5Reader.h"
 
 @implementation SMKDeviceEnumerator
 
-- (id)initWithReader:(MACHdf5Reader *)reader devicePaths:(NSArray *)paths
+- (id)createNextEntity
 {
-    self = [super init];
-    if (self) {
-        _reader = [reader retain];
-        _paths = [paths retain];
-        _index = 0;
-    }
-    return self;
+    return [SMKDevice new];
 }
 
-- (id)nextObject
+- (void)mapEntity:(SMKEntity *)entity withPath:(NSString *)path
 {
-    if (_index >= [_paths count]) {
-        return nil;
-    }
+    [super mapEntity:entity withPath:path];
     
-    NSString *devicePath = [_paths objectAtIndex:_index];
+    SMKDevice *device = (SMKDevice *)entity;
     
-    // Release the last returned device
-    if (_lastDevice != nil) {
-        [_lastDevice release];
-    }
-    
-    SMKDevice *device = [SMKDevice new];
-    
-    _index++;
-    _lastDevice = device;
-    return device;
-}
-
-- (NSArray *)allObjects
-{
-    return nil;
-}
-
-- (id)copyWithZone:(NSZone *)zone
-{
-    SMKDeviceEnumerator *another = [[SMKDeviceEnumerator alloc] initWithReader:_reader devicePaths:_paths];
-    return another;
-}
-
-- (void)dealloc
-{
-    [_reader release];
-    [_paths release];
-    [_lastDevice release];
-    
-    [super dealloc];
+    device.name = [_reader readStringAttribute:@"name" onPath:path];
+    device.manufacturer = [_reader readStringAttribute:@"manufacturer" onPath:path];
 }
 
 @end

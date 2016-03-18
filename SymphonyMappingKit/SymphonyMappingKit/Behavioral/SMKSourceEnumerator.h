@@ -7,17 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SMKEntityEnumerator.h"
 
-@class MACHdf5Reader;
-@class SMKSource;
-
-@interface SMKSourceEnumerator : NSEnumerator <NSCopying> {
-    MACHdf5Reader *_reader;
-    NSArray *_paths;
-    NSUInteger _index;
-    SMKSource *_lastSource;
-}
-
-- (id)initWithReader:(MACHdf5Reader *)reader sourcePaths:(NSArray *)paths;
+@interface SMKSourceEnumerator : SMKEntityEnumerator
 
 @end
