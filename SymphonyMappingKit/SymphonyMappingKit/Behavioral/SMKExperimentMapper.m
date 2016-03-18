@@ -8,7 +8,6 @@
 
 #import "SMKExperimentMapper.h"
 #import "SMKExperiment.h"
-#import "SMKMetadataParser.h"
 #import "SMKNote.h"
 #import "SMKDataFileReader.h"
 #import "SMKEpochGroupEnumerator.h"

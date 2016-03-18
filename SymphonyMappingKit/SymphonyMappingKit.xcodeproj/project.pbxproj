@@ -12,8 +12,6 @@
 		FC0F4E31169671C700B9EA5C /* BWKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC0F4E291696719600B9EA5C /* BWKit.framework */; };
 		FC0F4E32169671C700B9EA5C /* DAQFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC0F4E2A1696719600B9EA5C /* DAQFramework.framework */; };
 		FC0F4E361696774900B9EA5C /* SMKBaseTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0F4E341696774900B9EA5C /* SMKBaseTestCase.m */; };
-		FC0F4F22169794D300B9EA5C /* SMKMetadataParser.h in Headers */ = {isa = PBXBuildFile; fileRef = FC0F4F20169794D300B9EA5C /* SMKMetadataParser.h */; };
-		FC0F4F23169794D300B9EA5C /* SMKMetadataParser.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0F4F21169794D300B9EA5C /* SMKMetadataParser.m */; };
 		FC0F4F271697991E00B9EA5C /* SMKSource.h in Headers */ = {isa = PBXBuildFile; fileRef = FC0F4F251697991E00B9EA5C /* SMKSource.h */; };
 		FC0F4F281697991E00B9EA5C /* SMKSource.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0F4F261697991E00B9EA5C /* SMKSource.m */; };
 		FC0F4F2B1697993700B9EA5C /* SMKNote.h in Headers */ = {isa = PBXBuildFile; fileRef = FC0F4F291697993700B9EA5C /* SMKNote.h */; };
@@ -103,8 +101,6 @@
 		FC0F4E2A1696719600B9EA5C /* DAQFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DAQFramework.framework; path = ../Libraries/DAQFramework.framework; sourceTree = "<group>"; };
 		FC0F4E341696774900B9EA5C /* SMKBaseTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMKBaseTestCase.m; sourceTree = "<group>"; };
 		FC0F4E3816967BB000B9EA5C /* SMKBaseTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMKBaseTestCase.h; sourceTree = "<group>"; };
-		FC0F4F20169794D300B9EA5C /* SMKMetadataParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SMKMetadataParser.h; path = Behavioral/SMKMetadataParser.h; sourceTree = "<group>"; };
-		FC0F4F21169794D300B9EA5C /* SMKMetadataParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SMKMetadataParser.m; path = Behavioral/SMKMetadataParser.m; sourceTree = "<group>"; };
 		FC0F4F251697991E00B9EA5C /* SMKSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SMKSource.h; path = Model/SMKSource.h; sourceTree = "<group>"; };
 		FC0F4F261697991E00B9EA5C /* SMKSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SMKSource.m; path = Model/SMKSource.m; sourceTree = "<group>"; };
 		FC0F4F291697993700B9EA5C /* SMKNote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SMKNote.h; path = Model/SMKNote.h; sourceTree = "<group>"; };
@@ -333,8 +329,6 @@
 				FC16F8921C9A0A5B007CB4FF /* SMKExperimentEnumerator.m */,
 				FC6B6E4D16961335006B4688 /* SMKExperimentMapper.h */,
 				FC6B6E4E16961335006B4688 /* SMKExperimentMapper.m */,
-				FC0F4F20169794D300B9EA5C /* SMKMetadataParser.h */,
-				FC0F4F21169794D300B9EA5C /* SMKMetadataParser.m */,
 				FC7C8DE416B3279800F9E8A6 /* SMKDataFileReader.h */,
 				FC7C8DE516B3279800F9E8A6 /* SMKDataFileReader.m */,
 				FC50C13B16B84FED00656CC0 /* SMKEpochGroupEnumerator.h */,
@@ -394,7 +388,6 @@
 				FC5D2F181C9C8454005A8222 /* SMKTimelineEntity.h in Headers */,
 				FC5D2F101C9B83F6005A8222 /* SMKDevice.h in Headers */,
 				FC6B6E4F16961335006B4688 /* SMKExperimentMapper.h in Headers */,
-				FC0F4F22169794D300B9EA5C /* SMKMetadataParser.h in Headers */,
 				FC0F4F271697991E00B9EA5C /* SMKSource.h in Headers */,
 				FC0F4F2B1697993700B9EA5C /* SMKNote.h in Headers */,
 				FC7C8DE616B3279800F9E8A6 /* SMKDataFileReader.h in Headers */,
@@ -528,7 +521,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				FC6B6E5016961335006B4688 /* SMKExperimentMapper.m in Sources */,
-				FC0F4F23169794D300B9EA5C /* SMKMetadataParser.m in Sources */,
 				FC0F4F281697991E00B9EA5C /* SMKSource.m in Sources */,
 				FC0F4F2C1697993700B9EA5C /* SMKNote.m in Sources */,
 				FC7C8DE716B3279800F9E8A6 /* SMKDataFileReader.m in Sources */,
