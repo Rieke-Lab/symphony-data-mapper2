@@ -10,18 +10,15 @@
 #import "SMKTimelineEntity.h"
 
 @interface SMKEpoch : SMKTimelineEntity {
-    NSString *_protocolId;
-    NSNumber *_duration;
+    NSArray *_backgrounds;
     NSDictionary *_protocolParameters;
     NSArray *_stimuli;
     NSArray *_responses;
 }
 
-@property (copy) NSString *protocolId;
-@property (retain) NSNumber *duration;
+@property (retain) NSArray *backgrounds;
 @property (retain) NSDictionary *protocolParameters;
 @property (retain) NSArray *stimuli;
 @property (retain) NSArray *responses;
-
 
 @end

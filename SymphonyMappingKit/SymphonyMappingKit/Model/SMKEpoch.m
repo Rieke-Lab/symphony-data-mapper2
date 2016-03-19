@@ -10,16 +10,14 @@
 
 @implementation SMKEpoch
 
-@synthesize protocolId = _protocolId;
-@synthesize duration = _duration;
+@synthesize backgrounds = _backgrounds;
 @synthesize protocolParameters = _protocolParameters;
 @synthesize stimuli = _stimuli;
 @synthesize responses = _responses;
 
 - (void)dealloc
 {
-    [_protocolId release];
-    [_duration release];
+    [_backgrounds release];
     [_protocolParameters release];
     [_stimuli release];
     [_responses release];
