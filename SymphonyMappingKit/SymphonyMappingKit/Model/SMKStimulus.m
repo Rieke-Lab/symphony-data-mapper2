@@ -10,15 +10,20 @@
 
 @implementation SMKStimulus
 
-@synthesize parameters = _parameters;
-@synthesize pluginId = _pluginId;
+@synthesize stimulusId = _stimulusId;
 @synthesize units = _units;
+@synthesize sampleRate = _sampleRate;
+@synthesize sampleRateUnits = _sampleRateUnits;
+@synthesize parameters = _parameters;
+@synthesize duration = _duration;
 
 - (void)dealloc
 {
-    [_parameters release];
-    [_pluginId release];
+    [_stimulusId release];
     [_units release];
+    [_sampleRate release];
+    [_sampleRateUnits release];
+    [_parameters release];
     
     [super dealloc];
 }

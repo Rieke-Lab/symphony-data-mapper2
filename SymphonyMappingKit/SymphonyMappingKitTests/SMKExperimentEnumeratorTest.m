@@ -23,7 +23,8 @@
 
 @implementation SMKExperimentEnumeratorTest
 
-- (void)setUp {
+- (void)setUp
+{
     [super setUp];
     
     MACHdf5Reader *reader = [MACHdf5Reader readerWithFilePath:[_resourcePath stringByAppendingString:@"2016-03-16.h5"]];

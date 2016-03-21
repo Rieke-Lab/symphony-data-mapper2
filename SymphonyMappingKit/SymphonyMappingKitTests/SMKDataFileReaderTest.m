@@ -18,7 +18,8 @@
 
 @implementation SMKDataFileReaderTest
 
-- (void)setUp {
+- (void)setUp
+{
     [super setUp];
     
     _reader = [SMKDataFileReader readerForHdf5FilePath:[_resourcePath stringByAppendingString:@"2016-03-16.h5"]];

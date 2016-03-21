@@ -10,13 +10,19 @@
 #import "SMKIOBase.h"
 
 @interface SMKStimulus : SMKIOBase {
-    NSDictionary *_parameters;
-    NSString *_pluginId;
+    NSString *_stimulusId;
     NSString *_units;
+    NSNumber *_sampleRate;
+    NSString *_sampleRateUnits;
+    NSDictionary *_parameters;
+    NSTimeInterval _duration;
 }
 
-@property (retain) NSDictionary *parameters;
-@property (copy) NSString *pluginId;
+@property (copy) NSString *stimulusId;
 @property (copy) NSString *units;
+@property (retain) NSNumber *sampleRate;
+@property (copy) NSString *sampleRateUnits;
+@property (retain) NSDictionary *parameters;
+@property NSTimeInterval duration;
 
 @end
