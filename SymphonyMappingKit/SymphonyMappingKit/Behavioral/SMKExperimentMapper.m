@@ -84,7 +84,6 @@
     [self assertValid:auiExperiment];
     
     // Setup HDF5 output file for response
-    //NSURL *dataFileUrl = [Experiment responseDataURLForPersistentStoreURL:_auisqlUrl];
     NSURL *dataFileUrl = [_auisqlUrl URLByAppendingPathExtension:@"h5"];
     
     [Experiment createResponseDataFileAtURL:dataFileUrl];
@@ -106,9 +105,20 @@
         [NSException raise:@"CannotLoadBundle" format:@"Unable to load external devices plugin"];
     }
     
-    NSMutableDictionary *cells = [NSMutableDictionary new];
+    // Import notes
+    for (SMKNote *note in experiment.notes) {
+        Note *auiNote = [NSEntityDescription insertNewObjectForEntityForName:@"Note"
+                                                      inManagedObjectContext:_context];
+        
+        auiNote.date = note.timestamp;
+        auiNote.text = note.comment;
+        auiNote.experiment = auiExperiment;
+        
+        [self assertValid:auiNote];
+    }
     
     // All epoch groups with the same source are considered part of a "cell".
+    NSMutableDictionary *cells = [NSMutableDictionary new];
     SMKEpochGroupEnumerator *groupEnumerator = experiment.epochGroupEnumerator;
     SMKEpochGroup *group;
     while (group = [groupEnumerator nextObject]) {
@@ -200,7 +210,8 @@
         auiEpoch.duration = [NSNumber numberWithDouble:[epoch.endTime timeIntervalSinceDate:epoch.startTime]];
         
         // Protocol settings
-        NSMutableDictionary *protocolSettings = [NSMutableDictionary dictionaryWithDictionary:epoch.protocolParameters];
+        NSMutableDictionary *protocolSettings = [NSMutableDictionary dictionaryWithDictionary:block.protocolParameters];
+        [protocolSettings addEntriesFromDictionary:epoch.protocolParameters];
         //[protocolSettings setValue:group.label forKeyPath:@"epochGroup:label"];
         //[protocolSettings setValue:[group.properties valueForKey:@"__symphony__uuid__"] forKeyPath:@"epochGroup:uuid"];
         
@@ -210,7 +221,7 @@
             [auiEpoch addKeywordsObject:tag];
         }
         
-        // Add epoch group keywords
+        // Add epoch block keywords
         for (NSString *keyword in block.keywords) {
             KeywordTag *tag = [KeywordTag keywordTagWithTag:keyword inManagedObjectContext:_context error:nil];
             [auiEpoch addKeywordsObject:tag];
@@ -250,7 +261,7 @@
             NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
             for (NSString *key in [stimulus.deviceParameters allKeys]) {
                 id value = [stimulus.deviceParameters valueForKey:key];
-                NSString *newKey = [NSString stringWithFormat:@"deviceParameters:%@", key];
+                NSString *newKey = [NSString stringWithFormat:@"~deviceParameters:%@", key];
                 [parameters setValue:value forKey:newKey];
             }
             [parameters addEntriesFromDictionary:stimulus.parameters];
@@ -265,7 +276,7 @@
             NSString* streamName = [stimulus.device.name stringByReplacingOccurrencesOfString: @" " withString: @"_"];
             for (NSString *key in [stimulus.parameters allKeys]) {
                 id value = [stimulus.parameters valueForKey:key];
-                NSString *newKey = [NSString stringWithFormat:@"stimuli:%@:%@", streamName, key];
+                NSString *newKey = [NSString stringWithFormat:@"~stimuli:%@:%@", streamName, key];
                 [protocolSettings setValue:value forKey:newKey];
             }
             
