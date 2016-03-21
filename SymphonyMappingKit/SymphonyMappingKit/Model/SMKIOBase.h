@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <AUIModel/AUIModel.h>
 #import "SMKEntity.h"
+#import "SMKDevice.h"
 
 // CODE DEBT: copied from AUIAxoPatchDevice.h, which is part of a plugin and
 // therefore not readily imported from.
@@ -22,16 +23,14 @@ typedef enum {
 } AxoPatchAmpMode;
 
 @interface SMKIOBase : SMKEntity {
-    NSString *_deviceName;
-    NSString *_deviceManufacturer;
+    SMKDevice *_device;
     AxoPatchAmpMode _deviceMode;
     NSDictionary *_deviceParameters;
     NSNumber *_channelNumber;
     StreamType _streamType;
 }
 
-@property (copy) NSString *deviceName;
-@property (copy) NSString *deviceManufacturer;
+@property (retain) SMKDevice *device;
 @property AxoPatchAmpMode deviceMode;
 @property (retain) NSDictionary *deviceParameters;
 

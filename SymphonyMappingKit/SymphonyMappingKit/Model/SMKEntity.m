@@ -15,6 +15,11 @@
 @synthesize keywords = _keywords;
 @synthesize notes = _notes;
 
+- (BOOL)isEqual:(SMKEntity *)object
+{
+    return [_uuid isEqual:object.uuid];
+}
+
 - (void)dealloc
 {
     [_uuid release];

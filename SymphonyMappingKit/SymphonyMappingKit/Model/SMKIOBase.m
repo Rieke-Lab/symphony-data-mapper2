@@ -10,8 +10,7 @@
 
 @implementation SMKIOBase
 
-@synthesize deviceName = _deviceName;
-@synthesize deviceManufacturer = _deviceManufacturer;
+@synthesize device = _device;
 @synthesize deviceMode = _deviceMode;
 @synthesize deviceParameters = _deviceParameters;
 @synthesize channelNumber = _channelNumber;
@@ -19,8 +18,7 @@
 
 - (void)dealloc
 {
-    [_deviceName release];
-    [_deviceManufacturer release];
+    [_device release];
     [_deviceParameters release];
     [_channelNumber release];
     
