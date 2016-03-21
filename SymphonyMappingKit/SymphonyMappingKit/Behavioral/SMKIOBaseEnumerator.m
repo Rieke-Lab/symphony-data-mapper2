@@ -7,6 +7,7 @@
 //
 
 #import "SMKIOBaseEnumerator.h"
+#import "MACHdf5Reader.h"
 
 @implementation SMKIOBaseEnumerator
 

@@ -18,20 +18,6 @@
 #import "MACHdf5ObjectInformation.h"
 #import "MACHdf5LinkInformation.h"
 
-// HACK: This should be defined based on the MEASUREMENT data type in the data file.
-// How do we create a struct data type from that datatype?
-typedef struct measurementData {
-    double quantity;
-    char units[40];
-} measurementData;
-
-// HACK: Same with this.
-typedef struct backgroundData {
-    char externalDevice[40];
-    measurementData measurement;
-    measurementData sampleRate;
-} backgroundData;
-
 @implementation SMKEpochEnumerator
 
 - (id)createNextEntity

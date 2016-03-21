@@ -14,11 +14,13 @@
     NSString *_units;
     NSNumber *_sampleRate;
     NSString *_sampleRateUnits;
+    NSDate *_inputTime;
 }
 
 @property (retain) NSData *data;
 @property (copy) NSString *units;
 @property (retain) NSNumber *sampleRate;
 @property (copy) NSString *sampleRateUnits;
+@property (retain) NSDate *inputTime;
 
 @end

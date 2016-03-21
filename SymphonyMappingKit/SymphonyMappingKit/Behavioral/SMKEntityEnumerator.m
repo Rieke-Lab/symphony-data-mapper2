@@ -13,18 +13,6 @@
 #import "MACHdf5ObjectInformation.h"
 #import "MACHdf5LinkInformation.h"
 
-// HACK: This should be defined based on the NOTE data type in the data file.
-// How do we create a struct data type from that datatype?
-typedef struct dtoData {
-    uint64_t ticks;
-    double offset;
-} dtoData;
-
-typedef struct noteData {
-    dtoData time;
-    char *text;
-} noteData;
-
 @implementation SMKEntityEnumerator
 
 - (id)initWithReader:(MACHdf5Reader *)reader entityPaths:(NSArray *)paths

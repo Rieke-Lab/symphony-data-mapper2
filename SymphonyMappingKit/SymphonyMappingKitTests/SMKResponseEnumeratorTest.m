@@ -29,4 +29,43 @@
     _enumerator = [[[SMKResponseEnumerator alloc] initWithReader:reader entityPaths:[NSArray arrayWithObjects:response, nil]] autorelease];
 }
 
+- (void)testData
+{
+    SMKResponse *response = [_enumerator nextObject];
+    
+    // TODO: need better check for data
+    STAssertTrue(response.data.length == 48000, nil);
+}
+
+- (void)testUnits
+{
+    SMKResponse *response = [_enumerator nextObject];
+    
+    STAssertTrue([response.units isEqualToString:@"pA"], nil);
+}
+
+- (void)testSampleRate
+{
+    SMKResponse *response = [_enumerator nextObject];
+    
+    STAssertTrue([response.sampleRate isEqualToNumber:[NSNumber numberWithDouble:10000.0]], nil);
+}
+
+- (void)testSampleRateUnits
+{
+    SMKResponse *response = [_enumerator nextObject];
+    
+    STAssertTrue([response.sampleRateUnits isEqualToString:@"Hz"], nil);
+}
+
+- (void)testInputTime
+{
+    SMKResponse *response = [_enumerator nextObject];
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss Z"];
+    
+    STAssertTrue([[dateFormatter stringFromDate:response.inputTime] isEqualToString:@"2016-03-16 13:23:48 -0700"], nil);
+}
+
 @end

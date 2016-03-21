@@ -8,6 +8,7 @@
 
 #import "SMKStimulusEnumerator.h"
 #import "SMKStimulus.h"
+#import "MACHdf5Reader.h"
 
 @implementation SMKStimulusEnumerator
 
