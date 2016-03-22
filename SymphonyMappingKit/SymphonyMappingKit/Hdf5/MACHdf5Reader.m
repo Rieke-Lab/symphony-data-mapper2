@@ -669,6 +669,13 @@
                         int16_t value = [self readShortAttribute:name onPath:objectPath];
                         [attributes setValue:[NSNumber numberWithShort:value] forKey:name];
                     }
+                } else if (size == 1) {
+                    if (nElements > 1) {
+                        [NSException raise:@"UnsupportedAttributeType" format:@"%@.%@ is not a supported attribute type (boolean array)", objectPath, name];
+                    } else {
+                        int16_t value = [self readBooleanAttribute:name onPath:objectPath];
+                        [attributes setValue:[NSNumber numberWithShort:value] forKey:name];
+                    }
                 } else {
                     [NSException raise:@"UnsupportedAttributeType"
                                 format:@"%@.%@ is not a supported attribute type", objectPath, name];
