@@ -35,9 +35,9 @@ int main(int argc, char *argv[])
         return 1;
     }
     
-    NSArray *components = [dataFilePath componentsSeparatedByString:@".h5"];
-    NSString *auisqlFilePath = [[components objectAtIndex:0] stringByAppendingString:@".auisql"];
-    NSString *auisqlHdf5FilePath = [[components objectAtIndex:0] stringByAppendingString:@".auisql.h5"];
+    NSString *filename = [[dataFilePath lastPathComponent] stringByDeletingPathExtension];
+    NSString *auisqlFilePath = [filename stringByAppendingString:@".auisql"];
+    NSString *auisqlHdf5FilePath = [filename stringByAppendingString:@".auisql.h5"];
     
     if ([fileManager fileExistsAtPath:auisqlFilePath]) {
         char response;
