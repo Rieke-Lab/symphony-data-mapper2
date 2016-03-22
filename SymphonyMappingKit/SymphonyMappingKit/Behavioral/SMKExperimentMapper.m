@@ -198,9 +198,10 @@
             NSString *newKey = [NSString stringWithFormat:@"~source:%@:%@", currentSource.label, key];
             [protocolSettings setValue:value forKey:newKey];
         }
-        currentSource = currentSource.parent;
         
         [keywords addObjectsFromArray:[NSArray arrayWithSet:currentSource.keywords]];
+        
+        currentSource = currentSource.parent;
     }
     
     SMKEpochGroup *currentGroup = group;
@@ -210,9 +211,10 @@
             NSString *newKey = [NSString stringWithFormat:@"~epochGroup:%@:%@", currentGroup.label, key];
             [protocolSettings setValue:value forKey:newKey];
         }
-        currentGroup = currentGroup.parent;
         
         [keywords addObjectsFromArray:[NSArray arrayWithSet:currentGroup.keywords]];
+        
+        currentGroup = currentGroup.parent;
     }
     
     [self addNotesFromEntity:group toExperiment:auiCell.experiment];
