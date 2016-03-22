@@ -128,7 +128,6 @@
     
     // Import cells
     for (NSSet *cell in [cells allValues]) {
-        
         RecordedCell *auiCell = [NSEntityDescription insertNewObjectForEntityForName:@"Cell"
                                                               inManagedObjectContext:_context];
         
@@ -150,7 +149,7 @@
             
             [self assertValid:auiCell];
             
-            // Cut down on memory usage by flushing per cell
+            // cut down on memory usage by flushing per cell
             NSError *error;
             if ([_context save:&error] == NO) {
                 [NSException raise:@"Failed to save context" format:@"Failed to save context: %@", [error localizedDescription]];
@@ -246,7 +245,6 @@
     SMKEpochEnumerator *epochEnumerator = block.epochEnumerator;
     SMKEpoch *epoch;
     while (epoch = [epochEnumerator nextObject]) {
-        
         Epoch *auiEpoch = [NSEntityDescription insertNewObjectForEntityForName:@"Epoch"
                                                         inManagedObjectContext:_context];
         

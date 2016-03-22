@@ -28,13 +28,14 @@
 
 - (id)nextObject
 {
-    if (_index >= [_paths count]) {
-        return nil;
-    }
-    
     // Release the last returned entity
     if (_lastEntity != nil) {
         [_lastEntity release];
+        _lastEntity = nil;
+    }
+    
+    if (_index >= [_paths count]) {
+        return nil;
     }
     
     SMKEntity *entity = [self createNextEntity];
