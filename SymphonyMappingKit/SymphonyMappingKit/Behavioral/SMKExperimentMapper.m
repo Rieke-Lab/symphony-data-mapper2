@@ -80,7 +80,7 @@
     auiExperiment.rigSettingsData = [NSData data];
     auiExperiment.purpose = experiment.purpose;
     auiExperiment.otherNotes = @"";
-    auiExperiment.keywords = experiment.keywords;
+    //auiExperiment.keywords = experiment.keywords;
     
     [self assertValid:auiExperiment];
     
