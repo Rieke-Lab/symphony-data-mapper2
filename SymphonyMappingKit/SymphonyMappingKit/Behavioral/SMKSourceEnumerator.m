@@ -29,7 +29,7 @@
     
     if ([members containsObject:@"parent"]) {
         NSString *sourcePath = [path stringByAppendingString:@"/parent"];
-        SMKSourceEnumerator *sourceEnumerator = [[SMKSourceEnumerator alloc] initWithReader:_reader entityPaths:[NSArray arrayWithObjects:sourcePath, nil]];
+        SMKSourceEnumerator *sourceEnumerator = [[[SMKSourceEnumerator alloc] initWithReader:_reader entityPaths:[NSArray arrayWithObjects:sourcePath, nil]] autorelease];
         source.parent = sourceEnumerator.nextObject;
     } else {
         source.parent = nil;

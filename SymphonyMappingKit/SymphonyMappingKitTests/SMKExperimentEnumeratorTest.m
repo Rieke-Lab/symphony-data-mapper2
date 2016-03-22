@@ -61,7 +61,7 @@
 {
     SMKExperiment *experiment = [_enumerator nextObject];
     
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
     [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss Z"];
     
     STAssertTrue([[dateFormatter stringFromDate:experiment.startTime] isEqualToString:@"2016-03-16 13:19:19 -0700"], nil);
@@ -71,7 +71,7 @@
 {
     SMKExperiment *experiment = [_enumerator nextObject];
     
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
     [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss Z"];
     
     STAssertTrue([[dateFormatter stringFromDate:experiment.endTime] isEqualToString:@"2016-03-16 13:25:39 -0700"], nil);

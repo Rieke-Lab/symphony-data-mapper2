@@ -230,7 +230,9 @@
     SMKEpochBlockEnumerator *blockEnumerator = group.epochBlockEnumerator;
     SMKEpochBlock *block;
     while (block = [blockEnumerator nextObject]) {
-        [self mapEpochBlock:block protocolSettings:protocolSettings keywords:keywords toCell:auiCell];
+        @autoreleasepool {
+            [self mapEpochBlock:block protocolSettings:protocolSettings keywords:keywords toCell:auiCell];
+        }
     }
     
     SMKEpochGroupEnumerator *groupEnumerator = group.epochGroupEnumerator;

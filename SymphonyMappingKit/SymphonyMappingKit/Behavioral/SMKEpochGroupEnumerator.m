@@ -44,7 +44,7 @@
     group.label = [_reader readStringAttribute:@"label" onPath:path];
     
     NSString *sourcePath = [path stringByAppendingString:@"/source"];
-    SMKSourceEnumerator *sourceEnumerator = [[SMKSourceEnumerator alloc] initWithReader:_reader entityPaths:[NSArray arrayWithObjects:sourcePath, nil]];
+    SMKSourceEnumerator *sourceEnumerator = [[[SMKSourceEnumerator alloc] initWithReader:_reader entityPaths:[NSArray arrayWithObjects:sourcePath, nil]] autorelease];
     group.source = sourceEnumerator.nextObject;
     
     // Epoch Groups

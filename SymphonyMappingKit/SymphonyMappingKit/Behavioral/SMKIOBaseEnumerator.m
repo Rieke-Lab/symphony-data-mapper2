@@ -21,7 +21,7 @@
     SMKIOBase *iobase = (SMKIOBase *)entity;
     
     NSString *devicePath = [path stringByAppendingString:@"/device"];
-    SMKDeviceEnumerator *deviceEnumerator = [[SMKDeviceEnumerator alloc] initWithReader:_reader entityPaths:[NSArray arrayWithObjects:devicePath, nil]];
+    SMKDeviceEnumerator *deviceEnumerator = [[[SMKDeviceEnumerator alloc] initWithReader:_reader entityPaths:[NSArray arrayWithObjects:devicePath, nil]] autorelease];
     iobase.device = deviceEnumerator.nextObject;
     
     // Read device parameters

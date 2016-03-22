@@ -118,6 +118,11 @@
             [notes addObject:note];
         }
         entity.notes = notes;
+        
+        free(data);
+        H5Tclose(datatypeId);
+        H5Sclose(spaceId);
+        H5Dclose(notesId);
     }
 }
 
