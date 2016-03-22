@@ -55,7 +55,7 @@
     for (MACHdf5LinkInformation *groupMember in groupMembers) {
         [groupPaths addObject:groupMember.path];
     }
-    experiment.epochGroupEnumerator = [[[SMKEpochGroupEnumerator alloc] initWithReader:_reader entityPaths:groupPaths] autorelease];
+    experiment.epochGroupEnumerator = [[[SMKEpochGroupEnumerator alloc] initWithReader:_reader entityPaths:groupPaths parent:nil] autorelease];
 }
 
 @end

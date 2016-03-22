@@ -25,6 +25,16 @@
     
     SMKSource *source = (SMKSource *)entity;
     
+    NSArray *members = [_reader allGroupMembersInPath:path];
+    
+    if ([members containsObject:@"parent"]) {
+        NSString *sourcePath = [path stringByAppendingString:@"/parent"];
+        SMKSourceEnumerator *sourceEnumerator = [[SMKSourceEnumerator alloc] initWithReader:_reader entityPaths:[NSArray arrayWithObjects:sourcePath, nil]];
+        source.parent = sourceEnumerator.nextObject;
+    } else {
+        source.parent = nil;
+    }
+    
     source.label = [_reader readStringAttribute:@"label" onPath:path];
     
     // Sources

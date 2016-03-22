@@ -155,7 +155,7 @@
     
     size_t size = H5Tget_size(attributeType);   
     char value[size + 1];
-    value[size] = NULL;
+    memset(value, 0, size + 1);
     H5Aread(attributeId, attributeType, value);
     
     H5Tclose(attributeType);

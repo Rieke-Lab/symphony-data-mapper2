@@ -8,6 +8,12 @@
 
 #import "SMKTimelineEntityEnumerator.h"
 
-@interface SMKEpochBlockEnumerator : SMKTimelineEntityEnumerator
+@class SMKEpochGroup;
+
+@interface SMKEpochBlockEnumerator : SMKTimelineEntityEnumerator {
+    SMKEpochGroup *_epochGroup;
+}
+
+- (id)initWithReader:(MACHdf5Reader *)reader entityPaths:(NSArray *)paths epochGroup:(SMKEpochGroup *)group;
 
 @end

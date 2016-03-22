@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "SMKEntityEnumerator.h"
+#import "SMKSource.h"
 
 @interface SMKSourceEnumerator : SMKEntityEnumerator
 

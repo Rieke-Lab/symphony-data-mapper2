@@ -10,11 +10,13 @@
 
 @implementation SMKSource
 
+@synthesize parent = _parent;
 @synthesize label = _label;
 @synthesize sourceEnumerator = _sourceEnumerator;
 
 - (void)dealloc
 {
+    [_parent release];
     [_label release];
     [_sourceEnumerator release];
     

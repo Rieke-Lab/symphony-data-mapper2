@@ -9,6 +9,7 @@
 #import "SMKBaseTestCase.h"
 #import "SMKEpochBlockEnumerator.h"
 #import "SMKEpochBlock.h"
+#import "SMKEpochGroup.h"
 #import "MACHdf5Reader.h"
 
 @interface SMKEpochBlockEnumeratorTest : SMKBaseTestCase {

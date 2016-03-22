@@ -14,12 +14,14 @@
 @class SMKEpochBlockEnumerator;
 
 @interface SMKEpochGroup : SMKTimelineEntity {
+    SMKEpochGroup *_parent;
     NSString *_label;
     SMKSource *_source;
     SMKEpochGroupEnumerator *_epochGroupEnumerator;
     SMKEpochBlockEnumerator *_epochBlockEnumerator;
 }
 
+@property (retain) SMKEpochGroup *parent;
 @property (copy) NSString *label;
 @property (retain) SMKSource *source;
 @property (retain) SMKEpochGroupEnumerator *epochGroupEnumerator;

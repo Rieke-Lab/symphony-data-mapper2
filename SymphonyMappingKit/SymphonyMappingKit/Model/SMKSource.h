@@ -12,10 +12,12 @@
 @class SMKSourceEnumerator;
 
 @interface SMKSource : SMKEntity {
+    SMKSource *_parent;
     NSString *_label;
     SMKSourceEnumerator *_sourceEnumerator;
 }
 
+@property (retain) SMKSource *parent;
 @property (copy) NSString *label;
 @property (retain) SMKSourceEnumerator *sourceEnumerator;
 

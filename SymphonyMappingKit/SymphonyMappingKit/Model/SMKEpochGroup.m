@@ -12,6 +12,7 @@
 
 @implementation SMKEpochGroup
 
+@synthesize parent = _parent;
 @synthesize label = _label;
 @synthesize source = _source;
 @synthesize epochGroupEnumerator = _epochGroupEnumerator;
@@ -19,6 +20,7 @@
 
 - (void)dealloc
 {
+    [_parent release];
     [_label release];
     [_source release];
     [_epochGroupEnumerator release];

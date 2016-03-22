@@ -15,6 +15,15 @@
 
 @implementation SMKEpochBlockEnumerator
 
+- (id)initWithReader:(MACHdf5Reader *)reader entityPaths:(NSArray *)paths epochGroup:(SMKEpochGroup *)group
+{
+    self = [super initWithReader:reader entityPaths:paths];
+    if (self) {
+        _epochGroup = group;
+    }
+    return self;
+}
+
 - (id)createNextEntity
 {
     return [SMKEpochBlock new];
@@ -25,7 +34,7 @@
     [super mapEntity:entity withPath:path];
     
     SMKEpochBlock *block = (SMKEpochBlock *)entity;
-    
+    block.epochGroup = _epochGroup;
     block.protocolId = [_reader readStringAttribute:@"protocolID" onPath:path];
     
     NSString *parametersPath = [path stringByAppendingString:@"/protocolParameters"];    

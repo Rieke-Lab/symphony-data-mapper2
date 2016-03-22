@@ -50,4 +50,21 @@
     STAssertTrue(i == 1, nil);
 }
 
+- (void)testProperties
+{
+    SMKSource *source = [_enumerator nextObject];
+    
+    NSDictionary *expected = [NSDictionary dictionaryWithObjectsAndKeys:
+                              @"21", @"age",
+                              @"overnight", @"darkAdaptation",
+                              @"", @"description",
+                              @"[\"C57B6\",\"Arr1 KO\",\"GCAP KO\"]", @"genotype",
+                              @"my mouse id", @"id",
+                              @"male", @"sex",
+                              @"heavy", @"weight",
+                              nil];
+    
+    STAssertTrue([source.properties isEqualToDictionary:expected], nil);
+}
+
 @end

@@ -106,15 +106,13 @@
     }
     
     // Import notes
-    for (SMKNote *note in experiment.notes) {
-        Note *auiNote = [NSEntityDescription insertNewObjectForEntityForName:@"Note"
-                                                      inManagedObjectContext:_context];
-        
-        auiNote.date = note.timestamp;
-        auiNote.text = note.comment;
-        auiNote.experiment = auiExperiment;
-        
-        [self assertValid:auiNote];
+    [self addNotesFromEntity:experiment toExperiment:auiExperiment];
+    
+    // Import sources
+    SMKSourceEnumerator *sourceEnumerator = experiment.sourceEnumerator;
+    SMKSource *source;
+    while (source = [sourceEnumerator nextObject]) {
+        [self mapSource:source toExperiment:auiExperiment];
     }
     
     // All epoch groups with the same source are considered part of a "cell".
@@ -177,12 +175,52 @@
     }
 }
 
+- (void)mapSource:(SMKSource *)source toExperiment:(Experiment *)auiExperiment
+{
+    [self addNotesFromEntity:source toExperiment:auiExperiment];
+    
+    SMKSourceEnumerator *sourceEnumerator = source.sourceEnumerator;
+    SMKSource *subSource;
+    while (subSource = [sourceEnumerator nextObject]) {
+        [self mapSource:subSource toExperiment:auiExperiment];
+    }
+}
+
 - (void)mapEpochGroup:(SMKEpochGroup *)group toCell:(RecordedCell *)auiCell
 {
+    NSMutableDictionary *protocolSettings = [NSMutableDictionary new];
+    NSMutableSet *keywords = [NSMutableSet new];
+    
+    SMKSource *currentSource = group.source;
+    while (currentSource != nil) {
+        for (NSString *key in [currentSource.properties allKeys]) {
+            id value = [currentSource.properties valueForKey:key];
+            NSString *newKey = [NSString stringWithFormat:@"~source:%@:%@", currentSource.label, key];
+            [protocolSettings setValue:value forKey:newKey];
+        }
+        currentSource = currentSource.parent;
+        
+        [keywords addObjectsFromArray:[NSArray arrayWithSet:currentSource.keywords]];
+    }
+    
+    SMKEpochGroup *currentGroup = group;
+    while (currentGroup != nil) {
+        for (NSString *key in [currentGroup.properties allKeys]) {
+            id value = [currentGroup.properties valueForKey:key];
+            NSString *newKey = [NSString stringWithFormat:@"~epochGroup:%@:%@", currentGroup.label, key];
+            [protocolSettings setValue:value forKey:newKey];
+        }
+        currentGroup = currentGroup.parent;
+        
+        [keywords addObjectsFromArray:[NSArray arrayWithSet:currentGroup.keywords]];
+    }
+    
+    [self addNotesFromEntity:group toExperiment:auiCell.experiment];
+    
     SMKEpochBlockEnumerator *blockEnumerator = group.epochBlockEnumerator;
     SMKEpochBlock *block;
     while (block = [blockEnumerator nextObject]) {
-        [self mapEpochBlock:block toCell:auiCell];
+        [self mapEpochBlock:block protocolSettings:protocolSettings keywords:keywords toCell:auiCell];
     }
     
     SMKEpochGroupEnumerator *groupEnumerator = group.epochGroupEnumerator;
@@ -192,7 +230,7 @@
     }
 }
 
-- (void)mapEpochBlock:(SMKEpochBlock *)block toCell:(RecordedCell *)auiCell
+- (void)mapEpochBlock:(SMKEpochBlock *)block protocolSettings:(NSMutableDictionary *)protocolSettings keywords:(NSMutableSet *)keywords toCell:(RecordedCell *)auiCell
 {
     SMKEpochEnumerator *epochEnumerator = block.epochEnumerator;
     SMKEpoch *epoch;
@@ -210,10 +248,12 @@
         auiEpoch.duration = [NSNumber numberWithDouble:[epoch.endTime timeIntervalSinceDate:epoch.startTime]];
         
         // Protocol settings
-        NSMutableDictionary *protocolSettings = [NSMutableDictionary dictionaryWithDictionary:block.protocolParameters];
+        [protocolSettings addEntriesFromDictionary:block.protocolParameters];
         [protocolSettings addEntriesFromDictionary:epoch.protocolParameters];
-        //[protocolSettings setValue:group.label forKeyPath:@"epochGroup:label"];
-        //[protocolSettings setValue:[group.properties valueForKey:@"__symphony__uuid__"] forKeyPath:@"epochGroup:uuid"];
+        
+        // Epoch block
+        [protocolSettings setValue:block.startTime forKey:@"~epochBlock:startTime"];
+        [protocolSettings setValue:block.endTime forKey:@"~epochBlock:endTime"];
         
         // Add epoch keywords
         for (NSString *keyword in epoch.keywords) {
@@ -223,6 +263,12 @@
         
         // Add epoch block keywords
         for (NSString *keyword in block.keywords) {
+            KeywordTag *tag = [KeywordTag keywordTagWithTag:keyword inManagedObjectContext:_context error:nil];
+            [auiEpoch addKeywordsObject:tag];
+        }
+        
+        // Add source and epoch group keywords
+        for (NSString *keyword in keywords) {
             KeywordTag *tag = [KeywordTag keywordTagWithTag:keyword inManagedObjectContext:_context error:nil];
             [auiEpoch addKeywordsObject:tag];
         }
@@ -337,6 +383,20 @@
         [_streams addObject:stream];
     }
     [stream release];
+}
+
+- (void)addNotesFromEntity:(SMKEntity *)entity toExperiment:(Experiment *)experiment
+{
+    for (SMKNote *note in entity.notes) {
+        Note *auiNote = [NSEntityDescription insertNewObjectForEntityForName:@"Note"
+                                                      inManagedObjectContext:_context];
+        
+        auiNote.date = note.timestamp;
+        auiNote.text = note.comment;
+        auiNote.experiment = experiment;
+        
+        [self assertValid:auiNote];
+    }
 }
 
 - (void)assertValid:(NSManagedObject *)objectForInsert
