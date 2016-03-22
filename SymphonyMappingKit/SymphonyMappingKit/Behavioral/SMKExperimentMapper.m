@@ -197,7 +197,11 @@
         for (NSString *key in [currentSource.properties allKeys]) {
             id value = [currentSource.properties valueForKey:key];
             NSString *newKey = [NSString stringWithFormat:@"~source:%@:%@", currentSource.label, key];
-            [protocolSettings setValue:value forKey:newKey];
+            if ([protocolSettings hasKey:newKey]) {
+                NSLog(@"%@ wants to have two values: %@ and %@. Using the first.", newKey, [protocolSettings valueForKey:newKey], value);
+            } else {
+                [protocolSettings setValue:value forKey:newKey];
+            }
         }
         
         [keywords addObjectsFromArray:[NSArray arrayWithSet:currentSource.keywords]];
@@ -210,7 +214,11 @@
         for (NSString *key in [currentGroup.properties allKeys]) {
             id value = [currentGroup.properties valueForKey:key];
             NSString *newKey = [NSString stringWithFormat:@"~epochGroup:%@:%@", currentGroup.label, key];
-            [protocolSettings setValue:value forKey:newKey];
+            if ([protocolSettings hasKey:newKey]) {
+                NSLog(@"%@ wants to have two values: %@ and %@. Using the first.", newKey, [protocolSettings valueForKey:newKey], value);
+            } else {
+                [protocolSettings setValue:value forKey:newKey];
+            }
         }
         
         [keywords addObjectsFromArray:[NSArray arrayWithSet:currentGroup.keywords]];
