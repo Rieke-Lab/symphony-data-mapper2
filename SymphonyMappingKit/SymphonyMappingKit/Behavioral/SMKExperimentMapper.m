@@ -16,6 +16,7 @@
 #import "SMKEpochEnumerator.h"
 #import "SMKEpochGroup.h"
 #import "SMKEpoch.h"
+#import "SMKBackground.h"
 #import "SMKStimulus.h"
 #import "SMKResponse.h"
 #import "SMKSource.h"
@@ -265,6 +266,12 @@
         // Epoch block
         [protocolSettings setValue:block.startTime forKey:@"~epochBlock:startTime"];
         [protocolSettings setValue:block.endTime forKey:@"~epochBlock:endTime"];
+        
+        // Backgrounds
+        for (SMKBackground *background in epoch.backgrounds) {
+            NSString *key = [@"~background:" stringByAppendingString:background.device.name];
+            [protocolSettings setValue:background.value forKey:key];
+        }
         
         // Add epoch keywords
         for (NSString *keyword in epoch.keywords) {

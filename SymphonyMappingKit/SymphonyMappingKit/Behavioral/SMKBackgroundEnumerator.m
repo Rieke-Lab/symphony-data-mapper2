@@ -8,6 +8,7 @@
 
 #import "SMKBackgroundEnumerator.h"
 #import "SMKBackground.h"
+#import "SMKDeviceEnumerator.h"
 #import "MACHdf5Reader.h"
 
 @implementation SMKBackgroundEnumerator
@@ -27,6 +28,10 @@
     background.units = [_reader readStringAttribute:@"valueUnits" onPath:path];
     background.sampleRate = [NSNumber numberWithDouble:[_reader readDoubleAttribute:@"sampleRate" onPath:path]];
     background.sampleRateUnits = [_reader readStringAttribute:@"sampleRateUnits" onPath:path];
+    
+    NSString *devicePath = [path stringByAppendingString:@"/device"];
+    SMKDeviceEnumerator *deviceEnumerator = [[[SMKDeviceEnumerator alloc] initWithReader:_reader entityPaths:[NSArray arrayWithObjects:devicePath, nil]] autorelease];
+    background.device = deviceEnumerator.nextObject;
 }
 
 @end

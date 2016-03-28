@@ -14,6 +14,7 @@
 @synthesize units = _units;
 @synthesize sampleRate = _sampleRate;
 @synthesize sampleRateUnits = _sampleRateUnits;
+@synthesize device = _device;
 
 - (void)dealloc
 {
@@ -21,6 +22,7 @@
     [_units release];
     [_sampleRate release];
     [_sampleRateUnits release];
+    [_device release];
     
     [super dealloc];
 }
