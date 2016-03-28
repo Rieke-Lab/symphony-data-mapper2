@@ -19,7 +19,7 @@ int usage()
 
 int main(int argc, char *argv[])
 {
-    NSAutoreleasePool *pool = [[NSAutoreleasePool new] autorelease];
+    NSAutoreleasePool *pool = [NSAutoreleasePool new];
     NSError *error;
     
     if (argc != 2) {
