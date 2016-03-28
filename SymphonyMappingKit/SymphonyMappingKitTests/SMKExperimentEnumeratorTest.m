@@ -95,15 +95,15 @@
 {
     SMKExperiment *experiment = [_enumerator nextObject];
     
-    SMKNote *note1 = [SMKNote new];
+    SMKNote *note1 = [[SMKNote new] autorelease];
     note1.timestamp = [NSDate date];
     note1.comment = @"one note here";
     
-    SMKNote *note2 = [SMKNote new];
+    SMKNote *note2 = [[SMKNote new] autorelease];
     note2.timestamp = [NSDate date];
     note2.comment = @"and then comes another note";
     
-    SMKNote *note3 = [SMKNote new];
+    SMKNote *note3 = [[SMKNote new] autorelease];
     note3.timestamp = [NSDate date];
     note3.comment = @"these are experiment notes";
     

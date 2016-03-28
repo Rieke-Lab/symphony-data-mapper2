@@ -116,6 +116,7 @@
             note.comment = [NSString stringWithUTF8String:data[i].text];
             
             [notes addObject:note];
+            [note release];
         }
         entity.notes = notes;
         

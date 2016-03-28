@@ -118,11 +118,11 @@
     }
     
     // All epoch groups with the same source are considered part of a "cell".
-    NSMutableDictionary *cells = [NSMutableDictionary new];
+    NSMutableDictionary *cells = [NSMutableDictionary dictionary];
     SMKEpochGroupEnumerator *groupEnumerator = experiment.epochGroupEnumerator;
     SMKEpochGroup *group;
     while (group = [groupEnumerator nextObject]) {
-        NSMutableSet *set = [cells objectForKey:group.source.uuid defaultValue:[NSMutableSet new]];
+        NSMutableSet *set = [cells objectForKey:group.source.uuid defaultValue:[NSMutableSet set]];
         [set addObject:group];
         [cells setObject:set forKey:group.source.uuid];
     }

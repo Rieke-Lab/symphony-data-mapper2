@@ -25,7 +25,7 @@
     iobase.device = deviceEnumerator.nextObject;
     
     // Read device parameters
-    NSNumberFormatter *numFormatter = [NSNumberFormatter new];
+    NSNumberFormatter *numFormatter = [[NSNumberFormatter new] autorelease];
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     NSArray *spanMembers = [_reader groupMemberLinkInfoInPath:[path stringByAppendingString:@"/dataConfigurationSpans"]];
     for (MACHdf5LinkInformation *spanMember in spanMembers) {
