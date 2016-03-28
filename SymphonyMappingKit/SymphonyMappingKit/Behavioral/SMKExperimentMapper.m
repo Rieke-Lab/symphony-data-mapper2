@@ -189,14 +189,14 @@
 
 - (void)mapEpochGroup:(SMKEpochGroup *)group toCell:(RecordedCell *)auiCell
 {
-    NSMutableDictionary *protocolSettings = [NSMutableDictionary new];
-    NSMutableSet *keywords = [NSMutableSet new];
+    NSMutableDictionary *protocolSettings = [NSMutableDictionary dictionary];
+    NSMutableSet *keywords = [NSMutableSet set];
     
     SMKSource *currentSource = group.source;
     while (currentSource != nil) {
         for (NSString *key in [currentSource.properties allKeys]) {
             id value = [currentSource.properties valueForKey:key];
-            NSString *newKey = [NSString stringWithFormat:@"~source:%@:%@", currentSource.label, key];
+            NSString *newKey = [NSString stringWithFormat:@"source:%@:%@", currentSource.label, key];
             if ([protocolSettings hasKey:newKey]) {
                 NSLog(@"%@ wants to have two values: %@ and %@. Using the first.", newKey, [protocolSettings valueForKey:newKey], value);
             } else {
@@ -213,7 +213,7 @@
     while (currentGroup != nil) {
         for (NSString *key in [currentGroup.properties allKeys]) {
             id value = [currentGroup.properties valueForKey:key];
-            NSString *newKey = [NSString stringWithFormat:@"~epochGroup:%@:%@", currentGroup.label, key];
+            NSString *newKey = [NSString stringWithFormat:@"epochGroup:%@:%@", currentGroup.label, key];
             if ([protocolSettings hasKey:newKey]) {
                 NSLog(@"%@ wants to have two values: %@ and %@. Using the first.", newKey, [protocolSettings valueForKey:newKey], value);
             } else {
@@ -243,7 +243,7 @@
     }
 }
 
-- (void)mapEpochBlock:(SMKEpochBlock *)block protocolSettings:(NSMutableDictionary *)protocolSettings keywords:(NSMutableSet *)keywords toCell:(RecordedCell *)auiCell
+- (void)mapEpochBlock:(SMKEpochBlock *)block protocolSettings:(NSMutableDictionary *)commonProtocolSettings keywords:(NSMutableSet *)commonKeywords toCell:(RecordedCell *)auiCell
 {
     SMKEpochEnumerator *epochEnumerator = block.epochEnumerator;
     SMKEpoch *epoch;
@@ -260,16 +260,18 @@
         auiEpoch.duration = [NSNumber numberWithDouble:[epoch.endTime timeIntervalSinceDate:epoch.startTime]];
         
         // Protocol settings
+        NSMutableDictionary *protocolSettings = [NSMutableDictionary dictionary];
+        [protocolSettings addEntriesFromDictionary:commonProtocolSettings];
         [protocolSettings addEntriesFromDictionary:block.protocolParameters];
         [protocolSettings addEntriesFromDictionary:epoch.protocolParameters];
         
         // Epoch block
-        [protocolSettings setValue:block.startTime forKey:@"~epochBlock:startTime"];
-        [protocolSettings setValue:block.endTime forKey:@"~epochBlock:endTime"];
+        [protocolSettings setValue:block.startTime forKey:@"epochBlock:startTime"];
+        [protocolSettings setValue:block.endTime forKey:@"epochBlock:endTime"];
         
         // Backgrounds
         for (SMKBackground *background in epoch.backgrounds) {
-            NSString *key = [@"~background:" stringByAppendingString:background.device.name];
+            NSString *key = [@"background:" stringByAppendingString:background.device.name];
             [protocolSettings setValue:background.value forKey:key];
         }
         
@@ -286,7 +288,7 @@
         }
         
         // Add source and epoch group keywords
-        for (NSString *keyword in keywords) {
+        for (NSString *keyword in commonKeywords) {
             KeywordTag *tag = [KeywordTag keywordTagWithTag:keyword inManagedObjectContext:_context error:nil];
             [auiEpoch addKeywordsObject:tag];
         }
@@ -325,7 +327,7 @@
             NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
             for (NSString *key in [stimulus.deviceParameters allKeys]) {
                 id value = [stimulus.deviceParameters valueForKey:key];
-                NSString *newKey = [NSString stringWithFormat:@"~deviceParameters:%@", key];
+                NSString *newKey = [NSString stringWithFormat:@"deviceParameters:%@", key];
                 [parameters setValue:value forKey:newKey];
             }
             [parameters addEntriesFromDictionary:stimulus.parameters];
@@ -340,7 +342,7 @@
             NSString* streamName = [stimulus.device.name stringByReplacingOccurrencesOfString: @" " withString: @"_"];
             for (NSString *key in [stimulus.parameters allKeys]) {
                 id value = [stimulus.parameters valueForKey:key];
-                NSString *newKey = [NSString stringWithFormat:@"~stimuli:%@:%@", streamName, key];
+                NSString *newKey = [NSString stringWithFormat:@"stimuli:%@:%@", streamName, key];
                 [protocolSettings setValue:value forKey:newKey];
             }
             
