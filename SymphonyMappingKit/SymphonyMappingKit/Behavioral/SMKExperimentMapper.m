@@ -245,6 +245,8 @@
 
 - (void)mapEpochBlock:(SMKEpochBlock *)block protocolSettings:(NSMutableDictionary *)commonProtocolSettings keywords:(NSMutableSet *)commonKeywords toCell:(RecordedCell *)auiCell
 {
+    [self addNotesFromEntity:block toExperiment:auiCell.experiment];
+    
     SMKEpochEnumerator *epochEnumerator = block.epochEnumerator;
     SMKEpoch *epoch;
     while (epoch = [epochEnumerator nextObject]) {
