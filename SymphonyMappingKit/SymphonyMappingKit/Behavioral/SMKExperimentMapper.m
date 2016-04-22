@@ -278,7 +278,7 @@
             
             for (NSString *paramKey in [background.deviceParameters allKeys]) {
                 id value = [background.deviceParameters valueForKey:paramKey];
-                NSString *newParamKey = [NSString stringWithFormat:@"%@:deviceParameters:%@", key, paramKey];
+                NSString *newParamKey = [NSString stringWithFormat:@"%@:%@", key, paramKey];
                 [protocolSettings setValue:value forKey:newParamKey];
             }
         }
