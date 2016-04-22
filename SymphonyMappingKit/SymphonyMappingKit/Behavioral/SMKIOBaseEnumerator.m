@@ -20,6 +20,8 @@
     
     SMKIOBase *iobase = (SMKIOBase *)entity;
     
+    NSArray *members = [_reader allGroupMembersInPath:path];
+    
     NSString *devicePath = [path stringByAppendingString:@"/device"];
     SMKDeviceEnumerator *deviceEnumerator = [[[SMKDeviceEnumerator alloc] initWithReader:_reader entityPaths:[NSArray arrayWithObjects:devicePath, nil]] autorelease];
     iobase.device = deviceEnumerator.nextObject;
@@ -27,50 +29,54 @@
     // Read device parameters
     NSNumberFormatter *numFormatter = [[NSNumberFormatter new] autorelease];
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    NSArray *spanMembers = [_reader groupMemberLinkInfoInPath:[path stringByAppendingString:@"/dataConfigurationSpans"]];
-    for (MACHdf5LinkInformation *spanMember in spanMembers) {
-        NSArray *nodeMembers = [_reader groupMemberLinkInfoInPath:spanMember.path];
-        for (MACHdf5LinkInformation *nodeMember in nodeMembers) {
-            if (nodeMember.isGroup) {
-                // FIXME: This should be merging the dictionaries by combining pre-existing keys not overwriting them
-                [parameters addEntriesFromDictionary:[_reader readAttributesOnPath:nodeMember.path]];
-            } else {
-                [NSException raise:@"UnsupportedFeature" format:@"%@ must be a group", nodeMember.path];
+    
+    if ([members containsObject:@"dataConfigurationSpans"]) {
+        NSArray *spanMembers = [_reader groupMemberLinkInfoInPath:[path stringByAppendingString:@"/dataConfigurationSpans"]];
+        for (MACHdf5LinkInformation *spanMember in spanMembers) {
+            NSArray *nodeMembers = [_reader groupMemberLinkInfoInPath:spanMember.path];
+            for (MACHdf5LinkInformation *nodeMember in nodeMembers) {
+                NSString *name = [nodeMember.path lastPathComponent];
+                
+                if ([name isEqualTo:iobase.device.name]) {
+                    // FIXME: This should be merging the dictionaries by combining pre-existing keys not overwriting them
+                    [parameters addEntriesFromDictionary:[_reader readAttributesOnPath:nodeMember.path]];
+                    break;
+                }
             }
-        }
-        
-        // Read channel
-        NSString *channelTypeStr;
-        NSNumber *channelNumber = NULL;
-        for (MACHdf5LinkInformation *nodeMember in nodeMembers) {
-            NSString *name = [nodeMember.path lastPathComponent];
-            NSArray *comps = [name componentsSeparatedByString:@"."];
             
-            channelTypeStr = [comps objectAtIndex:0];
-            
-            if ([channelTypeStr isEqualToString:@"ANALOG_OUT"] ||
-                [channelTypeStr isEqualToString:@"ANALOG_IN"] ||
-                [channelTypeStr isEqualToString:@"DIGITAL_OUT"] ||
-                [channelTypeStr isEqualToString:@"DIGITAL_IN"]) {
-                NSString *numStr = [comps lastObject];
-                channelNumber = [numFormatter numberFromString:numStr];
-                break;
+            // Read channel
+            NSString *channelTypeStr;
+            NSNumber *channelNumber = NULL;
+            for (MACHdf5LinkInformation *nodeMember in nodeMembers) {
+                NSString *name = [nodeMember.path lastPathComponent];
+                NSArray *comps = [name componentsSeparatedByString:@"."];
+                
+                channelTypeStr = [comps objectAtIndex:0];
+                
+                if ([channelTypeStr isEqualToString:@"ANALOG_OUT"] ||
+                    [channelTypeStr isEqualToString:@"ANALOG_IN"] ||
+                    [channelTypeStr isEqualToString:@"DIGITAL_OUT"] ||
+                    [channelTypeStr isEqualToString:@"DIGITAL_IN"]) {
+                    NSString *numStr = [comps lastObject];
+                    channelNumber = [numFormatter numberFromString:numStr];
+                    break;
+                }
             }
+            
+            if (channelNumber == NULL) {
+                [NSException raise:@"CannotFindChannelSpan" format:@"Cannot find channel span"];
+            }
+            
+            StreamType type = [self typeWithString:channelTypeStr];
+            
+            if (iobase.streamType != UNCONFIGURED && iobase.streamType != type
+                && iobase.channelNumber != nil && ![iobase.channelNumber isEqualToNumber:channelNumber]) {
+                [NSException raise:@"HeterogeneousChannel" format:@"Channel is not homogenous in %@", path];
+            }
+            
+            iobase.streamType = type;
+            iobase.channelNumber = channelNumber;
         }
-        
-        if (channelNumber == NULL) {
-            [NSException raise:@"CannotFindChannelSpan" format:@"Cannot find channel span"];
-        }
-        
-        StreamType type = [self typeWithString:channelTypeStr];
-        
-        if (iobase.streamType != UNCONFIGURED && iobase.streamType != type
-            && iobase.channelNumber != nil && ![iobase.channelNumber isEqualToNumber:channelNumber]) {
-            [NSException raise:@"HeterogeneousChannel" format:@"Channel is not homogenous in %@", path];
-        }
-        
-        iobase.streamType = type;
-        iobase.channelNumber = channelNumber;
     }
     iobase.deviceParameters = parameters;
     

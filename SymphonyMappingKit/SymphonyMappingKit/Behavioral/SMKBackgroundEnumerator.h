@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "SMKEntityEnumerator.h"
+#import "SMKIOBaseEnumerator.h"
 
-@interface SMKBackgroundEnumerator : SMKEntityEnumerator
+@interface SMKBackgroundEnumerator : SMKIOBaseEnumerator
 
 @end

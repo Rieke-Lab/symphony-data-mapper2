@@ -6,22 +6,20 @@
 //
 //
 
-#import "SMKEntity.h"
+#import "SMKIOBase.h"
 
 @class SMKDevice;
 
-@interface SMKBackground : SMKEntity {
+@interface SMKBackground : SMKIOBase {
     NSNumber *_value;
     NSString *_units;
     NSNumber *_sampleRate;
     NSString *_sampleRateUnits;
-    SMKDevice *_device;
 }
 
 @property (retain) NSNumber *value;
 @property (copy) NSString *units;
 @property (retain) NSNumber *sampleRate;
 @property (copy) NSString *sampleRateUnits;
-@property (retain) SMKDevice *device;
 
 @end

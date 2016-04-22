@@ -275,6 +275,12 @@
         for (SMKBackground *background in epoch.backgrounds) {
             NSString *key = [@"background:" stringByAppendingString:background.device.name];
             [protocolSettings setValue:background.value forKey:key];
+            
+            for (NSString *paramKey in [background.deviceParameters allKeys]) {
+                id value = [background.deviceParameters valueForKey:paramKey];
+                NSString *newParamKey = [NSString stringWithFormat:@"%@:deviceParameters:%@", key, paramKey];
+                [protocolSettings setValue:value forKey:newParamKey];
+            }
         }
         
         // Add epoch keywords
