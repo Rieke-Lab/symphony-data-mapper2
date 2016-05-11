@@ -525,7 +525,7 @@
                         format:@"%@.%@ length is too large", objectPath, attributeName];
         }
         
-        memTypeId = H5Tarray_create(H5T_NATIVE_INT16, 1, dims);
+        memTypeId = H5Tarray_create(H5T_NATIVE_DOUBLE, 1, dims);
     } else {
         hid_t spaceId = H5Aget_space(attributeId);
         int rank = H5Sget_simple_extent_ndims(spaceId);
@@ -570,15 +570,79 @@
     hid_t objectId = H5Oopen(_fileId, stringToCString(objectPath), H5P_DEFAULT);
     hid_t attributeId = H5Aopen(objectId, stringToCString(attributeName), H5P_DEFAULT);
     
-    hid_t typeId = H5Aget_type(attributeId);
-    
     BOOL value;
-    H5Aread(attributeId, typeId, &value);
+    H5Aread(attributeId, H5T_NATIVE_INT8, &value);
     
     H5Aclose(attributeId);
     H5Oclose(objectId);
     
     return value;
+}
+
+- (NSArray *)readBooleanArrayAttribute:(NSString *)attributeName onPath:(NSString *)objectPath
+{
+    hid_t objectId = H5Oopen(_fileId, stringToCString(objectPath), H5P_DEFAULT);
+    hid_t attributeId = H5Aopen(objectId, stringToCString(attributeName), H5P_DEFAULT);
+    
+    hid_t typeId = H5Aget_type(attributeId);
+    H5T_class_t class = H5Tget_class(typeId);
+    
+    hid_t memTypeId;
+    int length;
+    if (class == H5T_ARRAY) {
+        int rank = H5Tget_array_ndims(typeId);
+        hsize_t dims[rank];
+        H5Tget_array_dims(typeId, dims);
+        
+        if (rank != 1) {
+            [NSException raise:@"UnexpectedRank"
+                        format:@"%@.%@ needs to be of rank 1, but is of rank %i", objectPath, attributeName, rank];
+        }
+        
+        length = (int)dims[0];
+        if (length != dims[0]) {
+            [NSException raise:@"LengthTooLarge"
+                        format:@"%@.%@ length is too large", objectPath, attributeName];
+        }
+        
+        memTypeId = H5Tarray_create(H5T_NATIVE_INT8, 1, dims);
+    } else {
+        hid_t spaceId = H5Aget_space(attributeId);
+        int rank = H5Sget_simple_extent_ndims(spaceId);
+        hsize_t dims[rank];
+        H5Sget_simple_extent_dims(spaceId, dims, NULL);
+        
+        if (rank == 0) {
+            length = 1;
+        } else if (rank == 1) {
+            length = (int)dims[0];
+            if (length != dims[0]) {
+                [NSException raise:@"LengthTooLarge"
+                            format:@"%@.%@ length is too large", objectPath, attributeName];
+            }
+        } else {
+            [NSException raise:@"UnexpectedRank"
+                        format:@"%@.%@ needs to be of rank 1, but is of rank %i", objectPath, attributeName, rank];
+        }
+        
+        memTypeId = H5T_NATIVE_INT8;
+        
+        H5Sclose(spaceId);
+    }
+    
+    BOOL buffer[length];
+    H5Aread(attributeId, memTypeId, buffer);
+    
+    H5Tclose(typeId);
+    H5Aclose(attributeId);
+    H5Oclose(objectId);
+    
+    NSMutableArray *data = [NSMutableArray arrayWithCapacity:length];
+    for (int i = 0; i < length; i++) {
+        [data addObject:[NSNumber numberWithBool:buffer[i]]];
+    }
+    
+    return data;
 }
 
 - (NSDictionary *)readAttributesOnPath:(NSString *)objectPath
@@ -671,7 +735,8 @@
                     }
                 } else if (size == 1) {
                     if (nElements > 1) {
-                        [NSException raise:@"UnsupportedAttributeType" format:@"%@.%@ is not a supported attribute type (boolean array)", objectPath, name];
+                        NSArray *value = [self readBooleanArrayAttribute:name onPath:objectPath];
+                        [attributes setValue:value forKey:name];
                     } else {
                         int16_t value = [self readBooleanAttribute:name onPath:objectPath];
                         [attributes setValue:[NSNumber numberWithShort:value] forKey:name];
