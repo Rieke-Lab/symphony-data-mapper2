@@ -38,8 +38,17 @@
                 NSString *name = [nodeMember.path lastPathComponent];
                 
                 if ([name isEqualTo:iobase.device.name]) {
-                    // FIXME: This should be merging the dictionaries by combining pre-existing keys not overwriting them
-                    [parameters addEntriesFromDictionary:[_reader readAttributesOnPath:nodeMember.path]];
+                    NSDictionary *dic = [_reader readAttributesOnPath:nodeMember.path];
+                    NSEnumerator* e = [dic keyEnumerator];
+                    id key = nil;
+                    while ((key = [e nextObject]) != nil) {
+                        id new = [dic objectForKey:key];
+                        id old = [parameters objectForKey:key];
+                        if (old != nil && ![old isEqualTo:new]) {
+                            NSLog(@"%@ contains more than one device parameter value for %@ (%@ and %@). Using %@.", path, key, old, new, new);
+                        }
+                        [parameters setObject:new forKey:key];
+                    }
                     break;
                 }
             }
