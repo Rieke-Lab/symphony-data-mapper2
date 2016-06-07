@@ -192,11 +192,19 @@
     NSMutableDictionary *protocolSettings = [NSMutableDictionary dictionary];
     NSMutableSet *keywords = [NSMutableSet set];
     
+    int sourceLevel = 0;
     SMKSource *currentSource = group.source;
     while (currentSource != nil) {
+        NSString *prefix = @"source:";
+        for (int i = 0; i < sourceLevel; i++) {
+            prefix = [prefix stringByAppendingString:@"parent:"];
+        }
+        
+        [protocolSettings setValue:currentSource.label forKey:[prefix stringByAppendingString:@"label"]];
+        
         for (NSString *key in [currentSource.properties allKeys]) {
             id value = [currentSource.properties valueForKey:key];
-            NSString *newKey = [NSString stringWithFormat:@"source:%@:%@", currentSource.label, key];
+            NSString *newKey = [prefix stringByAppendingString:key];
             if ([protocolSettings hasKey:newKey]) {
                 NSLog(@"%@ wants to have two values: %@ and %@. Using the first.", newKey, [protocolSettings valueForKey:newKey], value);
             } else {
@@ -207,13 +215,22 @@
         [keywords addObjectsFromArray:[NSArray arrayWithSet:currentSource.keywords]];
         
         currentSource = currentSource.parent;
+        sourceLevel++;
     }
     
+    int groupLevel = 0;
     SMKEpochGroup *currentGroup = group;
     while (currentGroup != nil) {
+        NSString *prefix = @"epochGroup:";
+        for (int i = 0; i < groupLevel; i++) {
+            prefix = [prefix stringByAppendingString:@"parent:"];
+        }
+        
+        [protocolSettings setValue:currentGroup.label forKey:[prefix stringByAppendingString:@"label"]];
+        
         for (NSString *key in [currentGroup.properties allKeys]) {
             id value = [currentGroup.properties valueForKey:key];
-            NSString *newKey = [NSString stringWithFormat:@"epochGroup:%@:%@", currentGroup.label, key];
+            NSString *newKey = [prefix stringByAppendingString:key];
             if ([protocolSettings hasKey:newKey]) {
                 NSLog(@"%@ wants to have two values: %@ and %@. Using the first.", newKey, [protocolSettings valueForKey:newKey], value);
             } else {
