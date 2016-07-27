@@ -1,3 +1,7 @@
-# Symphony Data Mapper version 2
+# Symphony Data Mapper
 
-Symphony data mapper, version 2. This is a work-in-progress.
+Maps Symphony HDF5 files to auisql files.
+
+## License
+
+Licensed under the [MIT License](https://opensource.org/licenses/MIT), which is an [open source license](https://opensource.org/docs/osd).
