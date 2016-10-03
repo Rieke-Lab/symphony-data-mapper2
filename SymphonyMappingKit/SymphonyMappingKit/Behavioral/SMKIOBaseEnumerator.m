@@ -58,15 +58,30 @@
             NSNumber *channelNumber = NULL;
             for (MACHdf5LinkInformation *nodeMember in nodeMembers) {
                 NSString *name = [nodeMember.path lastPathComponent];
-                NSArray *comps = [name componentsSeparatedByString:@"."];
                 
-                channelTypeStr = [comps objectAtIndex:0];
-                
-                if ([channelTypeStr isEqualToString:@"ANALOG_OUT"] ||
-                    [channelTypeStr isEqualToString:@"ANALOG_IN"] ||
-                    [channelTypeStr isEqualToString:@"DIGITAL_OUT"] ||
-                    [channelTypeStr isEqualToString:@"DIGITAL_IN"]) {
+                if ([name hasPrefix:@"ANALOG_IN"] || [name hasPrefix:@"ANALOG_OUT"] || [name hasPrefix:@"DIGITAL_IN"] || [name hasPrefix:@"DIGITAL_OUT"]) {
+                    // old stream name format
+                    NSArray *comps = [name componentsSeparatedByString:@"."];
+                    if ([comps count] != 2) {
+                        continue;
+                    }
+                    
+                    channelTypeStr = [comps objectAtIndex:0];
+                    
                     NSString *numStr = [comps lastObject];
+                    channelNumber = [numFormatter numberFromString:numStr];
+                    break;
+                    
+                } else if ([name hasPrefix:@"ai"] || [name hasPrefix:@"ao"] || [name hasPrefix:@"diport"] || [name hasPrefix:@"doport"]) {
+                    // new stream name format
+                    NSRange split = [name rangeOfCharacterFromSet:[NSCharacterSet decimalDigitCharacterSet]];
+                    if (split.location == NSNotFound) {
+                        continue;
+                    }
+                    
+                    channelTypeStr = [name substringToIndex:split.location];
+                    
+                    NSString *numStr = [name substringFromIndex:split.location];
                     channelNumber = [numFormatter numberFromString:numStr];
                     break;
                 }
@@ -94,13 +109,13 @@
 
 - (StreamType)typeWithString:(NSString *)typeStr
 {
-    if ([typeStr isEqualToString:@"ANALOG_OUT"]) {
+    if ([typeStr isEqualToString:@"ANALOG_OUT"] || [typeStr isEqualToString:@"ao"]) {
         return ANALOG_OUT;
-    } else if ([typeStr isEqualToString:@"ANALOG_IN"]) {
+    } else if ([typeStr isEqualToString:@"ANALOG_IN"] || [typeStr isEqualToString:@"ai"]) {
         return ANALOG_IN;
-    } else if ([typeStr isEqualToString:@"DIGITAL_OUT"]) {
+    } else if ([typeStr isEqualToString:@"DIGITAL_OUT"] || [typeStr isEqualToString:@"doport"]) {
         return DIGITAL_OUT;
-    } else if ([typeStr isEqualToString:@"DIGITAL_IN"]) {
+    } else if ([typeStr isEqualToString:@"DIGITAL_IN"] || [typeStr isEqualToString:@"diport"]) {
         return DIGITAL_IN;
     } else {
         [NSException raise:@"UnknownStreamType" format:@"Encountered unknown stream type"];
