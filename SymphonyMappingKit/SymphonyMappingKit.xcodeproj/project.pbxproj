@@ -24,7 +24,6 @@
 		FC50C13E16B84FED00656CC0 /* SMKEpochGroupEnumerator.m in Sources */ = {isa = PBXBuildFile; fileRef = FC50C13C16B84FED00656CC0 /* SMKEpochGroupEnumerator.m */; };
 		FC50C14116B8C06700656CC0 /* MACHdf5Reader.h in Headers */ = {isa = PBXBuildFile; fileRef = FC50C13F16B8C06600656CC0 /* MACHdf5Reader.h */; };
 		FC50C14216B8C06700656CC0 /* MACHdf5Reader.m in Sources */ = {isa = PBXBuildFile; fileRef = FC50C14016B8C06600656CC0 /* MACHdf5Reader.m */; };
-		FC5D2EFD1C9A1FF4005A8222 /* 2016-03-16.h5 in Resources */ = {isa = PBXBuildFile; fileRef = FC5D2EFC1C9A1FF4005A8222 /* 2016-03-16.h5 */; };
 		FC5D2F031C9A245D005A8222 /* SMKDataFileReaderTest.m in Sources */ = {isa = PBXBuildFile; fileRef = FC5D2F021C9A245D005A8222 /* SMKDataFileReaderTest.m */; };
 		FC5D2F051C9A2881005A8222 /* SMKExperimentEnumeratorTest.m in Sources */ = {isa = PBXBuildFile; fileRef = FC5D2F041C9A2881005A8222 /* SMKExperimentEnumeratorTest.m */; };
 		FC5D2F0A1C9B7FB6005A8222 /* SMKSourceEnumerator.h in Headers */ = {isa = PBXBuildFile; fileRef = FC5D2F061C9B7FB6005A8222 /* SMKSourceEnumerator.h */; };
@@ -582,7 +581,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC5D2EFD1C9A1FF4005A8222 /* 2016-03-16.h5 in Resources */,
 				FC6B6E41169612C0006B4688 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -698,9 +696,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_LINK_OBJC_RUNTIME = NO;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
@@ -721,7 +720,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				OBJC_DISABLE_GC = Yes;
 				SDKROOT = macosx10.6;
-				VALID_ARCHS = i386;
+				VALID_ARCHS = x86_64;
 			};
 			name = Debug;
 		};
@@ -729,9 +728,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_LINK_OBJC_RUNTIME = NO;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = YES;
@@ -746,13 +746,14 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				OBJC_DISABLE_GC = Yes;
 				SDKROOT = macosx10.6;
-				VALID_ARCHS = i386;
+				VALID_ARCHS = x86_64;
 			};
 			name = Release;
 		};
 		FC6B6E48169612C0006B4688 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				COMBINE_HIDPI_IMAGES = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -766,9 +767,11 @@
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/Frameworks";
 				OTHER_LDFLAGS = (
 					/usr/local/hdf5/lib/libhdf5.a,
-					"-lz",
+					/usr/local/hdf5/lib/libsz.a,
+					/usr/local/hdf5/lib/libz.a,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = x86_64;
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Debug;
@@ -776,6 +779,7 @@
 		FC6B6E49169612C0006B4688 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				COMBINE_HIDPI_IMAGES = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -789,9 +793,11 @@
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/Frameworks";
 				OTHER_LDFLAGS = (
 					/usr/local/hdf5/lib/libhdf5.a,
-					"-lz",
+					/usr/local/hdf5/lib/libsz.a,
+					/usr/local/hdf5/lib/libz.a,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = x86_64;
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Release;
@@ -799,6 +805,7 @@
 		FC6B6E4B169612C0006B4688 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
@@ -809,8 +816,13 @@
 				HEADER_SEARCH_PATHS = /usr/local/hdf5/include;
 				INFOPLIST_FILE = "SymphonyMappingKitTests/SymphonyMappingKitTests-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(SRCROOT)/../Libraries";
-				OTHER_LDFLAGS = /usr/local/hdf5/lib/libhdf5.a;
+				OTHER_LDFLAGS = (
+					/usr/local/hdf5/lib/libhdf5.a,
+					/usr/local/hdf5/lib/libsz.a,
+					/usr/local/hdf5/lib/libz.a,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = x86_64;
 				WRAPPER_EXTENSION = octest;
 			};
 			name = Debug;
@@ -818,6 +830,7 @@
 		FC6B6E4C169612C0006B4688 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
@@ -828,8 +841,13 @@
 				HEADER_SEARCH_PATHS = /usr/local/hdf5/include;
 				INFOPLIST_FILE = "SymphonyMappingKitTests/SymphonyMappingKitTests-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(SRCROOT)/../Libraries";
-				OTHER_LDFLAGS = /usr/local/hdf5/lib/libhdf5.a;
+				OTHER_LDFLAGS = (
+					/usr/local/hdf5/lib/libhdf5.a,
+					/usr/local/hdf5/lib/libsz.a,
+					/usr/local/hdf5/lib/libz.a,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = x86_64;
 				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;
