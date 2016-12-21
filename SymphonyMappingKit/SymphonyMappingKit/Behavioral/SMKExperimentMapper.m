@@ -110,6 +110,17 @@
     // Import notes
     [self addNotesFromEntity:experiment toExperiment:auiExperiment];
     
+    // Add experiment properties and keywords to common set
+    NSMutableDictionary *protocolSettings = [NSMutableDictionary dictionary];
+    for (NSString *key in [experiment.properties allKeys]) {
+        id value = [experiment.properties valueForKey:key];
+        NSString *newKey = [@"experiment:" stringByAppendingString:key];
+        [protocolSettings setValue:value forKey:newKey];
+    }
+    
+    NSMutableSet *keywords = [NSMutableSet set];
+    [keywords addObjectsFromArray:[NSArray arrayWithSet:experiment.keywords]];
+    
     // Import sources
     SMKSourceEnumerator *sourceEnumerator = experiment.sourceEnumerator;
     SMKSource *source;
@@ -146,7 +157,7 @@
                 auiCell.startDate = group.startTime;
             }
             
-            [self mapEpochGroup:group toCell:auiCell];
+            [self mapEpochGroup:group protocolSettings:protocolSettings keywords:keywords toCell:auiCell];
             
             [self assertValid:auiCell];
             
@@ -187,10 +198,10 @@
     }
 }
 
-- (void)mapEpochGroup:(SMKEpochGroup *)group toCell:(RecordedCell *)auiCell
+- (void)mapEpochGroup:(SMKEpochGroup *)group protocolSettings:(NSMutableDictionary *)commonProtocolSettings keywords:(NSMutableSet *)commonKeywords toCell:(RecordedCell *)auiCell
 {
-    NSMutableDictionary *protocolSettings = [NSMutableDictionary dictionary];
-    NSMutableSet *keywords = [NSMutableSet set];
+    NSMutableDictionary *protocolSettings = [NSMutableDictionary dictionaryWithDictionary:commonProtocolSettings];
+    NSMutableSet *keywords = [NSMutableSet setWithSet:commonKeywords];
     
     int sourceLevel = 0;
     SMKSource *currentSource = group.source;
@@ -241,6 +252,7 @@
         [keywords addObjectsFromArray:[NSArray arrayWithSet:currentGroup.keywords]];
         
         currentGroup = currentGroup.parent;
+        groupLevel++;
     }
     
     [self addNotesFromEntity:group toExperiment:auiCell.experiment];
@@ -256,7 +268,7 @@
     SMKEpochGroupEnumerator *groupEnumerator = group.epochGroupEnumerator;
     SMKEpochGroup *subGroup;
     while (subGroup = [groupEnumerator nextObject]) {
-        [self mapEpochGroup:subGroup toCell:auiCell];
+        [self mapEpochGroup:subGroup protocolSettings:commonProtocolSettings keywords:commonKeywords toCell:auiCell];
     }
 }
 
@@ -291,12 +303,29 @@
         // Backgrounds
         for (SMKBackground *background in epoch.backgrounds) {
             NSString *key = [@"background:" stringByAppendingString:background.device.name];
-            [protocolSettings setValue:background.value forKey:key];
+            [protocolSettings setValue:background.value forKey:[NSString stringWithFormat:@"%@:%@", key, @"value"]];
             
             for (NSString *paramKey in [background.deviceParameters allKeys]) {
                 id value = [background.deviceParameters valueForKey:paramKey];
                 NSString *newParamKey = [NSString stringWithFormat:@"%@:%@", key, paramKey];
-                [protocolSettings setValue:value forKey:newParamKey];
+                if ([protocolSettings hasKey:newParamKey]) {
+                    NSLog(@"%@ wants to have two values: %@ and %@. Using the first.", newParamKey, [protocolSettings valueForKey:newParamKey], value);
+                } else {
+                    [protocolSettings setValue:value forKey:newParamKey];
+                }
+            }
+        }
+        
+        // Add epoch properties
+        [protocolSettings setValue:epoch.startTime forKey:@"epoch:startTime"];
+        [protocolSettings setValue:epoch.endTime forKey:@"epoch:endTime"];
+        for (NSString *key in [epoch.properties allKeys]) {
+            id value = [epoch.properties valueForKey:key];
+            NSString *newKey = [@"epoch:" stringByAppendingString:key];
+            if ([protocolSettings hasKey:newKey]) {
+                NSLog(@"%@ wants to have two values: %@ and %@. Using the first.", newKey, [protocolSettings valueForKey:newKey], value);
+            } else {
+                [protocolSettings setValue:value forKey:newKey];
             }
         }
         
@@ -363,12 +392,21 @@
             
             auiStimulus.epoch = auiEpoch;
             
-            // Add stimulus parameters to epoch protocol settings for convenience
+            // Add stimulus parameters and device parameters to epoch protocol settings for convenience
             NSString* streamName = [stimulus.device.name stringByReplacingOccurrencesOfString: @" " withString: @"_"];
             for (NSString *key in [stimulus.parameters allKeys]) {
                 id value = [stimulus.parameters valueForKey:key];
                 NSString *newKey = [NSString stringWithFormat:@"stimuli:%@:%@", streamName, key];
                 [protocolSettings setValue:value forKey:newKey];
+            }
+            for (NSString *key in [stimulus.deviceParameters allKeys]) {
+                id value = [stimulus.deviceParameters valueForKey:key];
+                NSString *newKey = [NSString stringWithFormat:@"stimuli:%@:%@", streamName, key];
+                if ([protocolSettings hasKey:newKey]) {
+                    NSLog(@"%@ wants to have two values: %@ and %@. Using the first.", newKey, [protocolSettings valueForKey:newKey], value);
+                } else {
+                    [protocolSettings setValue:value forKey:newKey];
+                }
             }
             
             [self assertValid:auiStimulus];

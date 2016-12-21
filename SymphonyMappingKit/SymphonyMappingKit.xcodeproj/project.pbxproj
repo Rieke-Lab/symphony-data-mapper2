@@ -766,6 +766,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/Frameworks";
 				OTHER_LDFLAGS = (
 					/usr/local/hdf5/lib/libhdf5.a,
+					/usr/local/hdf5/lib/libsz.a,
 					"-lz",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -789,6 +790,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/Frameworks";
 				OTHER_LDFLAGS = (
 					/usr/local/hdf5/lib/libhdf5.a,
+					/usr/local/hdf5/lib/libsz.a,
 					"-lz",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -809,7 +811,11 @@
 				HEADER_SEARCH_PATHS = /usr/local/hdf5/include;
 				INFOPLIST_FILE = "SymphonyMappingKitTests/SymphonyMappingKitTests-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(SRCROOT)/../Libraries";
-				OTHER_LDFLAGS = /usr/local/hdf5/lib/libhdf5.a;
+				OTHER_LDFLAGS = (
+					/usr/local/hdf5/lib/libhdf5.a,
+					/usr/local/hdf5/lib/libsz.a,
+					"-lz",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = octest;
 			};
@@ -828,7 +834,11 @@
 				HEADER_SEARCH_PATHS = /usr/local/hdf5/include;
 				INFOPLIST_FILE = "SymphonyMappingKitTests/SymphonyMappingKitTests-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(SRCROOT)/../Libraries";
-				OTHER_LDFLAGS = /usr/local/hdf5/lib/libhdf5.a;
+				OTHER_LDFLAGS = (
+					/usr/local/hdf5/lib/libhdf5.a,
+					/usr/local/hdf5/lib/libsz.a,
+					"-lz",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = octest;
 			};
