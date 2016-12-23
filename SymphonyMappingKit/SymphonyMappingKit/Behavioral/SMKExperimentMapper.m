@@ -302,7 +302,7 @@
         
         // Backgrounds
         for (SMKBackground *background in epoch.backgrounds) {
-            NSString *key = [@"background:" stringByAppendingString:background.device.name];
+            NSString *key = [@"background:" stringByAppendingString:[background.device.name stringByReplacingOccurrencesOfString: @" " withString: @"_"]];
             [protocolSettings setValue:background.value forKey:[NSString stringWithFormat:@"%@:%@", key, @"value"]];
             
             for (NSString *paramKey in [background.deviceParameters allKeys]) {
