@@ -381,7 +381,7 @@
             NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
             for (NSString *key in [stimulus.deviceParameters allKeys]) {
                 id value = [stimulus.deviceParameters valueForKey:key];
-                NSString *newKey = [NSString stringWithFormat:@"deviceParameters:%@", key];
+                NSString *newKey = [NSString stringWithFormat:@"deviceParameter:%@", key];
                 [parameters setValue:value forKey:newKey];
             }
             [parameters addEntriesFromDictionary:stimulus.parameters];
@@ -396,12 +396,12 @@
             NSString* streamName = [stimulus.device.name stringByReplacingOccurrencesOfString: @" " withString: @"_"];
             for (NSString *key in [stimulus.parameters allKeys]) {
                 id value = [stimulus.parameters valueForKey:key];
-                NSString *newKey = [NSString stringWithFormat:@"stimuli:%@:%@", streamName, key];
+                NSString *newKey = [NSString stringWithFormat:@"stimulus:%@:%@", streamName, key];
                 [protocolSettings setValue:value forKey:newKey];
             }
             for (NSString *key in [stimulus.deviceParameters allKeys]) {
                 id value = [stimulus.deviceParameters valueForKey:key];
-                NSString *newKey = [NSString stringWithFormat:@"stimuli:%@:%@", streamName, key];
+                NSString *newKey = [NSString stringWithFormat:@"stimulus:%@:%@", streamName, key];
                 if ([protocolSettings hasKey:newKey]) {
                     NSLog(@"%@ wants to have two values: %@ and %@. Using the first.", newKey, [protocolSettings valueForKey:newKey], value);
                 } else {
