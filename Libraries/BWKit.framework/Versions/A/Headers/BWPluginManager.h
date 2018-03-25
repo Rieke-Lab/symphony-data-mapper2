@@ -25,7 +25,7 @@ OBJC_EXPORT NSString *BWPluginClassNameKey;
 }
 
 @property(retain) NSString *status;
-@property(assign) __weak NSTextField *statusField;
+@property(assign) NSTextField *statusField;
 @property(retain) NSMutableSet *pluginExtensions;
 @property(retain,readonly) NSMutableDictionary *plugins;
 

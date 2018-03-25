@@ -91,6 +91,7 @@
     [Experiment createResponseDataFileAtURL:dataFileUrl];
     [auiExperiment useResponseDataFileAtURL:dataFileUrl];
     [BWFileSystemResource setURL:dataFileUrl relativeToRootURL:_auisqlUrl forFileSystemResource:auiExperiment.responseDataFile];
+    auiExperiment.responseDataFile.alias = auiExperiment.responseDataFile.url;
     
     _hdf5FileUrl = dataFileUrl;
     
